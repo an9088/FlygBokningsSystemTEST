@@ -1,7 +1,7 @@
 /**
  * 
  */
-package src;
+package src.main;
 /**
  * @author Dino Patarcec
  *
@@ -13,7 +13,7 @@ public class gui {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		gui();
+		//gui();
 
 	}
 	
