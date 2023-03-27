@@ -1,5 +1,6 @@
 package src.model;
 
+import src.controller.Controller;
 import src.view.Mainframe;
 
 public class Main {
@@ -7,6 +8,7 @@ public class Main {
 
 
         //Mainframe frame = new Mainframe();
+        Controller controller = new Controller();
 
         Airline airline = new Airline("WizzAir", "W123AN1324");
         System.out.println("Added a new airline");
