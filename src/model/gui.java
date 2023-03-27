@@ -1,7 +1,7 @@
 /**
  * 
  */
-package src.main;
+package src.model;
 /**
  * @author Dino Patarcec
  *
