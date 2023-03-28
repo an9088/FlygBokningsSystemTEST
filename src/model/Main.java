@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        //Mainframe frame = new Mainframe();
+        Mainframe frame = new Mainframe();
         Controller controller = new Controller();
 
         Airline airline = new Airline("WizzAir", "W123AN1324");
