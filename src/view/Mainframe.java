@@ -2,8 +2,6 @@ package src.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Mainframe extends JFrame {
     private JPanel panelMain;
@@ -16,6 +14,7 @@ public class Mainframe extends JFrame {
     private JSpinner adultSelect;
     private JLabel passengers;
     private JLabel adults;
+    private JButton bookButton;
 
     private JFrame frame;
 
