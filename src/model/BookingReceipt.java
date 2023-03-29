@@ -51,7 +51,7 @@ public class BookingReceipt {
 			Session session=Session.getInstance(properties, new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {				
-					return new PasswordAuthentication("midibasketi@gmail.com", "Skunkson123");
+					return new PasswordAuthentication("midibasketi@gmail.com", "********");
 				}
 				
 				
@@ -155,7 +155,7 @@ public class BookingReceipt {
 			Session session=Session.getInstance(properties, new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {				
-					return new PasswordAuthentication("techsoftindia2018@gmail.com", "Durgesh@123");
+					return new PasswordAuthentication("midibasketi@gmail.com", "******");
 				}
 				
 				
