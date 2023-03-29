@@ -1,55 +1,58 @@
 package src.view;
 
+import src.controller.Controller;
+
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Mainframe extends JFrame {
-    private JPanel panelMain;
-    private JPanel panelEast;
-    private JButton searchButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JCheckBox economyClassOnlyCheckBox;
-    private JSpinner childrenSelect;
-    private JSpinner adultSelect;
-    private JLabel passengers;
-    private JLabel adults;
-    private JButton bookButton;
+    private JPanel mainPanel;
+    private JPanel northPanel;
+    private JPanel southPanel;
+    private JTextField fromAirport;
+    private JPanel eastPanel;
+    private JTextField toAirport;
+    private JButton searchFligthsButton;
+    private JSpinner spinnerAdult;
+    private JSpinner spinnerChildren;
+    private JCheckBox economyTripsOnlyCheckBox;
+    private JEditorPane editorPane1;
 
-    private JFrame frame;
+    private ArrayList<String> messages = new ArrayList<String>();
 
-    public Mainframe() {
 
-        frame = new JFrame("FlightBuddy");
-        panelMain = new JPanel();
-        frame.setPreferredSize(new Dimension(1300, 800));
-        frame.setContentPane(new Mainframe().panelMain);
-      //  frame.setContentPane(new Mainframe().panelEast);
+    private Controller controller;
+
+
+    public Mainframe(Controller controller) {
+        this.controller = controller;
+        createFrame();
+
+    }
+
+    private void createFrame() {
+        JFrame frame = new JFrame("Mainframe");
+        frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
-        /*searchButton.addActionListener(new ActionListener() {
+        searchFligthsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String flyOut = fromAirport.getText().trim();
+                String flyDest = toAirport.getText().trim();
+                int adultSpinner = (int) spinnerAdult.getValue();
+                int childSpinner = (int) spinnerChildren.getValue();
+                editorPane1.setText("You want to book a trip from " + flyOut + " to " + flyDest + "\n"
+                        + "You're traveling with " + adultSpinner + " adults and " + childSpinner + " children");
+
+
 
             }
         });
-
-         */
     }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        textField1 = new JTextField();
-        textField2 = new JTextField();
-        childrenSelect = new JSpinner();
-        adultSelect = new JSpinner();
-        passengers = new JLabel();
-        adults = new JLabel();
-        economyClassOnlyCheckBox = new JCheckBox();
-        searchButton = new JButton("Search");
-        panelMain.add(searchButton);
-
-    }
+    
 }

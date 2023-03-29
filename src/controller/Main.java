@@ -1,13 +1,16 @@
-package src.model;
+package src.controller;
 
 import src.controller.Controller;
+import src.model.Airline;
+import src.model.Passenger;
 import src.view.Mainframe;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
 
 
-        Mainframe frame = new Mainframe();
         Controller controller = new Controller();
 
         Airline airline = new Airline("WizzAir", "W123AN1324");
