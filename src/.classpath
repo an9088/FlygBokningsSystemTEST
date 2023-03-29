@@ -6,5 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Dino Patarcec/Documents/GitHub/FlygBokningsSystemTEST/src/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
