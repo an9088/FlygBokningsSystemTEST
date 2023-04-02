@@ -19,6 +19,8 @@ public class Mainframe extends JFrame {
     private JSpinner spinnerChildren;
     private JCheckBox economyTripsOnlyCheckBox;
     private JEditorPane editorPane1;
+    private JButton signUpButton;
+    private JButton loginButton;
 
     private ArrayList<String> messages = new ArrayList<String>();
 
@@ -30,6 +32,13 @@ public class Mainframe extends JFrame {
         this.controller = controller;
         createFrame();
 
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+        });
     }
 
     private void createFrame() {
