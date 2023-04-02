@@ -1,4 +1,5 @@
-package model;
+package src.model;
+
 
 import java.io.File;
 import java.util.Properties;
