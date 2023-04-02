@@ -1,4 +1,4 @@
-package main;
+package src.main;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -19,15 +19,17 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import src.view.Mainframe;
+
 public class api_test {
 	private static Scanner scanner = new Scanner(System.in);
 	public static void main(String[] args) throws IOException, InterruptedException, ParserConfigurationException, SAXException {
 		System.out.println("Welcome to the Flight Booking System!");
-		
+
 		String departureAirport = getDepartureAirport();
 		String destinationAirport = getDestinationAirport();
 		String date = getDate();
-		
+
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create("https://timetable-lookup.p.rapidapi.com/TimeTable/" + departureAirport + "/" + destinationAirport + "/" + date + "/"))
 				.header("X-RapidAPI-Key", "5bdf7d1e5amshd77e7d6fbee5d6cp1cdf9ejsna5b67528fced")
@@ -36,7 +38,7 @@ public class api_test {
 				.build();
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		//System.out.println(response.body());
-		
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		Document document = builder.parse(new InputSource(new StringReader(response.body())));
@@ -63,6 +65,10 @@ public class api_test {
 		        // Datarad
 		        System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s\n",
 		            departureTime, departureOffset, arrivalTime, arrivalOffset, flightNumber, duration);
+
+
+
+
 		    }
 		}
 
@@ -73,21 +79,21 @@ public class api_test {
 
 
 
-		
+
 		System.out.println("Thank you for using the Flight Booking System!");
 
 	}
-	
+
 	private static String getDepartureAirport() {
 		System.out.println("Please enter departure Airport: ");
 		return scanner.nextLine();
 	}
-	
+
 	private static String getDestinationAirport() {
 		System.out.println("Please enter destination Airport: ");
 		return scanner.nextLine();
 	}
-	
+
 	private static String getDate() {
 		System.out.println("Please enter date (format yyyymmdd): ");
 		return scanner.nextLine();
