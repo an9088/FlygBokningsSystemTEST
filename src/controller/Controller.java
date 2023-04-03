@@ -19,10 +19,6 @@ public class Controller {
         mainframe = new Mainframe(this);
     }
 
-    public void setDisplayMessage(ArrayList message) {
-        mainframe.getEditorPane1().setText(String.valueOf(message));
-    }
-
     public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException {
 
         String departureAirport = mainframe.getFromAirport().getText();
@@ -42,6 +38,10 @@ public class Controller {
 
         API apiMessage = new API(departureAirport, destinationAirport, date, this);
 
+    }
+
+    public void setDisplayMessage(ArrayList message) {
+        mainframe.getEditorPane1().setText(String.valueOf(message));
     }
 
 
