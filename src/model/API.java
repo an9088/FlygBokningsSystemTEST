@@ -46,7 +46,7 @@ public class API {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://timetable-lookup.p.rapidapi.com/TimeTable/" + depAirport + "/" + arrAirport + "/" + date + "/"))
-                .header("X-RapidAPI-Key", "5bdf7d1e5amshd77e7d6fbee5d6cp1cdf9ejsna5b67528fced")
+                .header("X-RapidAPI-Key", "ce88d20303msh70939666ef817abp16916cjsn12852aec3cfd")
                 .header("X-RapidAPI-Host", "timetable-lookup.p.rapidapi.com")
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();

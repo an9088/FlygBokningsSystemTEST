@@ -23,10 +23,6 @@ public class Mainframe extends JFrame {
     private JSpinner spinnerChildren;
     private JCheckBox economyTripsOnlyCheckBox;
 
-    public JList getList1() {
-        return list1;
-    }
-
     private JEditorPane editorPane1;
     private JButton signUpButton;
     private JButton loginButton;
@@ -90,9 +86,6 @@ public class Mainframe extends JFrame {
         return day;
     }
 
-    public JScrollPane getScrollDisplay() {
-        return scrollDisplay;
-    }
 
     private void createFrame() {
         JFrame frame = new JFrame("Mainframe");
@@ -108,12 +101,14 @@ public class Mainframe extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editorPane1.setText("");
-                String flyOut = fromAirport.getText().trim();
+                /*String flyOut = fromAirport.getText().trim();
                 String flyDest = toAirport.getText().trim();
                 int adultSpinner = (int) spinnerAdult.getValue();
                 int childSpinner = (int) spinnerChildren.getValue();
                 editorPane1.setText("You want to book a trip from " + flyOut + " to " + flyDest + "\n"
                         + "You're traveling with " + adultSpinner + " adults and " + childSpinner + " children");
+
+                 */
                 try {
                     controller.searchAvailableFlights();
                 } catch (IOException ex) {
