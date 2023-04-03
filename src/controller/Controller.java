@@ -2,6 +2,7 @@ package src.controller;
 
 import org.xml.sax.SAXException;
 import src.model.API;
+import src.model.AirportCode;
 import src.view.Mainframe;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,10 +14,13 @@ public class Controller {
 
     private Mainframe mainframe;
 
+    private AirportCode airportCode;
+
     private Scanner scanner = new Scanner(System.in);
 
     public Controller() {
         mainframe = new Mainframe(this);
+        this.airportCode = airportCode;
     }
 
     public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException {
