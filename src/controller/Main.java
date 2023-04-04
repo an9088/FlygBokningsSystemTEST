@@ -19,7 +19,7 @@ public class Main {
 
         System.out.println();
 
-        Passenger passenger = new Passenger("Mattias", "Malm", "19971215-xxxx", "Magnoliavägen 3" );
+        Passenger passenger = new Passenger("Mattias", "Malm", "xxxxxx-xxxx", "Magnoliavägen 3" );
         System.out.println(passenger.toString());
     }
 }

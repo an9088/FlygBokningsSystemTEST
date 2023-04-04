@@ -34,6 +34,8 @@ public class Mainframe extends JFrame {
 
     private ArrayList<String> messages = new ArrayList<String>();
 
+    private LoginGUI login;
+
 
     private Controller controller;
 
@@ -55,7 +57,7 @@ public class Mainframe extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                login = new LoginGUI();
             }
         });
         signUpButton.addActionListener(new ActionListener() {

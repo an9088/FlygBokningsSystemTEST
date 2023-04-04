@@ -1,0 +1,20 @@
+Firstname: Mattias
+Lastname: Malm
+Email: test1@gmail.com
+Password: 1Mattias!
+
+Firstname: Mattias
+Lastname: Malm
+Email: mattias@test.com
+Password: Mattias123
+
+Firstname: Test
+Lastname: Testsson
+Email: test1@mau.se
+Password: asdfkdsfgk
+
+Firstname: Test
+Lastname: Testsson
+Email: test@mau.se
+Password: qoxeirt1!
+

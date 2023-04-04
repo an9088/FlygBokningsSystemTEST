@@ -1,4 +1,6 @@
-package src.model;
+package src.view;
+
+import src.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +14,16 @@ public class LoginGUI {
     private JFrame loginFrame;
     private JFrame signUpFrame;
 
-    public static void main(String[] args) {
+    private Controller controller;
+
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LoginGUI().createLoginGUI());
+    }
+
+     */
+
+    public LoginGUI() {
+        createLoginGUI();
     }
 
     private void createLoginGUI() {
