@@ -14,4 +14,8 @@ public class MainFrameV2 {
             exception.printStackTrace();
         }
     }
+
+    public static void main (String[] args){
+
+    }
 }
