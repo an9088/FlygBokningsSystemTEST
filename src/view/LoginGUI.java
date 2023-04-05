@@ -1,4 +1,6 @@
-package src.model;
+package src.view;
+
+import src.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,13 +14,15 @@ public class LoginGUI {
     private JFrame loginFrame;
     private JFrame signUpFrame;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginGUI().createLoginGUI());
+    private Controller controller;
+
+    public LoginGUI() {
+        createLoginGUI();
     }
 
     private void createLoginGUI() {
         loginFrame = new JFrame("Login");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 250);
 
         JPanel loginPanel = new JPanel(new GridBagLayout());
@@ -66,6 +70,7 @@ public class LoginGUI {
         loginPanel.add(signUpButton, constraints);
 
         loginFrame.getContentPane().add(loginPanel);
+        loginFrame.setLocationRelativeTo(null);
         loginFrame.setVisible(true);
     }
 
@@ -160,6 +165,7 @@ public class LoginGUI {
 
 
         signUpFrame.getContentPane().add(signUpPanel);
+        signUpFrame.setLocationRelativeTo(null);
         signUpFrame.setVisible(true);
     }
 }

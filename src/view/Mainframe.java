@@ -4,14 +4,17 @@ import org.xml.sax.SAXException;
 import src.controller.Controller;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
-public class Mainframe extends JFrame {
+public class Mainframe extends JFrame implements ActionListener {
     private JPanel mainPanel;
     private JPanel northPanel;
     private JPanel southPanel;
@@ -22,7 +25,7 @@ public class Mainframe extends JFrame {
     private JSpinner spinnerAdult;
     private JSpinner spinnerChildren;
     private JCheckBox economyTripsOnlyCheckBox;
-
+    private Border border, border1, border2, border3;
     private JEditorPane editorPane1;
     private JButton signUpButton;
     private JButton loginButton;
@@ -30,40 +33,40 @@ public class Mainframe extends JFrame {
     private JSpinner month;
     private JSpinner day;
     private JScrollPane scrollDisplay;
+    private JButton book;
+
     private JList list1;
 
     private ArrayList<String> messages = new ArrayList<String>();
-
-
+    private LoginGUI login;
     private Controller controller;
-
-    public JEditorPane getEditorPane1() {
-        return editorPane1;
-    }
 
     public Mainframe(Controller controller) {
         this.controller = controller;
+        loginButton.addActionListener(this);
+        searchFligthsButton.addActionListener(this);
+        book.addActionListener(this);
         createFrame();
+    }
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    private void createFrame() {
 
+        JFrame frame = new JFrame("Mainframe");
+        frame.setPreferredSize(new Dimension(800, 600));
+        setBorders();
+        frame.setContentPane(mainPanel);
+        setTodaysDate();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
 
-            }
-        });
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    private void setTodaysDate() {
 
-            }
-        });
-        signUpButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        year.setValue(2023);
+        month.setValue(04);
+        day.setValue(05);
     }
 
     public JTextField getToAirport() {
@@ -86,47 +89,49 @@ public class Mainframe extends JFrame {
         return day;
     }
 
-
-    private void createFrame() {
-        JFrame frame = new JFrame("Mainframe");
-        frame.setContentPane(mainPanel);
-        year.setValue(2023);
-        month.setValue(04);
-        day.setValue(02);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-
-        searchFligthsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editorPane1.setText("");
-                /*String flyOut = fromAirport.getText().trim();
-                String flyDest = toAirport.getText().trim();
-                int adultSpinner = (int) spinnerAdult.getValue();
-                int childSpinner = (int) spinnerChildren.getValue();
-                editorPane1.setText("You want to book a trip from " + flyOut + " to " + flyDest + "\n"
-                        + "You're traveling with " + adultSpinner + " adults and " + childSpinner + " children");
-
-                 */
-                try {
-                    controller.searchAvailableFlights();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                } catch (ParserConfigurationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (SAXException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                fromAirport.setText("");
-                toAirport.setText("");
-
-
-            }
-        });
+    public JEditorPane getEditorPane1() {
+        return editorPane1;
     }
 
+    private void setBorders() {
+        border = BorderFactory.createTitledBorder("  Search Flights  ");
+        border1 = BorderFactory.createTitledBorder("");
+        border2 = BorderFactory.createTitledBorder("  Available Flights  ");
+        border3 = BorderFactory.createTitledBorder("");
+        eastPanel.setBorder(border);
+        southPanel.setBorder(border1);
+        scrollDisplay.setBorder(border2);
+        mainPanel.setBorder(border3);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(loginButton)) {
+            login = new LoginGUI();
+        }
+        if (e.getSource().equals(searchFligthsButton)) {
+            editorPane1.setText("");
+
+            try {
+                controller.searchAvailableFlights();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            } catch (ParserConfigurationException ex) {
+                throw new RuntimeException(ex);
+            } catch (SAXException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            fromAirport.setText("");
+            toAirport.setText("");
+        }
+        if (e.getSource().equals(book)) {
+            BookingCreatorGUI booking = new BookingCreatorGUI(controller);
+        }
+    }
 }
+
+
