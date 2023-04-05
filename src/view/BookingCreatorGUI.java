@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 /**
  * @author Ellyas Rahimy
+ * @co-author Mattias Malm
  */
 
 public class BookingCreatorGUI {

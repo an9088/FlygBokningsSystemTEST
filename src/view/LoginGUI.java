@@ -16,12 +16,6 @@ public class LoginGUI {
 
     private Controller controller;
 
-    /*public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginGUI().createLoginGUI());
-    }
-
-     */
-
     public LoginGUI() {
         createLoginGUI();
     }

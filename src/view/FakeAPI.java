@@ -8,6 +8,7 @@ public class FakeAPI {
 
     /**
      * @author Ellyas Rahimy
+     * @co-author Mattias Malm
      */
 
     private String departureAirport;
