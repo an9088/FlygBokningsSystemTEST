@@ -4,7 +4,9 @@ import org.xml.sax.SAXException;
 import src.controller.Controller;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -23,6 +25,8 @@ public class Mainframe extends JFrame {
     private JSpinner spinnerChildren;
     private JCheckBox economyTripsOnlyCheckBox;
 
+    private Border border, border1, border2;
+
     private JEditorPane editorPane1;
     private JButton signUpButton;
     private JButton loginButton;
@@ -30,6 +34,7 @@ public class Mainframe extends JFrame {
     private JSpinner month;
     private JSpinner day;
     private JScrollPane scrollDisplay;
+    private JButton book;
     private JList list1;
 
     private ArrayList<String> messages = new ArrayList<String>();
@@ -66,6 +71,12 @@ public class Mainframe extends JFrame {
 
             }
         });
+        book.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BookingCreatorGUI booking = new BookingCreatorGUI(controller);
+            }
+        });
     }
 
     public JTextField getToAirport() {
@@ -91,12 +102,15 @@ public class Mainframe extends JFrame {
 
     private void createFrame() {
         JFrame frame = new JFrame("Mainframe");
+        frame.setPreferredSize(new Dimension(800,600));
+        setBorders();
         frame.setContentPane(mainPanel);
         year.setValue(2023);
         month.setValue(04);
         day.setValue(02);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         searchFligthsButton.addActionListener(new ActionListener() {
@@ -129,6 +143,16 @@ public class Mainframe extends JFrame {
 
             }
         });
+    }
+
+    private void setBorders() {
+        border = BorderFactory.createTitledBorder("  Search Flights  ");
+        border1 = BorderFactory.createTitledBorder("    ");
+        border2 = BorderFactory.createTitledBorder("  Available Flights  ");
+        eastPanel.setBorder(border);
+        southPanel.setBorder(border1);
+        mainPanel.setBorder(border2);
+
     }
 
 }

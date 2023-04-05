@@ -1,8 +1,10 @@
 package src.controller;
 
 import org.xml.sax.SAXException;
-import src.model.API;
 import src.model.AirportCode;
+import src.model.Booking;
+import src.view.BookingCreatorGUI;
+import src.view.FakeAPI;
 import src.view.Mainframe;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,6 +15,8 @@ import java.util.Scanner;
 public class Controller {
 
     private Mainframe mainframe;
+
+    private Booking booking;
 
     private AirportCode airportCode;
 
@@ -40,7 +44,8 @@ public class Controller {
 
          */
 
-        API apiMessage = new API(departureAirport, destinationAirport, date, this);
+       // API apiMessage = new API(departureAirport, destinationAirport, date, this);
+        FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
 
     }
 
@@ -49,5 +54,11 @@ public class Controller {
     }
 
 
+    public void createNewBooking(String name, String lastName, String address, String city, String zip, String country, String email) {
+
+        booking = new Booking(name, lastName, address, city, zip, country, email);
+        System.out.println(booking.toString());
+
+    }
 }
 

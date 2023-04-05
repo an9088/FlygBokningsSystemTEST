@@ -28,7 +28,7 @@ public class LoginGUI {
 
     private void createLoginGUI() {
         loginFrame = new JFrame("Login");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 250);
 
         JPanel loginPanel = new JPanel(new GridBagLayout());
@@ -76,6 +76,7 @@ public class LoginGUI {
         loginPanel.add(signUpButton, constraints);
 
         loginFrame.getContentPane().add(loginPanel);
+        loginFrame.setLocationRelativeTo(null);
         loginFrame.setVisible(true);
     }
 
@@ -170,6 +171,7 @@ public class LoginGUI {
 
 
         signUpFrame.getContentPane().add(signUpPanel);
+        signUpFrame.setLocationRelativeTo(null);
         signUpFrame.setVisible(true);
     }
 }
