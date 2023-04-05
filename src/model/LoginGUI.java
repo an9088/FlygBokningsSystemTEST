@@ -137,7 +137,7 @@ public class LoginGUI {
 
                         // Save the user data to a text file
 
-                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(".\\users.txt", true))) {
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
                             writer.write("Firstname: " + firstName);
                             writer.newLine();
                             writer.write("Lastname: " + lastName );
