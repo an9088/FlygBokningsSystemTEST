@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 public class Mainframe extends JFrame implements ActionListener {
@@ -65,9 +66,10 @@ public class Mainframe extends JFrame implements ActionListener {
 
     private void setTodaysDate() {
 
-        year.setValue(2023);
-        month.setValue(04);
-        day.setValue(05);
+        LocalDate today = LocalDate.now();
+        year.setValue(today.getYear());
+        month.setValue(today.getMonthValue());
+        day.setValue(today.getDayOfMonth());
     }
 
     public JTextField getToAirport() {
