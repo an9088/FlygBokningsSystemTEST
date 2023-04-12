@@ -18,6 +18,7 @@ public class BookingCreatorGUI {
 
     private Controller controller;
 
+    private int bookingNumber = 1;
 
 
     public BookingCreatorGUI(Controller controller) {
@@ -120,6 +121,8 @@ public class BookingCreatorGUI {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
                 JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
 
                 String name = firstNameField.getText();
@@ -130,10 +133,10 @@ public class BookingCreatorGUI {
                 String country = countryField.getText();
                 String email = eMailField.getText();
 
-                controller.createNewBooking(name, lastName, address, city, zip, country, email);
+                controller.createNewBooking(name, lastName, address, city, zip, country, email, bookingNumber);
+
+                signUpFrame.setVisible(false);
             }
         });
     }
-
-
 }

@@ -1,11 +1,15 @@
 package src.model;
 
+import src.controller.Controller;
+
 import java.util.ArrayList;
 
 public class Booking {
 
-    private String reservationNumber;
+    private int bookingNumber;
     private int nbrOfTravelers;
+
+    private Controller controller;
 
     private ArrayList bookings = new ArrayList();
     private String name;
@@ -16,6 +20,9 @@ public class Booking {
     private String city;
     private String email;
 
+    private Booking newBooking;
+
+
     /*public Booking(String reservationNumber) {
         this.reservationNumber = reservationNumber;
         this.nbrOfTravelers = nbrOfTravelers;
@@ -24,8 +31,7 @@ public class Booking {
      */
 
 
-
-    public Booking(String name, String lastName, String address, String city, String zip, String country, String email) {
+    public Booking(String name, String lastName, String address, String city, String zip, String country, String email, int bookingNumber, Controller controller) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
@@ -33,14 +39,26 @@ public class Booking {
         this.zip = zip;
         this.country = country;
         this.email = email;
+        this.bookingNumber = bookingNumber;
+        this.controller = controller;
+
+        bookingConfirmation(name, lastName, address, city, zip, country, email);
     }
 
-    public String getReservationNumber() {
-        return reservationNumber;
-    }
+    private void bookingConfirmation(String name, String lastName, String address, String city, String zip, String country, String email) {
+        
+        String bookingMessage = "Thank you " + name + " " + lastName + " for using this application for booking your flight tickets. \n" +
+                "We hope you will have a pleasant stay in wherever the hell your traveling! \n\n\n" +
+                "Your booking number: " + bookingNumber + "\n" +
+                "Full name: " + name + " " + lastName + "\n" +
+                "Email address: " + email + "\n" +
+                "Address: " + address + "\n" +
+                "Zip code: " + zip + "\n" +
+                "City: " + city + "\n" +
+                "Country: " + country + "\n";
 
-    public void setReservationNumber(String reservationNumber) {
-        this.reservationNumber = reservationNumber;
+        controller.showBookingConfirmation(bookingMessage);
+
     }
 
     public int getNbrOfTravelers() {

@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class Mainframe extends JFrame implements ActionListener {
@@ -35,6 +34,8 @@ public class Mainframe extends JFrame implements ActionListener {
     private JScrollPane scrollDisplay;
     private JButton book;
 
+    private BookingCreatorGUI booking;
+
     private JList list1;
 
     private ArrayList<String> messages = new ArrayList<String>();
@@ -51,7 +52,7 @@ public class Mainframe extends JFrame implements ActionListener {
 
     private void createFrame() {
 
-        JFrame frame = new JFrame("Mainframe");
+        JFrame frame = new JFrame("Flygbokningssystem");
         frame.setPreferredSize(new Dimension(800, 600));
         setBorders();
         frame.setContentPane(mainPanel);
@@ -131,6 +132,22 @@ public class Mainframe extends JFrame implements ActionListener {
         if (e.getSource().equals(book)) {
             BookingCreatorGUI booking = new BookingCreatorGUI(controller);
         }
+    }
+
+    public JList getList1() {
+        return list1;
+    }
+
+    public void errorMessage(String message) {
+        JOptionPane errorMessage = new JOptionPane();
+        JOptionPane.showMessageDialog(errorMessage, message);
+    }
+
+    public void showBookingConfirmation(String bookingMessage) {
+
+        JOptionPane bookingInfo = new JOptionPane();
+        JOptionPane.showMessageDialog(bookingInfo, bookingMessage);
+
     }
 }
 
