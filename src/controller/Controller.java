@@ -1,15 +1,15 @@
 package src.controller;
 
+import com.amadeus.exceptions.ResponseException;
 import org.xml.sax.SAXException;
 import src.model.AirportCode;
+import src.model.AmadeusExample;
 import src.model.Booking;
-import src.view.FakeAPI;
 import src.view.Mainframe;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Controller {
 
@@ -21,14 +21,13 @@ public class Controller {
 
     private AirportCode airportCode;
 
-    private Scanner scanner = new Scanner(System.in);
 
     public Controller() {
         mainframe = new Mainframe(this);
         this.airportCode = airportCode;
     }
 
-    public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException {
+    public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException, ResponseException {
 
         String departureAirport = mainframe.getFromAirport().getText();
         String destinationAirport = mainframe.getToAirport().getText();
@@ -61,21 +60,14 @@ public class Controller {
          */
 
             // API apiMessage = new API(departureAirport, destinationAirport, date, this);
-            FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
+            //FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
+            AmadeusExample am = new AmadeusExample(departureAirport, destinationAirport, date, this);
         }
 
     }
 
     public void setDisplayMessage(ArrayList message) {
         mainframe.getEditorPane1().setText(String.valueOf(message));
-       /* DefaultListModel<Object> listModel = new DefaultListModel<>();
-        for (Object element : message) {
-            listModel.addElement(element);
-        }
-
-        mainframe.getList1().setModel(listModel); // Uppdatera JList med den nya modellen
-
-        */
     }
 
 

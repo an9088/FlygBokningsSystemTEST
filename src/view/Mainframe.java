@@ -1,5 +1,6 @@
 package src.view;
 
+import com.amadeus.exceptions.ResponseException;
 import org.xml.sax.SAXException;
 import src.controller.Controller;
 
@@ -125,6 +126,8 @@ public class Mainframe extends JFrame implements ActionListener {
             } catch (ParserConfigurationException ex) {
                 throw new RuntimeException(ex);
             } catch (SAXException ex) {
+                throw new RuntimeException(ex);
+            } catch (ResponseException ex) {
                 throw new RuntimeException(ex);
             }
 

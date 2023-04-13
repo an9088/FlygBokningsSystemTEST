@@ -1,4 +1,4 @@
-package src.view;
+package src.model;
 
 import src.controller.Controller;
 
