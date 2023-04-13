@@ -1,4 +1,4 @@
-package src.main;
+package main;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import src.view.Mainframe;
+import view.Mainframe;
 
 public class api_test {
 	private static Scanner scanner = new Scanner(System.in);

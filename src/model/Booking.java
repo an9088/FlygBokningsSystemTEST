@@ -1,6 +1,6 @@
-package src.model;
+package model;
 
-import src.controller.Controller;
+import controller.Controller;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,11 @@
-package src.controller;
+package controller;
 
 import com.amadeus.exceptions.ResponseException;
 import org.xml.sax.SAXException;
-import src.model.AirportCode;
-import src.model.AmadeusAPI;
-import src.model.Booking;
-import src.view.Mainframe;
+import model.AirportCode;
+import model.AmadeusAPI;
+import model.Booking;
+import view.Mainframe;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;

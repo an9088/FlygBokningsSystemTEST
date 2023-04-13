@@ -1,6 +1,6 @@
-package src.controller;
+package controller;
 
-import src.model.Airline;
+import model.Airline;
 
 public class Main {
     public static void main(String[] args) {
