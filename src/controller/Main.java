@@ -13,6 +13,8 @@ public class Main {
 
         Controller controller = new Controller();
 
+        System.out.println("Hello World");
+
         Airline airline = new Airline("WizzAir", "W123AN1324");
         System.out.println("Added a new airline");
         System.out.println(airline.toString());
