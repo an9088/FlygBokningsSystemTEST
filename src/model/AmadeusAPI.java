@@ -63,7 +63,7 @@ public class AmadeusAPI {
                     "\nTo: " + destination +
                     "\nDeparture date: " + departureTime +
                     "\nAirline: " + airline +
-                    "\nPrice: " + price +
+                    "\nPrice: " + price + "€" +
                     "\n";
             flightInfo.add(flights);
             controller.setDisplayMessage(flightInfo);
