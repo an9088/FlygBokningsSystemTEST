@@ -1,4 +1,4 @@
-package src.model;
+package model;
 
 import com.amadeus.Amadeus;
 import com.amadeus.Params;
@@ -6,7 +6,7 @@ import com.amadeus.exceptions.ResponseException;
 import com.amadeus.referencedata.Locations;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.Location;
-import src.controller.Controller;
+import controller.Controller;
 
 import java.util.ArrayList;
 
@@ -63,7 +63,7 @@ public class AmadeusAPI {
                     "\nTo: " + destination +
                     "\nDeparture date: " + departureTime +
                     "\nAirline: " + airline +
-                    "\nPrice: " + price +
+                    "\nPrice: " + price + "€" +
                     "\n";
             flightInfo.add(flights);
             controller.setDisplayMessage(flightInfo);

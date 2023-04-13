@@ -1,8 +1,8 @@
-package src.view;
+package view;
 
 import com.amadeus.exceptions.ResponseException;
 import org.xml.sax.SAXException;
-import src.controller.Controller;
+import controller.Controller;
 
 import javax.swing.*;
 import javax.swing.border.Border;

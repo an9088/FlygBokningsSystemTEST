@@ -1,4 +1,4 @@
-package src.model;
+package model;
 /*
 import javax.mail.*;
 import javax.mail.internet.*;
