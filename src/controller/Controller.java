@@ -3,7 +3,7 @@ package src.controller;
 import com.amadeus.exceptions.ResponseException;
 import org.xml.sax.SAXException;
 import src.model.AirportCode;
-import src.model.AmadeusExample;
+import src.model.AmadeusAPI;
 import src.model.Booking;
 import src.view.Mainframe;
 
@@ -31,10 +31,29 @@ public class Controller {
 
         String departureAirport = mainframe.getFromAirport().getText();
         String destinationAirport = mainframe.getToAirport().getText();
+        int nbrOfPassengers = (int) mainframe.getSpinnerAdult().getValue();
         String year = mainframe.getYear().getValue().toString();
         String month = mainframe.getMonth().getValue().toString();
         String day = mainframe.getDay().getValue().toString();
-        String date = year + "0" + month + "0" + day;
+        String date = year + "-" + month + "-" + day;
+
+        if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {
+            date = year + "-0" + month + "-" + day;
+            System.out.println("Test 2 " + date);
+        }
+        if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) < 10) {
+            date = year + "-" + month + "-0" + day;
+            System.out.println("Test 1 " + date);
+        }
+        if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) >= 10) {
+            date = year + "-" + month + "-" + day;
+            System.out.println("Test 3 " + date);
+        }
+        if (Integer.parseInt(month) < 10 && Integer.parseInt(day) < 10) {
+            date = year + "-0" + month + "-0" + day;
+            System.out.println("Test 4 " + date);
+        }
+
 
         if (departureAirport.equals("")) {
             mainframe.getEditorPane1().setText("");
@@ -50,18 +69,9 @@ public class Controller {
             mainframe.errorMessage(message);
         } else {
 
-        /*if(month.startsWith("10") || month.startsWith("11") || month.startsWith("12"))
-            date = year + month + "0" + day;
-        if(!(day.startsWith("1,2,3,4,5,6,7,8,9")))
-            date = year + "0"+ month + day;
-        if(!(month.startsWith("1,2,3,4,5,6,7,8,9")) && (!(day.startsWith("1,2,3,4,5,6,7,8,9"))))
-            date = year + month + day;
-
-         */
-
             // API apiMessage = new API(departureAirport, destinationAirport, date, this);
             //FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
-            AmadeusExample am = new AmadeusExample(departureAirport, destinationAirport, date, this);
+            AmadeusAPI am = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
         }
 
     }

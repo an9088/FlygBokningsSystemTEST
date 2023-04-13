@@ -59,6 +59,7 @@ public class Mainframe extends JFrame implements ActionListener {
         setBorders();
         frame.setContentPane(mainPanel);
         setTodaysDate();
+        spinnerAdult.setValue(1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -153,6 +154,10 @@ public class Mainframe extends JFrame implements ActionListener {
         JOptionPane bookingInfo = new JOptionPane();
         JOptionPane.showMessageDialog(bookingInfo, bookingMessage);
 
+    }
+
+    public JSpinner getSpinnerAdult() {
+        return spinnerAdult;
     }
 }
 

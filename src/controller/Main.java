@@ -1,11 +1,6 @@
 package src.controller;
 
-import src.controller.Controller;
 import src.model.Airline;
-import src.model.Passenger;
-import src.view.Mainframe;
-
-import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +8,6 @@ public class Main {
 
         Controller controller = new Controller();
 
-        System.out.println("Hello World");
 
         Airline airline = new Airline("WizzAir", "W123AN1324");
         System.out.println("Added a new airline");

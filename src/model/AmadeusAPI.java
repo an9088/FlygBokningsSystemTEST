@@ -10,23 +10,26 @@ import src.controller.Controller;
 
 import java.util.ArrayList;
 
-public class AmadeusExample {
+public class AmadeusAPI {
 
     private Controller controller;
     private ArrayList<String> flightInfo = new ArrayList<String>();
 
     private String departureAirport, destinationAirport, date;
 
-    public AmadeusExample(String departureAirport, String destinationAirport, String date, Controller controller) throws ResponseException {
+    private int nbrOfPassengers;
+
+    public AmadeusAPI(String departureAirport, String destinationAirport, String date, int nbrOfPassengers, Controller controller) throws ResponseException {
         this.controller = controller;
         this.departureAirport = departureAirport;
         this.destinationAirport = destinationAirport;
         this.date = date;
-        tryApi(departureAirport, destinationAirport, date);
+        this.nbrOfPassengers = nbrOfPassengers;
+        tryApi(departureAirport, destinationAirport,nbrOfPassengers, date);
     }
 
 
-    public void tryApi(String departureAirport, String destinationAirport, String date) throws ResponseException {
+    public void tryApi(String departureAirport, String destinationAirport, int nbrOfPassengers, String date) throws ResponseException {
 
         Amadeus amadeus = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
@@ -39,9 +42,9 @@ public class AmadeusExample {
         FlightOfferSearch[] flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
                 Params.with("originLocationCode", departureAirport)
                         .and("destinationLocationCode", destinationAirport)
-                        .and("departureDate", "2023-04-13")
-                        .and("returnDate", "2023-04-15")
-                        .and("adults", 1)
+                        .and("departureDate", date)
+                        .and("returnDate", date) // date står här endast i testningssyfte 2023-04-13 Mattias Malm
+                        .and("adults", nbrOfPassengers)
                         .and("nonStop", true)
                         .and("max", 10));
 
@@ -53,8 +56,7 @@ public class AmadeusExample {
             String price = flightOffersSearches[i].getPrice().getTotal();
 
 
-
-            // Adding flight information to flightInfo ArrayList
+                // Adding flight information to flightInfo ArrayList
             String flights =
                     "==================================" +
                     "\nFrom: " + departure +
