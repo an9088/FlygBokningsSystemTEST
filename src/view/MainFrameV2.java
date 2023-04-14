@@ -1,12 +1,11 @@
 package view;
 
-
-import de.javasoft.synthetica.bluemoon.SyntheticaBlueMoonLookAndFeel;
-
 import javax.swing.*;
-
+import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+import de.javasoft.synthetica.bluemoon.SyntheticaBlueMoonLookAndFeel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 
@@ -23,10 +22,6 @@ public class MainFrameV2 extends JFrame implements ActionListener {
     JMenuItem homePage;
     JMenuItem about;
 
-    Icon checkIcon1;
-    Icon deselectIcon1;
-    Icon checkIcon2;
-    Icon deselectIcon2;
     public MainFrameV2() {
         // Set window properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,19 +106,16 @@ public class MainFrameV2 extends JFrame implements ActionListener {
     }
 
     public static void main (String[] args) throws ParseException {
-
         try {
-            UIManager.setLookAndFeel("SyntheticaBlueMoonLookAndFeel");
-            
-        } catch (Exception exception) {
+            UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
 
-            exception.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            EventQueue.invokeLater(() -> new MainFrameV2());
         }
-        MainFrameV2 mainframev2 = new MainFrameV2();
-
-
-
     }
+
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
