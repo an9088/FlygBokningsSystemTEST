@@ -1,10 +1,13 @@
 package view;
 
 
+import de.javasoft.synthetica.bluemoon.SyntheticaBlueMoonLookAndFeel;
+
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
 
 
 public class MainFrameV2 extends JFrame implements ActionListener {
@@ -81,16 +84,6 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public void setLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel");
-        } catch (Exception exception) {
-
-            exception.printStackTrace();
-        }
-
-
-    }
 
 
     @Override
@@ -117,9 +110,11 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         }
     }
 
-    public static void main (String[] args){
+    public static void main (String[] args) throws ParseException {
+
         try {
-            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.bluemoon");
+            UIManager.setLookAndFeel("SyntheticaBlueMoonLookAndFeel");
+            
         } catch (Exception exception) {
 
             exception.printStackTrace();
