@@ -6,9 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class LoginGUI {
     private JFrame loginFrame;
@@ -22,7 +20,7 @@ public class LoginGUI {
 
     private void createLoginGUI() {
         loginFrame = new JFrame("Login");
-       // loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 250);
 
         JPanel loginPanel = new JPanel(new GridBagLayout());
@@ -56,6 +54,52 @@ public class LoginGUI {
         constraints.gridy = 2;
         constraints.gridwidth = 2;
         loginPanel.add(loginButton, constraints);
+
+        // Add action listener to handle button press
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                String email = emailField.getText();
+                String password = new String(passwordField.getPassword());
+
+                // Check if the email and password match any user in the file
+                try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] tokens = line.split(": ");
+                        if (tokens.length == 2) {
+                            String field = tokens[0];
+                            String value = tokens[1];
+                            if (field.equals("Email") && value.equals(email)) {
+                                String name = "";
+                                line = reader.readLine();
+                                if (line != null) {
+                                    tokens = line.split(": ");
+                                    if (tokens.length == 2) {
+                                        field = tokens[0];
+                                        value = tokens[1];
+                                        if (field.equals("Password") && value.equals(password)) {
+                                            // Login successful
+                                            name = reader.readLine().split(": ")[1];
+                                            JOptionPane.showMessageDialog(loginFrame, "Login successful, welcome dear " + name);
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                // Login failed
+                JOptionPane.showMessageDialog(loginFrame, "Incorrect email or password");
+
+            }
+        });
 
         JButton signUpButton = new JButton("Sign Up");
         signUpButton.addActionListener(new ActionListener() {

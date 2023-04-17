@@ -1,5 +1,10 @@
-Firstname: mehdi
-Lastname: muhebbi
-Email: msmsjsjsjsj
-Password: ksksksksks
+Firstname: Mehdi
+Lastname: Muhebbi
+Email: mehdi.muhebbi@gmail.com
+Password: Mehdi123
+
+Firstname: Dino
+Lastname: Pateric
+Email: Dinomaster@yahoo.se
+Password: Dino12345!
 
