@@ -107,6 +107,7 @@ public class MainFrameV2 extends JFrame implements ActionListener {
     public static void main (String[] args) throws ParseException {
         try {
             //UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
+            UIManager.setLookAndFeel("com.jtattoo.plaf.smart.LunaLookAndFeel");
 
         } catch (Exception ex) {
             ex.printStackTrace();
