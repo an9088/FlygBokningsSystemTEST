@@ -1,8 +1,7 @@
 package view;
 
 import javax.swing.*;
-import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
-import de.javasoft.synthetica.bluemoon.SyntheticaBlueMoonLookAndFeel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -107,7 +106,7 @@ public class MainFrameV2 extends JFrame implements ActionListener {
 
     public static void main (String[] args) throws ParseException {
         try {
-            UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
+            //UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
 
         } catch (Exception ex) {
             ex.printStackTrace();
