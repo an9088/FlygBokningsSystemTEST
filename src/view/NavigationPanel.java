@@ -67,7 +67,7 @@ public class NavigationPanel extends JPanel {
 
 
         // Customize the appearance of the buttons
-        Font font = new Font("Arial", Font.BOLD, 14);
+        Font font = new Font("Open Sans", Font.BOLD, 20);
         Color fontColor = Color.WHITE;
         flight.setFont(font);
         rentCar.setFont(font);
