@@ -18,7 +18,7 @@ public class BookingCreatorGUI {
 
     private Controller controller;
 
-    private int bookingNumber = 1;
+    private static int bookingNumber = 0;
 
 
     public BookingCreatorGUI(Controller controller) {
@@ -107,23 +107,21 @@ public class BookingCreatorGUI {
         constraints.gridy = 6;
         signUpPanel.add(eMailField, constraints);
 
-        JButton bookingButton = new JButton("Create Booking");
+        JButton createBookingButton = new JButton("Create Booking");
         constraints.gridx = 0;
         constraints.gridy = 7;
         constraints.gridwidth = 2;
-        signUpPanel.add(bookingButton, constraints);
+        signUpPanel.add(createBookingButton, constraints);
 
         signUpFrame.getContentPane().add(signUpPanel);
         signUpFrame.setLocationRelativeTo(null);
         signUpFrame.setVisible(true);
 
-        bookingButton.addActionListener(new ActionListener() {
+        createBookingButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-                JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
 
                 String name = firstNameField.getText();
                 String lastName = lastNameField.getText();
@@ -133,9 +131,25 @@ public class BookingCreatorGUI {
                 String country = countryField.getText();
                 String email = eMailField.getText();
 
-                controller.createNewBooking(name, lastName, address, city, zip, country, email, bookingNumber);
 
-                signUpFrame.setVisible(false);
+                if (name.equals("") || lastName.equals("") || address.equals("") ||
+                        city.equals("") || zip.equals("") || country.equals("") || email.equals("")) {
+                    JOptionPane.showMessageDialog(signUpFrame, "Please enter empty field to complete the booking");
+                }
+                if (!(zip.length() == 5)) {
+                    JOptionPane.showMessageDialog(signUpFrame, "Zip code must contain five characters");
+                }
+                if (!(email.contains("@"))) {
+                    JOptionPane.showMessageDialog(signUpFrame, "You must enter a valid email address");
+                } else if (!(name.equals("") || lastName.equals("") || address.equals("") || city.equals("")
+                        || zip.equals("") || country.equals("")) && email.contains("@") && zip.length() == 5) {
+
+                    bookingNumber++;
+                    JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
+                    controller.createNewBooking(name, lastName, address, city, zip, country, email, bookingNumber);
+
+                    signUpFrame.setVisible(false);
+                }
             }
         });
     }

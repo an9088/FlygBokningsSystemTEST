@@ -58,6 +58,6 @@ public class FakeAPI {
         flightInfo.add(message);
         flightInfo.add(message1);
         flightInfo.add(message2);
-        controller.setDisplayMessage(flightInfo);
+       // controller.setDisplayMessage(flightInfo);
     }
 }

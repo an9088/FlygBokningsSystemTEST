@@ -35,7 +35,13 @@ public class Controller {
         String year = mainframe.getYear().getValue().toString();
         String month = mainframe.getMonth().getValue().toString();
         String day = mainframe.getDay().getValue().toString();
+        String returnYear = mainframe.getReturnYear().getValue().toString();
+        String returnMonth = mainframe.getReturnMonth().getValue().toString();
+        String returnDay = mainframe.getReturnDay().getValue().toString();
+        String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
         String date = year + "-" + month + "-" + day;
+
+        ///////////////DEPARTURE DATES///////////////////
 
         if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {
             date = year + "-0" + month + "-" + day;
@@ -54,30 +60,52 @@ public class Controller {
             System.out.println("Test 4 " + date);
         }
 
+        ///////////////RETURN DATES///////////////////
+
+        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) >= 10) {
+            returnDate = year + "-0" + month + "-" + day;
+            System.out.println("Test 2 " + returnDate);
+        }
+        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
+            returnDate = year + "-" + month + "-0" + day;
+            System.out.println("Test 1 " + returnDate);
+        }
+        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
+            returnDate = year + "-" + month + "-" + day;
+            System.out.println("Test 3 " + returnDate);
+        }
+        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
+            returnDate = year + "-0" + month + "-0" + day;
+            System.out.println("Test 4 " + returnDate);
+        }
+
 
         if (departureAirport.equals("")) {
-            mainframe.getEditorPane1().setText("");
+           // mainframe.getEditorPane1().setText("");
             message = "Please enter valid departure destination";
             mainframe.errorMessage(message);
         } else if (destinationAirport.equals("")) {
-            mainframe.getEditorPane1().setText("");
+            //mainframe.getEditorPane1().setText("");
             message = "Please enter valid arrival destination";
             mainframe.errorMessage(message);
         } else if (destinationAirport.equals("") && departureAirport.equals("")) {
-            mainframe.getEditorPane1().setText("");
+          //  mainframe.getEditorPane1().setText("");
             message = "Please enter valid destinations";
             mainframe.errorMessage(message);
-        } else {
-
+        } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()){
+            AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
             // API apiMessage = new API(departureAirport, destinationAirport, date, this);
             //FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
-            AmadeusAPI am = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
+        } else {
+            AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
         }
 
     }
 
-    public void setDisplayMessage(ArrayList message) {
-        mainframe.getEditorPane1().setText(String.valueOf(message));
+    public void setDisplayMessage(ArrayList<String> message) {
+       // mainframe.getEditorPane1().setText(String.valueOf(message));
+        mainframe.setDisplayMessage(message);
+        //mainframe.test(message);
     }
 
 
