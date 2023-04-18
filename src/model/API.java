@@ -87,7 +87,7 @@ public class API {
                         "\nFlight number: " + flightNumber + "\nDuration: " + duration + "\n";
 
                 flightInfo.add(message);
-                controller.setDisplayMessage(flightInfo);
+               // controller.setDisplayMessage(flightInfo);
 
             }
         }
