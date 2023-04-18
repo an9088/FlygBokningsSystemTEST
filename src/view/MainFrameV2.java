@@ -26,6 +26,7 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1600, 900);
         this.setLayout(new FlowLayout());
+        getContentPane().setBackground(new Color(25,55,109));
 
         // Create menu bar and icons
         menuBar = new JMenuBar();
@@ -48,7 +49,28 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         options.add(musicItem);
 
 
+        //Create a JToolBar and add buttons for each category
+        JToolBar toolBar = new JToolBar();
+        JButton flight = new JButton("Flight");
+        JButton rentCar = new JButton("Rent a car");
+        JButton lastMinute = new JButton("Last minute");
+        JButton travelGuide = new JButton("Travel guide");
+        JButton priceRunner = new JButton("Pricerunner");
+        JButton watchPrices = new JButton("Watch Prices");
+        JButton hotel = new JButton("Hotel");
+        JButton aboutUs = new JButton("About Us");
+        toolBar.add(flight);
+        toolBar.add(rentCar);
+        toolBar.add(lastMinute);
+        toolBar.add(travelGuide);
+        toolBar.add(priceRunner);
+        toolBar.add(watchPrices);
+        toolBar.add(hotel);
+        toolBar.add(aboutUs);
 
+
+        // Add the JToolBar to the JFrame
+        getContentPane().add(toolBar,BorderLayout.NORTH);
 
 
 
@@ -107,7 +129,7 @@ public class MainFrameV2 extends JFrame implements ActionListener {
     public static void main (String[] args) throws ParseException {
         try {
             //UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
-            UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+            //UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
 
         } catch (Exception ex) {
             ex.printStackTrace();
