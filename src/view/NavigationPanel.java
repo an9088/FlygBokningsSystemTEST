@@ -3,9 +3,9 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ToolBar extends JToolBar {
+public class NavigationPanel extends JToolBar {
 
-    public ToolBar(){
+    public NavigationPanel(){
         // Add buttons for each category
         JButton flight = new JButton("Flight");
         JButton rentCar = new JButton("Rent a car");

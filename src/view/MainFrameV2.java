@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.*;
-import javax.tools.Tool;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,12 +25,14 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         // Set window properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1600, 900);
-        
+
 
 
 
         JPanel contentPane = new JPanel();
+        contentPane.setLayout(new BorderLayout());
         contentPane.setBackground(new Color(25,55,109));
+        add(contentPane,BorderLayout.CENTER);
         // Create menu bar and icons
         menuBar = new JMenuBar();
 
@@ -55,9 +56,9 @@ public class MainFrameV2 extends JFrame implements ActionListener {
 
 
         //Create a toolBar and add it to the JFrame
-        ToolBar toolBar = new ToolBar();
+        NavigationPanel navigationPanel = new NavigationPanel();
         // Add the JToolBar to the JFrame
-        getContentPane().add(toolBar,BorderLayout.NORTH);
+        getContentPane().add(navigationPanel,BorderLayout.NORTH);
         setLayout(new BorderLayout());
 
 
