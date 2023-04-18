@@ -1,12 +1,12 @@
 package view;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ToolBar extends JToolBar {
 
     public ToolBar(){
-        //Create a JToolBar and add buttons for each category
-        JToolBar toolBar = new JToolBar();
+        // Add buttons for each category
         JButton flight = new JButton("Flight");
         JButton rentCar = new JButton("Rent a car");
         JButton lastMinute = new JButton("Last minute");
@@ -15,13 +15,17 @@ public class ToolBar extends JToolBar {
         JButton watchPrices = new JButton("Watch Prices");
         JButton hotel = new JButton("Hotel");
         JButton aboutUs = new JButton("About Us");
-        toolBar.add(flight);
-        toolBar.add(rentCar);
-        toolBar.add(lastMinute);
-        toolBar.add(travelGuide);
-        toolBar.add(priceRunner);
-        toolBar.add(watchPrices);
-        toolBar.add(hotel);
-        toolBar.add(aboutUs);
+        add(flight);
+        add(rentCar);
+        add(lastMinute);
+        add(travelGuide);
+        add(priceRunner);
+        add(watchPrices);
+        add(hotel);
+        add(aboutUs);
+
+        // Customize the layout and appearance of the toolbar
+        setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+        setPreferredSize(new Dimension(Integer.MAX_VALUE,getHeight()));
     }
 }

@@ -26,9 +26,12 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         // Set window properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1600, 900);
-        this.setLayout(new FlowLayout());
-        getContentPane().setBackground(new Color(25,55,109));
+        
 
+
+
+        JPanel contentPane = new JPanel();
+        contentPane.setBackground(new Color(25,55,109));
         // Create menu bar and icons
         menuBar = new JMenuBar();
 
@@ -53,9 +56,11 @@ public class MainFrameV2 extends JFrame implements ActionListener {
 
         //Create a toolBar and add it to the JFrame
         ToolBar toolBar = new ToolBar();
-
         // Add the JToolBar to the JFrame
         getContentPane().add(toolBar,BorderLayout.NORTH);
+        setLayout(new BorderLayout());
+
+
 
 
 
