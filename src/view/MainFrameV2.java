@@ -20,22 +20,33 @@ public class MainFrameV2 extends JFrame implements ActionListener {
     JMenuItem musicItem;
     JMenuItem homePage;
     JMenuItem about;
-
+    private JPanel mainPanel;
+    private NavigationPanel navigationPanel;
     public MainFrameV2() {
         // Set window properties
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1600, 900);
-        this.setLayout(new FlowLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1600, 900);
+
+        //Create main panel
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(new Color(25,55,109));
+        getContentPane().add(mainPanel);
+
+        // Create a navigation panel
+        navigationPanel = new NavigationPanel();
+        mainPanel.add(navigationPanel, BorderLayout.NORTH);
+
+
+
 
         // Create menu bar and icons
-        menuBar = new JMenuBar();
-
+        JMenuBar menuBar = new JMenuBar();
 
         // Create menu items for file menu
         fileMenu = new JMenu("File");
-        openItem = new JMenuItem("Open");
-        closeItem = new JMenuItem("Close");
-        exitItem = new JMenuItem("Exit");
+         openItem = new JMenuItem("Open");
+         closeItem = new JMenuItem("Close");
+         exitItem = new JMenuItem("Exit");
         fileMenu.add(openItem);
         fileMenu.add(closeItem);
         fileMenu.add(exitItem);
@@ -46,11 +57,6 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         musicItem = new JCheckBoxMenuItem("Disable/Enable music");
         options.add(toolTipsItem);
         options.add(musicItem);
-
-
-
-
-
 
         // Create menu items for help menu
         help = new JMenu("Help");
@@ -63,7 +69,7 @@ public class MainFrameV2 extends JFrame implements ActionListener {
         menuBar.add(fileMenu);
         menuBar.add(options);
         menuBar.add(help);
-        this.setJMenuBar(menuBar);
+        setJMenuBar(menuBar);
 
         // Add action listeners to menu items
         openItem.addActionListener(this);
@@ -107,12 +113,13 @@ public class MainFrameV2 extends JFrame implements ActionListener {
     public static void main (String[] args) throws ParseException {
         try {
             //UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
-            UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+            //UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
 
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             EventQueue.invokeLater(() -> new MainFrameV2());
+
         }
     }
 
