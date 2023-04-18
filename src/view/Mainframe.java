@@ -1,6 +1,7 @@
 package view;
 
 import com.amadeus.exceptions.ResponseException;
+import controller.Controller;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
@@ -55,6 +56,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
         oneWayTicketOnlyCheckBox.addChangeListener(this);
         createFrame();
     }
+
+
 
     private void createFrame() {
 

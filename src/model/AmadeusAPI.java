@@ -130,6 +130,7 @@ public class AmadeusAPI {
                     "\n\nTotal price: " + price + "€\n";
             ;
 
+            System.out.println("Hej");
             flightInfo.add(flights1);
             controller.setDisplayMessage(flightInfo);
 
