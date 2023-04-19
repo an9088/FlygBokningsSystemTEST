@@ -8,12 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+/**
+ * Klassen LoginGUI skapar ett grafiskt användargränssnitt för att hantera inloggning och registrering.
+ */
 public class LoginGUI {
     private JFrame loginFrame;
     private JFrame signUpFrame;
 
-    private Controller controller;
 
+    /**
+     * Konstruktorn för klassen LoginGUI.
+     * Den kallar på createLoginGUI-metoden för att skapa inloggningsgränssnittet.
+     */
     public LoginGUI() {
         createLoginGUI();
     }
@@ -24,7 +30,7 @@ public class LoginGUI {
         loginFrame.setSize(400, 250);
 
         JPanel loginPanel = new JPanel(new GridBagLayout());
-        loginPanel.setBackground(Color.LIGHT_GRAY);
+        loginPanel.setBackground(Color.PINK);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(4, 4, 4, 4);
@@ -55,24 +61,34 @@ public class LoginGUI {
         constraints.gridwidth = 2;
         loginPanel.add(loginButton, constraints);
 
-        // Add action listener to handle button press
+
+
+        /**
+         * Lyssnare för login-knappen som hanterar inloggningsförsök.
+         * När användaren klickar på login-knappen, går denna metod igenom
+         * "users.txt"-filen och försöker hitta en matchande e-post och lösenord.
+         * Om en match hittas, visas en dialogruta med ett meddelande om att
+         * inloggningen lyckades. Om ingen match hittas, visas en dialogruta med
+         * ett meddelande om att e-postadressen eller lösenordet är felaktigt.
+         */
+        // action listener to handle button press
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                // Check if the email and password match any user in the file
                 try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
                     String line;
+                    boolean foundEmail = false;
                     while ((line = reader.readLine()) != null) {
                         String[] tokens = line.split(": ");
                         if (tokens.length == 2) {
                             String field = tokens[0];
                             String value = tokens[1];
                             if (field.equals("Email") && value.equals(email)) {
+                                foundEmail = true;
+                            } else if (foundEmail && field.equals("Password") && value.equals(password)) {
                                 String name = "";
                                 line = reader.readLine();
                                 if (line != null) {
@@ -80,26 +96,25 @@ public class LoginGUI {
                                     if (tokens.length == 2) {
                                         field = tokens[0];
                                         value = tokens[1];
-                                        if (field.equals("Password") && value.equals(password)) {
-                                            // Login successful
-                                            name = reader.readLine().split(": ")[1];
-                                            JOptionPane.showMessageDialog(loginFrame, "Login successful, welcome dear " + name);
-                                            return;
+                                        if (field.equals("Firstname")) {
+                                            name = value;
                                         }
                                     }
                                 }
+                                JOptionPane.showMessageDialog(loginFrame, "Login successful, welcome dear Customer!");
+                                return;
+                            } else {
+                                foundEmail = false;
                             }
                         }
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
-                // Login failed
                 JOptionPane.showMessageDialog(loginFrame, "Incorrect email or password");
-
             }
         });
+
 
         JButton signUpButton = new JButton("Sign Up");
         signUpButton.addActionListener(new ActionListener() {
@@ -118,12 +133,16 @@ public class LoginGUI {
         loginFrame.setVisible(true);
     }
 
+    /**
+     * Skapar och visar registreringsgränssnittet.
+     * Den innehåller fält för att ange förnamn, efternamn, e-post och lösenord samt en knapp för att registrera sig.
+     */
     private void createSignUpGUI() {
         signUpFrame = new JFrame("Sign Up");
         signUpFrame.setSize(400, 300);
 
         JPanel signUpPanel = new JPanel(new GridBagLayout());
-        signUpPanel.setBackground(Color.LIGHT_GRAY);
+        signUpPanel.setBackground(Color.PINK);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(4, 4, 4, 4);

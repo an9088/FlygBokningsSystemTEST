@@ -1,10 +1,9 @@
 Firstname: Mehdi
 Lastname: Muhebbi
-Email: mehdi.muhebbi@gmail.com
-Password: Mehdi123
+Email: messi.master@gmail.com
+Password: Messi12345
 
 Firstname: Dino
-Lastname: Pateric
-Email: Dinomaster@yahoo.se
-Password: Dino12345!
-
+Lastname: Ellyas
+Email: Dino.Ellyas@yahoo.se
+Password: DinoEllyas1-?
