@@ -7,7 +7,13 @@ public class NavigationPanel extends JPanel {
 
     public NavigationPanel() {
 
-
+        Image image = Toolkit.getDefaultToolkit().getImage("img/icons/Air-Plane.png");
+        Image scaledImage = image.getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(scaledImage);
+        JButton logo = new JButton();
+        logo.setIcon(icon);
+        logo.setBorderPainted(false);
+        logo.setContentAreaFilled(false);
 
         // Add buttons for each category
         JButton flight = new JButton("Flight");
@@ -92,6 +98,7 @@ public class NavigationPanel extends JPanel {
         add(watchPrices);
         add(hotel);
         add(aboutUs);
+        add(logo);
 
         // Customize the layout and appearance of the panel
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
