@@ -13,6 +13,8 @@ public class AmadeusAPI {
     private Controller controller;
     private ArrayList<String> flightInfo = new ArrayList<String>();
 
+    private ArrayList<String> flightDisplay = new ArrayList<String>();
+
     private String departureAirport, destinationAirport, date, returnDate;
 
     private int nbrOfPassengers;
@@ -21,7 +23,7 @@ public class AmadeusAPI {
 
     private Amadeus amadeus;
 
-    //String[] flightData = new String[10];
+
 
     public AmadeusAPI(String departureAirport, String destinationAirport, String date, String returnDate, int nbrOfPassengers, Controller controller) throws ResponseException {
         this.controller = controller;
@@ -45,6 +47,8 @@ public class AmadeusAPI {
 
     public void searchReturnTickets(String departureAirport, String destinationAirport, int nbrOfPassengers
             , String date, String returnDate) throws ResponseException {
+
+        flightInfo.clear();
 
          amadeus = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
@@ -90,9 +94,23 @@ public class AmadeusAPI {
                             //  "\nAirline: " + returnAirline +
                             "\n\nTotal price: " + finalPrice + "€\n";
 
+            String flightDisplayInfo =
+
+                    "\nFrom: " + departure +
+                    "\nTo: " + destination +
+                    "\nDeparture date: " + departureTime +
+                    "\nAirline: " + airline +
+                    "\n<----->" +
+                    "\nReturn from: " + returnDeparture +
+                    "\nReturn to: " + returnDestination +
+                    "\nDeparture time: " + returnDepartureTime +
+                    "\nAirline: " + returnAirline +
+                    "\n\nTotal price: " + finalPrice + "€\n";
+
             System.out.println(finalPrice + "€");
+            flightDisplay.add(flightDisplayInfo);
             flightInfo.add(flights);
-            controller.setDisplayMessage(flightInfo);
+            controller.setDisplayMessage(flightInfo, flightDisplay);
 
 
         }
@@ -100,6 +118,9 @@ public class AmadeusAPI {
     }
 
     public void searchOneWayTicket(String departureAirport, String destinationAirport, int nbrOfPassengers, String date) throws ResponseException {
+
+
+        flightInfo.clear();
 
         Amadeus amadeus = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
@@ -120,19 +141,26 @@ public class AmadeusAPI {
             String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
             String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
             String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
-            // String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
+            String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
             String price = flightOffersSearches[i].getPrice().getTotal();
 
             // Adding flight information to flightInfo ArrayList
             String flights1 = "\nFrom: " + departure +
                     "\nTo: " + destination +
+                   // "\nDeparture time: " + departureTime +
+                    "\nAirline: " + airline +
+                    "\n\nTotal price: " + price + "€\n";
+
+            String flightDisplayInfo1 = "\nFrom: " + departure +
+                    "\nTo: " + destination +
                     "\nDeparture time: " + departureTime +
+                    "\nAirline: " + airline +
                     "\n\nTotal price: " + price + "€\n";
             ;
 
-            System.out.println("Hej");
+            flightDisplay.add(flightDisplayInfo1);
             flightInfo.add(flights1);
-            controller.setDisplayMessage(flightInfo);
+            controller.setDisplayMessage(flightInfo, flightDisplay);
 
 
         }
