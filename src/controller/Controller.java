@@ -113,9 +113,9 @@ public class Controller {
     }
 
 
-    public void createNewBooking(String name, String lastName, String address, String city, String zip, String country, String email, int bookingNumber) {
+    public void createNewBooking(String name, String lastName, String address, String city, String zip, String country, String email, String bookingDetails, int bookingNumber) {
 
-        booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, this);
+        booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, this);
         System.out.println(booking.toString());
 
     }
