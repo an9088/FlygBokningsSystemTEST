@@ -6,6 +6,9 @@ import java.awt.*;
 public class NavigationPanel extends JPanel {
 
     public NavigationPanel() {
+
+
+
         // Add buttons for each category
         JButton flight = new JButton("Flight");
         JButton rentCar = new JButton("Rent a car");
@@ -68,7 +71,7 @@ public class NavigationPanel extends JPanel {
 
         // Customize the appearance of the buttons
         Font font = new Font("Open Sans", Font.BOLD, 20);
-        Color fontColor = Color.WHITE;
+
         flight.setFont(font);
         rentCar.setFont(font);
         lastMinute.setFont(font);
@@ -77,14 +80,7 @@ public class NavigationPanel extends JPanel {
         watchPrices.setFont(font);
         hotel.setFont(font);
         aboutUs.setFont(font);
-        flight.setForeground(fontColor);
-        rentCar.setForeground(fontColor);
-        lastMinute.setForeground(fontColor);
-        travelGuide.setForeground(fontColor);
-        priceRunner.setForeground(fontColor);
-        watchPrices.setForeground(fontColor);
-        hotel.setForeground(fontColor);
-        aboutUs.setForeground(fontColor);
+
 
 
         // Add the buttons to the panel
@@ -100,7 +96,7 @@ public class NavigationPanel extends JPanel {
         // Customize the layout and appearance of the panel
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        setOpaque(false);
+        //setOpaque(false);
     }
 
 
