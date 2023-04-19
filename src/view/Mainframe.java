@@ -51,7 +51,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private Controller controller;
 
 
-
     public Mainframe(Controller controller) {
         this.controller = controller;
         loginButton.addActionListener(this);
@@ -130,10 +129,12 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             toAirport.setText("");
 
 
-
         }
         if (e.getSource().equals(book)) {
-            BookingCreatorGUI booking = new BookingCreatorGUI(controller);
+            
+            System.out.println(getEditorPane1().getText());
+            String bookingInfo = getEditorPane1().getText();
+            BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
         }
     }
 
@@ -232,7 +233,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getSource().equals(list1)) {
-            if(!(list1.equals(null))) {
+            if (!(list1.equals(null))) {
                 int i = list1.getSelectedIndex();
                 System.out.println("i = " + i);
                 String flightDisplay = controller.getFlightDisplay().get(i);
