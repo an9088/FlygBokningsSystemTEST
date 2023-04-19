@@ -21,6 +21,10 @@ public class Controller {
 
     private AirportCode airportCode;
 
+    private ArrayList<String> flightInfo;
+
+    private ArrayList<String> flightDisplay;
+
 
     public Controller() {
         mainframe = new Mainframe(this);
@@ -102,10 +106,10 @@ public class Controller {
 
     }
 
-    public void setDisplayMessage(ArrayList<String> message) {
-       // mainframe.getEditorPane1().setText(String.valueOf(message));
-        mainframe.setDisplayMessage(message);
-        //mainframe.test(message);
+    public void setDisplayMessage(ArrayList<String> message, ArrayList<String> flightDisplay) {
+
+        this.flightDisplay = flightDisplay;
+        mainframe.setDisplayMessage(message); // JLIST
     }
 
 
@@ -116,8 +120,14 @@ public class Controller {
 
     }
 
+
+
     public void showBookingConfirmation(String bookingMessage) {
         mainframe.showBookingConfirmation(bookingMessage);
+    }
+
+    public ArrayList<String> getFlightDisplay() {
+        return flightDisplay;
     }
 }
 

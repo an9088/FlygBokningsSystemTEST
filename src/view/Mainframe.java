@@ -8,6 +8,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class Mainframe extends JFrame implements ActionListener, ChangeListener {
+public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener {
     private JPanel mainPanel;
     private JPanel northPanel;
     private JPanel southPanel;
@@ -27,7 +29,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
     private JButton searchFligthsButton;
     private JSpinner spinnerAdult;
     private JCheckBox oneWayTicketOnlyCheckBox;
-    private Border border, border1, border2, border3;
+    private Border border, border1, border2, border3, border4;
     private JEditorPane editorPane1;
     private JButton signUpButton;
     private JButton loginButton;
@@ -48,15 +50,17 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
     private LoginGUI login;
     private Controller controller;
 
+
+
     public Mainframe(Controller controller) {
         this.controller = controller;
         loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
         book.addActionListener(this);
+        list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
         createFrame();
     }
-
 
 
     private void createFrame() {
@@ -89,10 +93,12 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
         border1 = BorderFactory.createTitledBorder("");
         border2 = BorderFactory.createTitledBorder("  Available Flights  ");
         border3 = BorderFactory.createTitledBorder("");
+        border4 = BorderFactory.createTitledBorder("Flight Information");
         eastPanel.setBorder(border);
         southPanel.setBorder(border1);
         scrollDisplay.setBorder(border2);
         mainPanel.setBorder(border3);
+        editorPane1.setBorder(border4);
 
     }
 
@@ -104,6 +110,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
         if (e.getSource().equals(searchFligthsButton)) {
 
             try {
+                editorPane1.setText("");
+                list1.removeListSelectionListener(this);
                 controller.searchAvailableFlights();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -117,8 +125,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
                 throw new RuntimeException(ex);
             }
 
+            list1.addListSelectionListener((ListSelectionListener) this);
             fromAirport.setText("");
             toAirport.setText("");
+
 
 
         }
@@ -140,8 +150,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
     }
 
     public void setDisplayMessage(ArrayList<String> message) {
+
+
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        
+
         for (String msg : message) {
             listModel.addElement(String.valueOf(msg));
         }
@@ -196,7 +208,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        if(e.getSource() == (oneWayTicketOnlyCheckBox)) {
+        if (e.getSource() == (oneWayTicketOnlyCheckBox)) {
             if (oneWayTicketOnlyCheckBox.isSelected()) {
                 System.out.println("Checkbox markerad");
                 returnYear.setEnabled(false);
@@ -208,6 +220,25 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener 
                 returnDay.setEnabled(true);
 
             }
+        }
+    }
+
+    public void setInfoDisplay(String flightDisplay) {
+        editorPane1.setText("");
+        editorPane1.setText(flightDisplay);
+
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getSource().equals(list1)) {
+            if(!(list1.equals(null))) {
+                int i = list1.getSelectedIndex();
+                System.out.println("i = " + i);
+                String flightDisplay = controller.getFlightDisplay().get(i);
+                setInfoDisplay(flightDisplay);
+            }
+
         }
     }
 }
