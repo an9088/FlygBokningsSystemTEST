@@ -12,13 +12,7 @@ public class Booking {
     private Controller controller;
 
     private ArrayList bookings = new ArrayList();
-    private String name;
-    private String lastName;
-    private String address;
-    private String zip;
-    private String country;
-    private String city;
-    private String email;
+    private String name, lastName, address, zip, country, city, email, bookingDetails;
 
     private Booking newBooking;
 
@@ -31,7 +25,7 @@ public class Booking {
      */
 
 
-    public Booking(String name, String lastName, String address, String city, String zip, String country, String email, int bookingNumber, Controller controller) {
+    public Booking(String name, String lastName, String address, String city, String zip, String country, String email, int bookingNumber, String bookingDetails, Controller controller) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
@@ -41,16 +35,19 @@ public class Booking {
         this.email = email;
         this.bookingNumber = bookingNumber;
         this.controller = controller;
+        this.bookingDetails = bookingDetails;
 
-        bookingConfirmation(name, lastName, address, city, zip, country, email);
+        bookingConfirmation(name, lastName, address, city, zip, country, email, bookingDetails);
     }
 
-    private void bookingConfirmation(String name, String lastName, String address, String city, String zip, String country, String email) {
+    private void bookingConfirmation(String name, String lastName, String address, String city,
+                                     String zip, String country, String email, String bookingDetails) {
         
-        String bookingMessage = "Thank you " + name + " " + lastName + " for using this application for booking your flight tickets. \n" +
-                "We hope you will have a pleasant stay in wherever the hell your traveling! \n\n\n" +
-                "Your booking number: " + bookingNumber + "\n" +
-                "Full name: " + name + " " + lastName + "\n" +
+        String bookingMessage = "Your booking number: " + bookingNumber + "\n" +
+                "Thank you " + name + " " + lastName + " for using this application for booking your flight tickets. \n" +
+                "We hope you will have a pleasant stay in wherever the hell your traveling! \n\n" +
+                "Here are your booking details for you upcoming flights:\n\n" + bookingDetails +
+                "\nFull name: " + name + " " + lastName + "\n" +
                 "Email address: " + email + "\n" +
                 "Address: " + address + "\n" +
                 "Zip code: " + zip + "\n" +
