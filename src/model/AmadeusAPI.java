@@ -16,7 +16,7 @@ public class AmadeusAPI {
 
     private ArrayList<String> flightDisplay = new ArrayList<String>();
 
-    private String departureAirport, destinationAirport, date, returnDate;
+    private String departureAirport, destinationAirport, date, returnDate, upperCaseAirport, upperCaseDestAirport;
 
     private int nbrOfPassengers;
 
@@ -45,30 +45,37 @@ public class AmadeusAPI {
         searchOneWayTicket(departureAirport, destinationAirport, nbrOfPassengers, date);
     }
 
+    public AmadeusAPI() {
+
+    }
+
     public void searchReturnTickets(String departureAirport, String destinationAirport, int nbrOfPassengers
             , String date, String returnDate) throws ResponseException {
 
         flightInfo.clear();
 
+
+        //These two small blocks ensures that the departure and destination city always are well formatted.
         String str = departureAirport;
-        String upperCaseAirport = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        upperCaseAirport = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         System.out.println(upperCaseAirport);
 
         String str1 = destinationAirport;
-        String upperCaseDestAirport = str1.substring(0, 1).toUpperCase() + str1.substring(1).toLowerCase();
+        upperCaseDestAirport = str1.substring(0, 1).toUpperCase() + str1.substring(1).toLowerCase();
         System.out.println(upperCaseDestAirport);
 
+        //Here, connection is established to the API
         amadeus = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
                 .build();
 
+        //This is where searched cities are converted to IATA-codes ex: Malmo -> MMA
         City[] cities = amadeus.referenceData.locations
                 .cities.get(Params.with("keyword", departureAirport));
 
         String departureCode = "";
         String destinationCode = "";
 
-        destinationCode.toUpperCase();
         if (cities.length > 0) {
             departureCode = cities[0].getIataCode();
             System.out.println("IATA-kod för " + departureAirport + " är " + departureCode);
@@ -82,7 +89,7 @@ public class AmadeusAPI {
             System.out.println("IATA-kod för " + destinationAirport + " är " + destinationCode);
         }
 
-
+        //This is where the flight offers are compared - this is where the request happens
         flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
                 Params.with("originLocationCode", departureCode)
                         .and("destinationLocationCode", destinationCode)
@@ -145,11 +152,11 @@ public class AmadeusAPI {
         flightInfo.clear();
 
         String str = departureAirport;
-        String upperCaseAirport = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        upperCaseAirport = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
         System.out.println(upperCaseAirport);
 
         String str1 = destinationAirport;
-        String upperCaseDestAirport = str1.substring(0, 1).toUpperCase() + str1.substring(1).toLowerCase();
+        upperCaseDestAirport = str1.substring(0, 1).toUpperCase() + str1.substring(1).toLowerCase();
         System.out.println(upperCaseDestAirport);
 
 
@@ -215,5 +222,9 @@ public class AmadeusAPI {
         }
 
 
+    }
+
+    public String getUpperCaseDestAirport() {
+        return upperCaseDestAirport;
     }
 }
