@@ -1,5 +1,8 @@
 package view;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -128,8 +131,8 @@ public class MainFrameV2 {
 
     public static void main (String[] args) throws ParseException {
         try {
-            //UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
-            //UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+            UIManager.setLookAndFeel(new FlatLightLaf());
+
 
         } catch (Exception ex) {
             ex.printStackTrace();

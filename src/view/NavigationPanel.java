@@ -3,104 +3,91 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+import java.io.File;
+import java.io.IOException;
+
+
 public class NavigationPanel extends JPanel {
 
     public NavigationPanel() {
-        // Add buttons for each category
-        JButton flight = new JButton("Flight");
-        JButton rentCar = new JButton("Rent a car");
-        JButton lastMinute = new JButton("Last minute");
-        JButton travelGuide = new JButton("Travel guide");
-        JButton priceRunner = new JButton("Pricerunner");
-        JButton watchPrices = new JButton("Watch Prices");
-        JButton hotel = new JButton("Hotel");
-        JButton aboutUs = new JButton("About Us");
 
-        // Set the background color of each button to be transparent
-        Color transparent = new Color(0, 0, 0, 0);
-        flight.setBackground(transparent);
-        rentCar.setBackground(transparent);
-        lastMinute.setBackground(transparent);
-        travelGuide.setBackground(transparent);
-        priceRunner.setBackground(transparent);
-        watchPrices.setBackground(transparent);
-        hotel.setBackground(transparent);
-        aboutUs.setBackground(transparent);
-
-        flight.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        rentCar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        lastMinute.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        travelGuide.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        priceRunner.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        watchPrices.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        hotel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        aboutUs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        Image logo = Toolkit.getDefaultToolkit().getImage("img/icons/Air-Plane.png");
+        Image scaledLogo = logo.getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        ImageIcon logoIcon = new ImageIcon(scaledLogo);
+        Image support = Toolkit.getDefaultToolkit().getImage("img/icons/support.png");
+        Image scaledSupport = support.getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        ImageIcon supportIcon = new ImageIcon(scaledSupport);
+        Image booking = Toolkit.getDefaultToolkit().getImage("img/icons/bookings.png");
+        Image scaledBooking = booking.getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        ImageIcon bookingIcon = new ImageIcon(scaledBooking);
+        Image travelGuide = Toolkit.getDefaultToolkit().getImage("img/icons/travelguide.png");
+        Image scaledTravelGuide = travelGuide.getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        ImageIcon travelGuideIcon = new ImageIcon(scaledTravelGuide);
 
 
-        // Disable focus and hover effects
-        flight.setFocusPainted(false);
-        flight.setContentAreaFilled(false);
-        rentCar.setFocusPainted(false);
-        rentCar.setContentAreaFilled(false);
-        lastMinute.setFocusPainted(false);
-        lastMinute.setContentAreaFilled(false);
-        travelGuide.setFocusPainted(false);
-        travelGuide.setContentAreaFilled(false);
-        priceRunner.setFocusPainted(false);
-        priceRunner.setContentAreaFilled(false);
-        watchPrices.setFocusPainted(false);
-        watchPrices.setContentAreaFilled(false);
-        hotel.setFocusPainted(false);
-        hotel.setContentAreaFilled(false);
-        aboutUs.setFocusPainted(false);
-        aboutUs.setContentAreaFilled(false);
 
-        //Disable border color
-        flight.setBorderPainted(false);
-        rentCar.setBorderPainted(false);
-        lastMinute.setBorderPainted(false);
-        travelGuide.setBorderPainted(false);
-        priceRunner.setBorderPainted(false);
-        watchPrices.setBorderPainted(false);
-        hotel.setBorderPainted(false);
-        aboutUs.setBorderPainted(false);
+
+
 
 
         // Customize the appearance of the buttons
-        Font font = new Font("Arial", Font.BOLD, 14);
-        Color fontColor = Color.WHITE;
-        flight.setFont(font);
-        rentCar.setFont(font);
-        lastMinute.setFont(font);
-        travelGuide.setFont(font);
-        priceRunner.setFont(font);
-        watchPrices.setFont(font);
-        hotel.setFont(font);
-        aboutUs.setFont(font);
-        flight.setForeground(fontColor);
-        rentCar.setForeground(fontColor);
-        lastMinute.setForeground(fontColor);
-        travelGuide.setForeground(fontColor);
-        priceRunner.setForeground(fontColor);
-        watchPrices.setForeground(fontColor);
-        hotel.setForeground(fontColor);
-        aboutUs.setForeground(fontColor);
+        try {
+            File fontFile = new File("fonts/NotoSans-Regular.ttf");
+            Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+            font = font.deriveFont(24f);
+            JLabel logoLabel = new JLabel("Flight booking System",JLabel.LEFT);
+            logoLabel.setIcon(logoIcon);
+            logoLabel.setHorizontalTextPosition(JLabel.RIGHT);
+            logoLabel.setVerticalTextPosition(JLabel.CENTER);
+            logoLabel.setFont(font);
+            logoLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
+            add(logoLabel);
+            logoLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            JLabel supportLabel = new JLabel("Support",JLabel.LEFT);
+            supportLabel.setIcon(supportIcon);
+            supportLabel.setHorizontalTextPosition(JLabel.RIGHT);
+            supportLabel.setVerticalTextPosition(JLabel.CENTER);
+            supportLabel.setFont(font);
+            supportLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
+            add(supportLabel);
+            supportLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 
-        // Add the buttons to the panel
-        add(flight);
-        add(rentCar);
-        add(lastMinute);
-        add(travelGuide);
-        add(priceRunner);
-        add(watchPrices);
-        add(hotel);
-        add(aboutUs);
+            JLabel bookingLabel = new JLabel("My Bookings",JLabel.LEFT);
+            bookingLabel.setIcon(bookingIcon);
+            bookingLabel.setHorizontalTextPosition(JLabel.RIGHT);
+            bookingLabel.setVerticalTextPosition(JLabel.CENTER);
+            bookingLabel.setFont(font);
+            bookingLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
+            add(bookingLabel);
+            bookingLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            JLabel travelGuideLabel = new JLabel("Travel Guide",JLabel.LEFT);
+            travelGuideLabel.setIcon(travelGuideIcon);
+            travelGuideLabel.setHorizontalTextPosition(JLabel.RIGHT);
+            travelGuideLabel.setVerticalTextPosition(JLabel.CENTER);
+            travelGuideLabel.setFont(font);
+            travelGuideLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
+            add(travelGuideLabel);
+            travelGuideLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+
+
+
+
+        }catch (FontFormatException | IOException e ){
+            e.printStackTrace();
+        }
+
+
+
+
 
         // Customize the layout and appearance of the panel
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        setOpaque(false);
+        //setOpaque(false);
     }
 
 
