@@ -1,8 +1,11 @@
 package view;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 
+
+//import com.formdev.flatlaf.FlatLightLaf;
+//import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+
+/*
 import javax.swing.*;
 
 import java.awt.*;
@@ -106,4 +109,5 @@ public class MainFrameV2 {
     }
 }
 
- 
+ */
+
