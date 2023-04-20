@@ -54,7 +54,9 @@ public class Booking {
                 "City: " + city + "\n" +
                 "Country: " + country + "\n";
 
+
         controller.showBookingConfirmation(bookingMessage);
+
 
     }
 

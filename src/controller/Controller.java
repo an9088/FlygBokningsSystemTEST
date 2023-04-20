@@ -33,6 +33,8 @@ public class Controller {
 
     public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException, ResponseException {
 
+
+
         String departureAirport = mainframe.getFromAirport().getText();
         String destinationAirport = mainframe.getToAirport().getText();
         int nbrOfPassengers = (int) mainframe.getSpinnerAdult().getValue();
@@ -45,6 +47,7 @@ public class Controller {
         String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
         String date = year + "-" + month + "-" + day;
 
+        //AmadeusAPI converter = new AmadeusAPI(departureAirport, destinationAirport);
         ///////////////DEPARTURE DATES///////////////////
 
         if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {

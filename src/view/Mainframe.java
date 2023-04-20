@@ -131,7 +131,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         }
         if (e.getSource().equals(book)) {
-            
+
             System.out.println(getEditorPane1().getText());
             String bookingInfo = getEditorPane1().getText();
             BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
@@ -227,7 +227,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void setInfoDisplay(String flightDisplay) {
         editorPane1.setText("");
         editorPane1.setText(flightDisplay);
-
     }
 
     @Override

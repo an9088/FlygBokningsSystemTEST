@@ -3,6 +3,7 @@ package model;
 import com.amadeus.Amadeus;
 import com.amadeus.Params;
 import com.amadeus.exceptions.ResponseException;
+import com.amadeus.resources.City;
 import com.amadeus.resources.FlightOfferSearch;
 import controller.Controller;
 
@@ -21,8 +22,8 @@ public class AmadeusAPI {
 
     private FlightOfferSearch[] flightOffersSearches;
 
-    private Amadeus amadeus;
 
+    private Amadeus amadeus;
 
 
     public AmadeusAPI(String departureAirport, String destinationAirport, String date, String returnDate, int nbrOfPassengers, Controller controller) throws ResponseException {
@@ -44,20 +45,47 @@ public class AmadeusAPI {
         searchOneWayTicket(departureAirport, destinationAirport, nbrOfPassengers, date);
     }
 
-
     public void searchReturnTickets(String departureAirport, String destinationAirport, int nbrOfPassengers
             , String date, String returnDate) throws ResponseException {
 
         flightInfo.clear();
 
-         amadeus = Amadeus
+        String str = departureAirport;
+        String upperCaseAirport = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        System.out.println(upperCaseAirport);
+
+        String str1 = destinationAirport;
+        String upperCaseDestAirport = str1.substring(0, 1).toUpperCase() + str1.substring(1).toLowerCase();
+        System.out.println(upperCaseDestAirport);
+
+        amadeus = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
                 .build();
 
+        City[] cities = amadeus.referenceData.locations
+                .cities.get(Params.with("keyword", departureAirport));
+
+        String departureCode = "";
+        String destinationCode = "";
+
+        destinationCode.toUpperCase();
+        if (cities.length > 0) {
+            departureCode = cities[0].getIataCode();
+            System.out.println("IATA-kod för " + departureAirport + " är " + departureCode);
+        }
+
+        City[] cities1 = amadeus.referenceData.locations
+                .cities.get(Params.with("keyword", destinationAirport));
+
+        if (cities.length > 0) {
+            destinationCode = cities1[0].getIataCode();
+            System.out.println("IATA-kod för " + destinationAirport + " är " + destinationCode);
+        }
+
 
         flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
-                Params.with("originLocationCode", departureAirport)
-                        .and("destinationLocationCode", destinationAirport)
+                Params.with("originLocationCode", departureCode)
+                        .and("destinationLocationCode", destinationCode)
                         .and("departureDate", date)
                         .and("returnDate", returnDate)
                         .and("adults", nbrOfPassengers)
@@ -78,34 +106,28 @@ public class AmadeusAPI {
             String returnAirline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
             String returnPrice = flightOffersSearches[i].getPrice().getTotal();
 
+
             double finalPrice = Double.parseDouble(price) + Double.parseDouble(returnPrice);
 
-            String flights = //"\n==================================" +
-                    // "\nFirst flight" +
+            String flights =
                     "\nFrom: " + departure +
                             "\nTo: " + destination +
-                            // "\nDeparture date: " + departureTime +
-                            // "\nAirline: " + airline +
                             "\n<-->" +
-                            // "\nReturn flight" +
                             "\nReturn from: " + returnDeparture +
                             "\nReturn to: " + returnDestination +
-                          //   "\nDeparture time: " + returnDepartureTime +
-                            //  "\nAirline: " + returnAirline +
                             "\n\nTotal price: " + finalPrice + "€\n";
 
             String flightDisplayInfo =
-
-                    "\nFrom: " + departure +
-                    "\nTo: " + destination +
                     "\nDeparture date: " + departureTime +
-                    "\nAirline: " + airline +
-                    "\n<----->" +
-                    "\nReturn from: " + returnDeparture +
-                    "\nReturn to: " + returnDestination +
-                    "\nDeparture time: " + returnDepartureTime +
-                    "\nAirline: " + returnAirline +
-                    "\n\nTotal price: " + finalPrice + "€\n";
+                            "\nFrom: " + upperCaseAirport + " " + departure +
+                            "\nTo: " + upperCaseDestAirport + " " + destination +
+                            "\nAirline: " + airline +
+                            "\n<----->" +
+                            "\nDeparture time: " + returnDepartureTime +
+                            "\nReturn from: " + upperCaseDestAirport + " " + returnDeparture +
+                            "\nReturn to: " + upperCaseAirport + " " + returnDestination +
+                            "\nAirline: " + returnAirline +
+                            "\n\nTotal price: " + finalPrice + "€\n";
 
             System.out.println(finalPrice + "€");
             flightDisplay.add(flightDisplayInfo);
@@ -122,14 +144,41 @@ public class AmadeusAPI {
 
         flightInfo.clear();
 
+        String str = departureAirport;
+        String upperCaseAirport = str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        System.out.println(upperCaseAirport);
+
+        String str1 = destinationAirport;
+        String upperCaseDestAirport = str1.substring(0, 1).toUpperCase() + str1.substring(1).toLowerCase();
+        System.out.println(upperCaseDestAirport);
+
+
         Amadeus amadeus = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
                 .build();
 
+        City[] cities = amadeus.referenceData.locations
+                .cities.get(Params.with("keyword", departureAirport));
+
+        String departureCode = "";
+        String destinationCode = "";
+        if (cities.length > 0) {
+            departureCode = cities[0].getIataCode();
+            System.out.println("IATA-kod för " + departureAirport + " är " + departureCode);
+        }
+
+        City[] cities1 = amadeus.referenceData.locations
+                .cities.get(Params.with("keyword", destinationAirport));
+
+        if (cities.length > 0) {
+            destinationCode = cities1[0].getIataCode();
+            System.out.println("IATA-kod för " + destinationAirport + " är " + destinationCode);
+        }
+
 
         FlightOfferSearch[] flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
-                Params.with("originLocationCode", departureAirport)
-                        .and("destinationLocationCode", destinationAirport)
+                Params.with("originLocationCode", departureCode)
+                        .and("destinationLocationCode", destinationCode)
                         .and("departureDate", date)
                         .and("returnDate", date)
                         .and("adults", nbrOfPassengers)
@@ -147,15 +196,15 @@ public class AmadeusAPI {
             // Adding flight information to flightInfo ArrayList
             String flights1 = "\nFrom: " + departure +
                     "\nTo: " + destination +
-                   // "\nDeparture time: " + departureTime +
                     "\nAirline: " + airline +
                     "\n\nTotal price: " + price + "€\n";
 
-            String flightDisplayInfo1 = "\nFrom: " + departure +
-                    "\nTo: " + destination +
+            String flightDisplayInfo1 =
                     "\nDeparture time: " + departureTime +
-                    "\nAirline: " + airline +
-                    "\n\nTotal price: " + price + "€\n";
+                            "\nFrom: " + upperCaseAirport + " " + departure +
+                            "\nTo: " + upperCaseDestAirport + " " + destination +
+                            "\nAirline: " + airline +
+                            "\n\nTotal price: " + price + "€\n";
             ;
 
             flightDisplay.add(flightDisplayInfo1);
@@ -164,6 +213,7 @@ public class AmadeusAPI {
 
 
         }
-    }
 
+
+    }
 }
