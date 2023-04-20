@@ -26,7 +26,7 @@ public class LoginGUI {
 
     private void createLoginGUI() {
         loginFrame = new JFrame("Login");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(400, 250);
 
         JPanel loginPanel = new JPanel(new GridBagLayout());
