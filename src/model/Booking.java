@@ -2,6 +2,9 @@ package model;
 
 import controller.Controller;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Booking {
@@ -55,8 +58,23 @@ public class Booking {
                 "Country: " + country + "\n";
 
         controller.showBookingConfirmation(bookingMessage);
+        saveBookingToFile(bookingMessage);
 
     }
+
+
+    private void saveBookingToFile(String bookingMessage){
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("booking.txt",true));
+            writer.write(bookingMessage);
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to save booking to file" + e.getMessage());
+        }
+    }
+
 
     public int getNbrOfTravelers() {
         return nbrOfTravelers;
