@@ -2,93 +2,83 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-
 import java.io.File;
 import java.io.IOException;
-
 
 public class NavigationPanel extends JPanel {
 
     public NavigationPanel() {
+        setLayout(new BorderLayout());
 
-        Image logo = Toolkit.getDefaultToolkit().getImage("img/icons/Air-Plane.png");
-        Image scaledLogo = logo.getScaledInstance(50,50,Image.SCALE_SMOOTH);
-        ImageIcon logoIcon = new ImageIcon(scaledLogo);
-        Image support = Toolkit.getDefaultToolkit().getImage("img/icons/support.png");
-        Image scaledSupport = support.getScaledInstance(50,50,Image.SCALE_SMOOTH);
-        ImageIcon supportIcon = new ImageIcon(scaledSupport);
-        Image booking = Toolkit.getDefaultToolkit().getImage("img/icons/bookings.png");
-        Image scaledBooking = booking.getScaledInstance(50,50,Image.SCALE_SMOOTH);
-        ImageIcon bookingIcon = new ImageIcon(scaledBooking);
-        Image travelGuide = Toolkit.getDefaultToolkit().getImage("img/icons/travelguide.png");
-        Image scaledTravelGuide = travelGuide.getScaledInstance(50,50,Image.SCALE_SMOOTH);
-        ImageIcon travelGuideIcon = new ImageIcon(scaledTravelGuide);
+        // Create the left-aligned spacing panel
+        add(createSpacingPanel(50), BorderLayout.WEST);
 
+        // Create the center-aligned logo label
+        JLabel logoLabel = createLabel("Flight booking System", "img/icons/Air-Plane.png", true);
+        logoLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        add(logoLabel, BorderLayout.CENTER);
 
+        JLabel supportLabel = createLabel("Support", "img/icons/support.png", true);
+        supportLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
+        JLabel bookingsLabel = createLabel("My Bookings", "img/icons/bookings.png", true);
+        bookingsLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
+        JLabel travelGuideLabel = createLabel("Travel Guide", "img/icons/travelguide.png", true);
+        travelGuideLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
+        JLabel[] labels = {supportLabel, bookingsLabel, travelGuideLabel};
 
+        JPanel labelsPanel = createLabelsPanel(labels, 100);
 
-        // Customize the appearance of the buttons
-        try {
-            File fontFile = new File("fonts/NotoSans-Regular.ttf");
-            Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
-            font = font.deriveFont(24f);
-            JLabel logoLabel = new JLabel("Flight booking System",JLabel.LEFT);
-            logoLabel.setIcon(logoIcon);
-            logoLabel.setHorizontalTextPosition(JLabel.RIGHT);
-            logoLabel.setVerticalTextPosition(JLabel.CENTER);
-            logoLabel.setFont(font);
-            logoLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
-            add(logoLabel);
-            logoLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        add(labelsPanel, BorderLayout.EAST);
 
-            JLabel supportLabel = new JLabel("Support",JLabel.LEFT);
-            supportLabel.setIcon(supportIcon);
-            supportLabel.setHorizontalTextPosition(JLabel.RIGHT);
-            supportLabel.setVerticalTextPosition(JLabel.CENTER);
-            supportLabel.setFont(font);
-            supportLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
-            add(supportLabel);
-            supportLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-
-            JLabel bookingLabel = new JLabel("My Bookings",JLabel.LEFT);
-            bookingLabel.setIcon(bookingIcon);
-            bookingLabel.setHorizontalTextPosition(JLabel.RIGHT);
-            bookingLabel.setVerticalTextPosition(JLabel.CENTER);
-            bookingLabel.setFont(font);
-            bookingLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
-            add(bookingLabel);
-            bookingLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-            JLabel travelGuideLabel = new JLabel("Travel Guide",JLabel.LEFT);
-            travelGuideLabel.setIcon(travelGuideIcon);
-            travelGuideLabel.setHorizontalTextPosition(JLabel.RIGHT);
-            travelGuideLabel.setVerticalTextPosition(JLabel.CENTER);
-            travelGuideLabel.setFont(font);
-            travelGuideLabel.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
-            add(travelGuideLabel);
-            travelGuideLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-
-
-
-
-        }catch (FontFormatException | IOException e ){
-            e.printStackTrace();
-        }
-
-
-
-
-
-        // Customize the layout and appearance of the panel
-        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
-        //setOpaque(false);
     }
+
+    // Creates a JLabel with the specified text and image icon
+    private JLabel createLabel(String text, String iconPath, boolean hasIcon) {
+        JLabel label = new JLabel(text, JLabel.LEFT);
+        if (hasIcon) {
+            Image iconImage = Toolkit.getDefaultToolkit().getImage(iconPath);
+            Image scaledIconImage = iconImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(scaledIconImage);
+            label.setIcon(icon);
+            label.setHorizontalTextPosition(JLabel.RIGHT);
+            label.setVerticalTextPosition(JLabel.CENTER);
+        }
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/NotoSans-medium.ttf"));
+            Font customFontPlain18 = customFont.deriveFont(Font.PLAIN, 18f);
+            label.setFont(customFontPlain18);
+        } catch (FontFormatException | IOException e) {
+            // Handle the exception here
+        }
+        label.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        return label;
+    }
+
+    // Creates a panel with the specified preferred width to serve as left-aligned spacing
+    private JPanel createSpacingPanel(int preferredWidth) {
+        JPanel spacingPanel = new JPanel();
+        spacingPanel.setPreferredSize(new Dimension(preferredWidth, 1));
+        spacingPanel.setOpaque(false);
+        return spacingPanel;
+    }
+
+    private JPanel createLabelsPanel(JLabel[] labels, int spacing) {
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        for (int i = 0; i < labels.length; i++) {
+            if (i > 0) {
+                panel.add(Box.createRigidArea(new Dimension(spacing, 0)));
+            }
+            panel.add(labels[i]);
+        }
+        return panel;
+    }
+
 
 
 }
