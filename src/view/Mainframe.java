@@ -5,9 +5,6 @@ import com.amadeus.exceptions.ResponseException;
 import controller.Controller;
 import org.xml.sax.SAXException;
 
-import controller.Controller;
-import org.xml.sax.SAXException;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
@@ -35,7 +32,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private JCheckBox oneWayTicketOnlyCheckBox;
     private Border border, border1, border2, border3, border4;
     private JEditorPane editorPane1;
-    private JButton signUpButton;
+    private JButton bookingsButton;
     private JButton loginButton;
     private JSpinner year;
     private JSpinner month;
@@ -59,6 +56,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         this.controller = controller;
         loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
+        bookingsButton.addActionListener(this);
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
@@ -140,6 +138,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             String bookingInfo = getEditorPane1().getText();
             BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
         }
+
+        if (e.getSource().equals(bookingsButton)) {
+            BookingGUI gui = new BookingGUI();
+        }
+
     }
 
     public void errorMessage(String message) {
