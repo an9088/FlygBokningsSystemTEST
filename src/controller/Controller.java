@@ -1,13 +1,20 @@
 package controller;
 
 import com.amadeus.exceptions.ResponseException;
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import org.xml.sax.SAXException;
 import model.AirportCode;
 import model.AmadeusAPI;
 import model.Booking;
 import view.Mainframe;
 
+import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,9 +34,16 @@ public class Controller {
 
 
     public Controller() {
+        try {
+            UIManager.setLookAndFeel(new FlatOneDarkIJTheme());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         mainframe = new Mainframe(this);
         this.airportCode = airportCode;
     }
+
 
     public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException, ResponseException {
 
