@@ -141,7 +141,6 @@ public class AmadeusAPI {
             flightInfo.add(flights);
             controller.setDisplayMessage(flightInfo, flightDisplay);
 
-
         }
 
     }
