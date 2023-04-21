@@ -160,13 +160,14 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void setDisplayMessage(ArrayList<String> message) {
 
 
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+            DefaultListModel<String> listModel = new DefaultListModel<>();
 
-        for (String msg : message) {
-            listModel.addElement(String.valueOf(msg));
-        }
+            for (String msg : message) {
+                listModel.addElement(String.valueOf(msg));
+            }
 
-        list1.setModel(listModel);
+            list1.setModel(listModel);
+
 
     }
 
