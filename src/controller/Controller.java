@@ -7,7 +7,6 @@ import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import org.xml.sax.SAXException;
-import model.AirportCode;
 import model.AmadeusAPI;
 import model.Booking;
 import view.Mainframe;
@@ -26,8 +25,6 @@ public class Controller {
 
     private String message;
 
-    private AirportCode airportCode;
-
     private ArrayList<String> flightInfo;
 
     private ArrayList<String> flightDisplay;
@@ -41,7 +38,6 @@ public class Controller {
         }
 
         mainframe = new Mainframe(this);
-        this.airportCode = airportCode;
     }
 
 

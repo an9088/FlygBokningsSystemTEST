@@ -46,6 +46,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private JSpinner returnYear;
     private JSpinner returnMonth;
     private JSpinner returnDay;
+    private JButton paymentButton;
 
     private ArrayList<String> messages = new ArrayList<String>();
     private LoginGUI login;
