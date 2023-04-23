@@ -1,19 +1,17 @@
 package controller;
 
 import com.amadeus.exceptions.ResponseException;
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
+
 import org.xml.sax.SAXException;
+
 import model.AmadeusAPI;
 import model.Booking;
+import org.xml.sax.SAXException;
 import view.Mainframe;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 

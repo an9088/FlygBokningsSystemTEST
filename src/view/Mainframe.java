@@ -52,6 +52,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private LoginGUI login;
     private Controller controller;
 
+    private JMenu menu1, menu2, menu3, menu4;
+
+    private JFrame frame;
 
     public Mainframe(Controller controller) {
         this.controller = controller;
@@ -67,16 +70,46 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     private void createFrame() {
 
-        JFrame frame = new JFrame("Flygbokningssystem");
+        frame = new JFrame("Flygbokningssystem");
         frame.setPreferredSize(new Dimension(800, 600));
         setBorders();
         frame.setContentPane(mainPanel);
         setTodaysDate();
         spinnerAdult.setValue(1);
+        setupMenu();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void setupMenu() {
+        JMenuBar menuBar = new JMenuBar();
+
+        menu1 = new JMenu("User");
+        menu1.add("Change Password");
+        menu1.add("Change Information");
+        menu1.add("Sign Out");
+
+        menu2 = new JMenu("Bookings");
+        menu2.add("Booking Information");
+        menu2.add("Delete Booking");
+        menu2.add("Handle Booking");
+
+        menu3 = new JMenu("Help");
+        menu3.add("How To Search Flights");
+        menu3.add("How To Make A Booking");
+
+        menu4 = new JMenu("General");
+        menu4.add("General Info");
+        menu4.add("Developers");
+
+        menuBar.add(menu1);
+        menuBar.add(menu2);
+        menuBar.add(menu3);
+        menuBar.add(menu4);
+        frame.setJMenuBar(menuBar);
+
     }
 
     private void setTodaysDate() {
@@ -142,6 +175,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         if (e.getSource().equals(bookingsButton)) {
             BookingGUI gui = new BookingGUI();
+        }
+
+        if (e.getSource().equals(menu1)){
+            System.out.println("Hej");
         }
 
     }
