@@ -61,6 +61,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
         bookingsButton.addActionListener(this);
+        paymentButton.addActionListener(this);
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
@@ -175,6 +176,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         if (e.getSource().equals(bookingsButton)) {
             BookingGUI gui = new BookingGUI();
+        }
+
+        if (e.getSource().equals(paymentButton)) {
+            PaymentGUI payment = new PaymentGUI();
         }
 
         if (e.getSource().equals(menu1)){
