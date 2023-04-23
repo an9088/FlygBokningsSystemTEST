@@ -17,4 +17,5 @@ public class Payment_Page {
     private JPanel paymentMethodPanel;
     private JPanel paymentInfoPanel;
     private JPanel paymentInfoPanel2;
+    private JButton confirmPayButton;
 }
