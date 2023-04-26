@@ -58,7 +58,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="abd69" binding="paymentMethodPanel" layout-manager="GridLayoutManager" row-count="1" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="abd69" binding="paymentMethodPanel" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -68,7 +68,7 @@
             <children>
               <component id="771c4" class="javax.swing.JCheckBox" binding="checkBox1" default-binding="true">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -76,7 +76,7 @@
               </component>
               <component id="91ebd" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="img/icons/Webiconset-Payment-VISA.64.png"/>
@@ -85,7 +85,7 @@
               </component>
               <component id="6ebfb" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="img/icons/Webiconset-Payment-Mastercard.64.png"/>
@@ -94,7 +94,7 @@
               </component>
               <component id="92425" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <enabled value="true"/>
@@ -102,28 +102,9 @@
                   <text value=""/>
                 </properties>
               </component>
-              <component id="89127" class="javax.swing.JCheckBox" binding="checkBox2" default-binding="true">
+              <hspacer id="d3126">
                 <constraints>
-                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value=""/>
-                </properties>
-              </component>
-              <component id="f1f56" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <icon value="img/icons/Designbolts-Credit-Card-Payment-Paypal.64.png"/>
-                  <text value=""/>
-                </properties>
-              </component>
-              <hspacer id="7c1b3">
-                <constraints>
-                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="50" height="-1"/>
-                  </grid>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
             </children>
