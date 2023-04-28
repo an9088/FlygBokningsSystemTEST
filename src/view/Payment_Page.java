@@ -3,8 +3,6 @@ package view;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -33,7 +31,7 @@ public class Payment_Page {
 
 
 
-        // Add suggestion text to text fields
+
         addSuggestionText(codeField, "Security Code");
         addSuggestionText(expiryDateField, "MM/YY");
         addSuggestionText(cardNumberField, "Card Number");
@@ -47,11 +45,11 @@ public class Payment_Page {
     }
 
     private void addSuggestionText(JTextField field, String suggestion) {
-        // Set suggestion text color
+
         Color gray = Color.GRAY;
         field.setForeground(gray);
 
-        // Add focus listener to remove suggestion text when field gains focus
+
         field.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
                 if (field.getText().equals(suggestion)) {
@@ -68,7 +66,7 @@ public class Payment_Page {
             }
         });
 
-        // Set suggestion text initially if field is empty
+
         if (field.getText().isEmpty()) {
             field.setText(suggestion);
         }
@@ -79,17 +77,17 @@ public class Payment_Page {
 
 
     public static void main(String[] args) {
-        // create a new instance of the Payment_Page form
+
         Payment_Page paymentPage = new Payment_Page();
 
-        // configure the form
+
         JFrame frame = new JFrame("Payment Page");
         frame.setContentPane(paymentPage.mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
 
-        // display the form
+
         frame.setVisible(true);
     }
 
