@@ -72,7 +72,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private void createFrame() {
 
         frame = new JFrame("Flygbokningssystem");
-        frame.setPreferredSize(new Dimension(800, 600));
+        frame.setPreferredSize(new Dimension(835, 600));
         setBorders();
         frame.setContentPane(mainPanel);
         setTodaysDate();
@@ -116,9 +116,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private void setTodaysDate() {
 
         LocalDate today = LocalDate.now();
+
         year.setValue(today.getYear());
         month.setValue(today.getMonthValue());
         day.setValue(today.getDayOfMonth());
+
         returnYear.setValue(today.getYear());
         returnMonth.setValue(today.getMonthValue());
         returnDay.setValue(today.getDayOfMonth());
@@ -162,8 +164,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             }
 
             list1.addListSelectionListener((ListSelectionListener) this);
-            fromAirport.setText("");
-            toAirport.setText("");
+
 
 
         }
@@ -171,7 +172,13 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
             System.out.println(getEditorPane1().getText());
             String bookingInfo = getEditorPane1().getText();
-            BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
+            int i = list1.getSelectedIndex();
+            if(i < 0 || i >10) {
+                errorMessage("Please select a flight from the list to create a booking");
+            } else {
+                BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
+            }
+
         }
 
         if (e.getSource().equals(bookingsButton)) {
@@ -183,7 +190,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         }
 
         if (e.getSource().equals(menu1)){
-            System.out.println("Hej");
         }
 
     }

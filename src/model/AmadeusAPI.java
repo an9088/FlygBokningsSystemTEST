@@ -89,58 +89,63 @@ public class AmadeusAPI {
             System.out.println("IATA-kod för " + destinationAirport + " är " + destinationCode);
         }
 
-        //This is where the flight offers are compared - this is where the request happens
-        flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
-                Params.with("originLocationCode", departureCode)
-                        .and("destinationLocationCode", destinationCode)
-                        .and("departureDate", date)
-                        .and("returnDate", returnDate)
-                        .and("adults", nbrOfPassengers)
-                        .and("nonStop", true)
-                        .and("max", 10));// Sortera efter pris
+        if (departureCode.equals(destinationCode)) {
+            controller.errorCode("Please enter two different destinations");
+        } else {
+
+            //This is where the flight offers are compared - this is where the request happens
+            flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
+                    Params.with("originLocationCode", departureCode)
+                            .and("destinationLocationCode", destinationCode)
+                            .and("departureDate", date)
+                            .and("returnDate", returnDate)
+                            .and("adults", nbrOfPassengers)
+                            .and("nonStop", true)
+                            .and("max", 10));// Sortera efter pris
 
 
-        for (int i = 0; i < flightOffersSearches.length; i++) {
-            String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
-            String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
-            String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
-            String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
-            String price = flightOffersSearches[i].getPrice().getTotal();
+            for (int i = 0; i < flightOffersSearches.length; i++) {
+                String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
+                String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
+                String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
+                String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
+                String price = flightOffersSearches[i].getPrice().getTotal();
 
-            String returnDeparture = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getDeparture().getIataCode(); // Lägger till returflygets avgångsinformation
-            String returnDestination = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getArrival().getIataCode(); // Lägger till returflygets destinationsinformation
-            String returnDepartureTime = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getDeparture().getAt();
-            String returnAirline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
-            String returnPrice = flightOffersSearches[i].getPrice().getTotal();
+                String returnDeparture = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getDeparture().getIataCode(); // Lägger till returflygets avgångsinformation
+                String returnDestination = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getArrival().getIataCode(); // Lägger till returflygets destinationsinformation
+                String returnDepartureTime = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getDeparture().getAt();
+                String returnAirline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
+                String returnPrice = flightOffersSearches[i].getPrice().getTotal();
 
 
-            double finalPrice = Double.parseDouble(price) + Double.parseDouble(returnPrice);
+                double finalPrice = Double.parseDouble(price) + Double.parseDouble(returnPrice);
 
-            String flights =
-                    "\nFrom: " + departure +
-                            "\nTo: " + destination +
-                            "\n<-->" +
-                            "\nReturn from: " + returnDeparture +
-                            "\nReturn to: " + returnDestination +
-                            "\n\nTotal price: " + finalPrice + "€\n";
+                String flights =
+                        "\nFrom: " + departure +
+                                "\nTo: " + destination +
+                                "\n<-->" +
+                                "\nReturn from: " + returnDeparture +
+                                "\nReturn to: " + returnDestination +
+                                "\n\nTotal price: " + finalPrice + "€\n";
 
-            String flightDisplayInfo =
-                    "\nDeparture date: " + departureTime +
-                            "\nFrom: " + upperCaseAirport + " " + departure +
-                            "\nTo: " + upperCaseDestAirport + " " + destination +
-                            "\nAirline: " + airline +
-                            "\n<----->" +
-                            "\nDeparture time: " + returnDepartureTime +
-                            "\nReturn from: " + upperCaseDestAirport + " " + returnDeparture +
-                            "\nReturn to: " + upperCaseAirport + " " + returnDestination +
-                            "\nAirline: " + returnAirline +
-                            "\n\nTotal price: " + finalPrice + "€\n";
+                String flightDisplayInfo =
+                        "\nDeparture date: " + departureTime +
+                                "\nFrom: " + upperCaseAirport + " " + departure +
+                                "\nTo: " + upperCaseDestAirport + " " + destination +
+                                "\nAirline: " + airline +
+                                "\n<----->" +
+                                "\nDeparture date: " + returnDepartureTime +
+                                "\nReturn from: " + upperCaseDestAirport + " " + returnDeparture +
+                                "\nReturn to: " + upperCaseAirport + " " + returnDestination +
+                                "\nAirline: " + returnAirline +
+                                "\n\nTotal price: " + finalPrice + "€\n";
 
-            System.out.println(finalPrice + "€");
-            flightDisplay.add(flightDisplayInfo);
-            flightInfo.add(flights);
-            controller.setDisplayMessage(flightInfo, flightDisplay);
+                System.out.println(finalPrice + "€");
+                flightDisplay.add(flightDisplayInfo);
+                flightInfo.add(flights);
+                controller.setDisplayMessage(flightInfo, flightDisplay);
 
+            }
         }
 
     }
@@ -180,44 +185,47 @@ public class AmadeusAPI {
             destinationCode = cities1[0].getIataCode();
             System.out.println("IATA-kod för " + destinationAirport + " är " + destinationCode);
         }
+        if (departureCode.equals(destinationCode)) {
+            controller.errorCode("Please enter two different destinations");
+        } else {
+
+            FlightOfferSearch[] flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
+                    Params.with("originLocationCode", departureCode)
+                            .and("destinationLocationCode", destinationCode)
+                            .and("departureDate", date)
+                            .and("returnDate", date)
+                            .and("adults", nbrOfPassengers)
+                            .and("nonStop", true)
+                            .and("max", 10));// Sortera efter pris
 
 
-        FlightOfferSearch[] flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
-                Params.with("originLocationCode", departureCode)
-                        .and("destinationLocationCode", destinationCode)
-                        .and("departureDate", date)
-                        .and("returnDate", date)
-                        .and("adults", nbrOfPassengers)
-                        .and("nonStop", true)
-                        .and("max", 10));// Sortera efter pris
+            for (int i = 0; i < flightOffersSearches.length; i++) {
+                String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
+                String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
+                String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
+                String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
+                String price = flightOffersSearches[i].getPrice().getTotal();
+
+                // Adding flight information to flightInfo ArrayList
+                String flights1 = "\nFrom: " + departure +
+                        "\nTo: " + destination +
+                        "\nAirline: " + airline +
+                        "\n\nTotal price: " + price + "€\n";
+
+                String flightDisplayInfo1 =
+                        "\nDeparture time: " + departureTime +
+                                "\nFrom: " + upperCaseAirport + " " + departure +
+                                "\nTo: " + upperCaseDestAirport + " " + destination +
+                                "\nAirline: " + airline +
+                                "\n\nTotal price: " + price + "€\n";
+                ;
+
+                flightDisplay.add(flightDisplayInfo1);
+                flightInfo.add(flights1);
+                controller.setDisplayMessage(flightInfo, flightDisplay);
 
 
-        for (int i = 0; i < flightOffersSearches.length; i++) {
-            String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
-            String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
-            String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
-            String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
-            String price = flightOffersSearches[i].getPrice().getTotal();
-
-            // Adding flight information to flightInfo ArrayList
-            String flights1 = "\nFrom: " + departure +
-                    "\nTo: " + destination +
-                    "\nAirline: " + airline +
-                    "\n\nTotal price: " + price + "€\n";
-
-            String flightDisplayInfo1 =
-                    "\nDeparture time: " + departureTime +
-                            "\nFrom: " + upperCaseAirport + " " + departure +
-                            "\nTo: " + upperCaseDestAirport + " " + destination +
-                            "\nAirline: " + airline +
-                            "\n\nTotal price: " + price + "€\n";
-            ;
-
-            flightDisplay.add(flightDisplayInfo1);
-            flightInfo.add(flights1);
-            controller.setDisplayMessage(flightInfo, flightDisplay);
-
-
+            }
         }
 
 

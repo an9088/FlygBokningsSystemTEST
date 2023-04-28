@@ -2,9 +2,6 @@ package controller;
 
 import com.amadeus.exceptions.ResponseException;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
-
-import org.xml.sax.SAXException;
-
 import model.AmadeusAPI;
 import model.Booking;
 import org.xml.sax.SAXException;
@@ -42,29 +39,29 @@ public class Controller {
     public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException, ResponseException {
 
 
-
         String departureAirport = mainframe.getFromAirport().getText();
         String destinationAirport = mainframe.getToAirport().getText();
+
         int nbrOfPassengers = (int) mainframe.getSpinnerAdult().getValue();
+
         String year = mainframe.getYear().getValue().toString();
         String month = mainframe.getMonth().getValue().toString();
         String day = mainframe.getDay().getValue().toString();
-        String returnYear = mainframe.getReturnYear().getValue().toString();
-        String returnMonth = mainframe.getReturnMonth().getValue().toString();
-        String returnDay = mainframe.getReturnDay().getValue().toString();
-        String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
+
         String date = year + "-" + month + "-" + day;
+
+        System.out.println("testdatum utresa: " + date);
 
         //AmadeusAPI converter = new AmadeusAPI(departureAirport, destinationAirport);
         ///////////////DEPARTURE DATES///////////////////
 
         if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {
             date = year + "-0" + month + "-" + day;
-            System.out.println("Test 2 " + date);
+            System.out.println("Test 1 " + date);
         }
         if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) < 10) {
             date = year + "-" + month + "-0" + day;
-            System.out.println("Test 1 " + date);
+            System.out.println("Test 2 " + date);
         }
         if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) >= 10) {
             date = year + "-" + month + "-" + day;
@@ -77,26 +74,35 @@ public class Controller {
 
         ///////////////RETURN DATES///////////////////
 
+        String returnYear = mainframe.getReturnYear().getValue().toString();
+        String returnMonth = mainframe.getReturnMonth().getValue().toString();
+        String returnDay = mainframe.getReturnDay().getValue().toString();
+
+
+        String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
+
+        System.out.println("testdatum hemresa: " + returnDate);
+
         if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) >= 10) {
-            returnDate = year + "-0" + month + "-" + day;
-            System.out.println("Test 2 " + returnDate);
+            returnDate = returnYear + "-0" + returnMonth + "-" + returnDay;
+            System.out.println("Test 5 " + returnDate);
         }
-        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
-            returnDate = year + "-" + month + "-0" + day;
-            System.out.println("Test 1 " + returnDate);
+        else if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
+            returnDate = returnYear + "-" + returnMonth + "-0" + returnDay;
+            System.out.println("Test 6 " + returnDate);
         }
-        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
-            returnDate = year + "-" + month + "-" + day;
-            System.out.println("Test 3 " + returnDate);
+        else if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
+            returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
+            System.out.println("Test 7 " + returnDate);
         }
-        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
-            returnDate = year + "-0" + month + "-0" + day;
-            System.out.println("Test 4 " + returnDate);
+        else if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
+            returnDate = returnYear + "-0" + returnMonth + "-0" + returnDay;
+            System.out.println("Test 8 " + returnDate);
         }
 
 
         if (departureAirport.equals("")) {
-           // mainframe.getEditorPane1().setText("");
+            // mainframe.getEditorPane1().setText("");
             message = "Please enter valid departure destination";
             mainframe.errorMessage(message);
         } else if (destinationAirport.equals("")) {
@@ -104,15 +110,19 @@ public class Controller {
             message = "Please enter valid arrival destination";
             mainframe.errorMessage(message);
         } else if (destinationAirport.equals("") && departureAirport.equals("")) {
-          //  mainframe.getEditorPane1().setText("");
+            //  mainframe.getEditorPane1().setText("");
             message = "Please enter valid destinations";
             mainframe.errorMessage(message);
-        } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()){
+        } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()) {
             AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
             // API apiMessage = new API(departureAirport, destinationAirport, date, this);
             //FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
+            mainframe.getFromAirport().setText("");
+            mainframe.getToAirport().setText("");
         } else {
             AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
+            mainframe.getFromAirport().setText("");
+            mainframe.getToAirport().setText("");
         }
 
     }
@@ -132,13 +142,16 @@ public class Controller {
     }
 
 
-
     public void showBookingConfirmation(String bookingMessage) {
         mainframe.showBookingConfirmation(bookingMessage);
     }
 
     public ArrayList<String> getFlightDisplay() {
         return flightDisplay;
+    }
+
+    public void errorCode(String message) {
+        mainframe.errorMessage(message);
     }
 }
 

@@ -20,7 +20,7 @@ public class BookingGUI {
     private void createGUI() {
         // Set up the main frame
         bookingsFrame = new JFrame("Booking GUI");
-        bookingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // bookingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         bookingsFrame.setSize(400, 300);
 
         // Set up the panel with a grid layout

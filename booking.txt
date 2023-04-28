@@ -50,3 +50,102 @@ Zip code: 12345
 City: Malmö
 Country: Sverige
 
+Your booking number: 1
+Thank you Mattias Malm for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-04-24T10:35:00
+From: Malmo MMX
+To: Stockholm BMA
+Airline: TF
+<----->
+Departure time: 2023-04-24T14:55:00
+Return from: Stockholm BMA
+Return to: Malmo MMX
+Airline: TF
+
+Total price: 534.1€
+
+Full name: Mattias Malm
+Email address: malmmattias1@outlook.com
+Address: Magnoliavägen 3
+Zip code: 24544
+City: Staffanstorp
+Country: Sweden
+
+Your booking number: 1
+Thank you asdf asdf for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-04-25T10:00:00
+From: Malmo MMX
+To: Stockholm ARN
+Airline: SK
+<----->
+Departure date: 2023-04-28T10:30:00
+Return from: Stockholm ARN
+Return to: Malmo MMX
+Airline: SK
+
+Total price: 235.74€
+
+Full name: asdf asdf
+Email address: asdf@
+Address: asdf
+Zip code: 12345
+City: asdf
+Country: asdf
+
+Your booking number: 2
+Thank you hjh jff for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure time: 2023-06-19T11:00:00
+From: Stockholm BMA
+To: Malmo MMX
+Airline: TF
+
+Total price: 271.22€
+
+Full name: hjh jff
+Email address: yghjg@
+Address: jugjhg
+Zip code: 45556
+City: hjkh
+Country: fg
+
+Your booking number: 1
+Thank you Mattias Malm for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-04-26T15:55:00
+From: Malmo MMX
+To: Stockholm ARN
+Airline: SK
+<----->
+Departure date: 2023-04-28T17:55:00
+Return from: Stockholm ARN
+Return to: Malmo MMX
+Airline: SK
+
+Total price: 333.26€
+
+Full name: Mattias Malm
+Email address: malmmattias1@outlook.com
+Address: Magnoliavägen 3
+Zip code: 24544
+City: Staffanstorp
+Country: Sweden
+
