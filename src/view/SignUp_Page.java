@@ -2,24 +2,29 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
-public class Login_Page {
-    private JPanel mainPanel;
-    private JTextField textField1;
+public class SignUp_Page {
+    private JTextField emailField;
+    private JTextField surnameField;
+    private JTextField forenameField;
     private JPasswordField passwordField1;
-    private JCheckBox rememberMeCheckBox;
-    private JLabel forgetPassWordLabelNOTUSED;
-    private JButton logInButton;
+    private JButton signUpButton;
+    private JLabel LoginButton;
+    private JPanel mainPanel;
     private JLabel passwordHideButton;
 
-    public Login_Page(){
-        logInButton.setBackground(new Color(0,123,255));
-        logInButton.setForeground(Color.WHITE);
+    public SignUp_Page() {
+
+        signUpButton.setBackground(new Color(0,123,255));
+        signUpButton.setForeground(Color.WHITE);
+        signUpButton.setText("Sign Up");
 
         passwordField1.setEchoChar((char)0);
 
+
+        LoginButton.setForeground(Color.BLUE);
+        LoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         passwordHideButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         passwordHideButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -30,15 +35,13 @@ public class Login_Page {
                 }
             }
         });
-
-
-
     }
 
+
     public static void main(String[] args) {
-        Login_Page login = new Login_Page();
+        SignUp_Page page = new SignUp_Page();
         JFrame frame = new JFrame("Sign Up Page");
-        frame.setContentPane(login.mainPanel);
+        frame.setContentPane(page.mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
@@ -46,3 +49,4 @@ public class Login_Page {
         frame.setVisible(true);
     }
 }
+
