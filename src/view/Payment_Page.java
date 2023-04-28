@@ -39,7 +39,7 @@ public class Payment_Page {
         addSuggestionText(nameField, "John Doe");
         addSuggestionText(emailField, "johndoe123@gmail.com");
 
-        ((AbstractDocument) codeField.getDocument()).setDocumentFilter(new FixedLengthFilter(4));
+        ((AbstractDocument) codeField.getDocument()).setDocumentFilter(new FixedLengthFilter(5));
         ((AbstractDocument) cardNumberField.getDocument()).setDocumentFilter(new FixedLengthFilter(16));
         ((AbstractDocument) expiryDateField.getDocument()).setDocumentFilter(new ExpiryDateFilter());
     }
