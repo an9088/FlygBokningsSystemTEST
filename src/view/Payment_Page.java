@@ -32,14 +32,14 @@ public class Payment_Page {
 
 
 
-        addSuggestionText(codeField, "Security Code");
+        addSuggestionText(codeField, "CVV");
         addSuggestionText(expiryDateField, "MM/YY");
         addSuggestionText(cardNumberField, "Card Number");
         addSuggestionText(nameCardField, "Name on Card");
         addSuggestionText(nameField, "John Doe");
         addSuggestionText(emailField, "johndoe123@gmail.com");
 
-        ((AbstractDocument) codeField.getDocument()).setDocumentFilter(new FixedLengthFilter(5));
+        ((AbstractDocument) codeField.getDocument()).setDocumentFilter(new FixedLengthFilter(4));
         ((AbstractDocument) cardNumberField.getDocument()).setDocumentFilter(new FixedLengthFilter(16));
         ((AbstractDocument) expiryDateField.getDocument()).setDocumentFilter(new ExpiryDateFilter());
     }
