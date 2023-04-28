@@ -12,39 +12,25 @@ public class Payment_Page {
     private JCheckBox checkBox1;
     private JTextField textField3;
     private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
     private JPanel contactPanel;
     private JPanel paymentPanel;
     private JPanel paymentMethodPanel;
     private JPanel paymentInfoPanel;
     private JPanel paymentInfoPanel2;
     private JButton confirmPayButton;
+    private JTextField textField6;
+    private JTextField textField5;
 
-
-    public Payment_Page(){
-
+    public Payment_Page() {
         confirmPayButton.setText("Confirm & Pay");
-        confirmPayButton.setBackground(new Color(0, 123, 255));
+        confirmPayButton.setBackground(new Color(0,123,255));
         confirmPayButton.setForeground(Color.WHITE);
-        confirmPayButton.setOpaque(true);
-        confirmPayButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        confirmPayButton.setFocusPainted(false);
-        confirmPayButton.setBorderPainted(false);
-        confirmPayButton.setRolloverEnabled(false);
-        confirmPayButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        confirmPayButton.setBorder(BorderFactory.createLineBorder(new Color(0, 123, 255), 2, true));
-        confirmPayButton.setBorder(BorderFactory.createCompoundBorder(confirmPayButton.getBorder(), BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+        int arc = 15;
+        confirmPayButton.setBorder(BorderFactory.create);
 
-
-
-        confirmPayButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
+
+
 
     public static void main(String[] args) {
         // create a new instance of the Payment_Page form
@@ -61,8 +47,11 @@ public class Payment_Page {
         frame.setVisible(true);
     }
 
+
     private void createUIComponents() {
-        confirmPayButton = new JButton();
-        // TODO: place custom component creation code here
+
+
+
+
     }
 }
