@@ -22,12 +22,12 @@ public class PaymentGUI {
     public void createPaymentGUI(){
 
         paymentFrame = new JFrame("Payment GUI");
-        paymentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // paymentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         paymentFrame.setSize(400, 300);
 
         // Set up the panel with a grid layout
         JPanel paymentPanel = new JPanel(new GridBagLayout());
-        paymentPanel.setBackground(Color.DARK_GRAY);
+       // paymentPanel.setBackground(Color.DARK_GRAY);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(4, 4, 4, 4);

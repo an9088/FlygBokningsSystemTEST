@@ -149,3 +149,29 @@ Zip code: 24544
 City: Staffanstorp
 Country: Sweden
 
+Your booking number: 1
+Thank you sdf asdf for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-04-28T13:05:00
+From: Malmo MMX
+To: Stockholm BMA
+Airline: TF
+<----->
+Departure date: 2023-04-28T19:35:00
+Return from: Stockholm BMA
+Return to: Malmo MMX
+Airline: TF
+
+Total price: 534.1€
+
+Full name: sdf asdf
+Email address: asdf@gmail.com
+Address: adsf
+Zip code: 12345
+City: adsf
+Country: adsf
+

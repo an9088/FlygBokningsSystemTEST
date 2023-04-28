@@ -30,7 +30,7 @@ public class LoginGUI {
         loginFrame.setSize(400, 250);
 
         JPanel loginPanel = new JPanel(new GridBagLayout());
-        loginPanel.setBackground(Color.PINK);
+        //loginPanel.setBackground(Color.PINK);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(4, 4, 4, 4);

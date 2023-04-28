@@ -31,7 +31,6 @@ public class Controller {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         mainframe = new Mainframe(this);
     }
 
@@ -50,26 +49,19 @@ public class Controller {
 
         String date = year + "-" + month + "-" + day;
 
-        System.out.println("testdatum utresa: " + date);
-
-        //AmadeusAPI converter = new AmadeusAPI(departureAirport, destinationAirport);
         ///////////////DEPARTURE DATES///////////////////
 
         if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {
             date = year + "-0" + month + "-" + day;
-            System.out.println("Test 1 " + date);
         }
         if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) < 10) {
             date = year + "-" + month + "-0" + day;
-            System.out.println("Test 2 " + date);
         }
         if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) >= 10) {
             date = year + "-" + month + "-" + day;
-            System.out.println("Test 3 " + date);
         }
         if (Integer.parseInt(month) < 10 && Integer.parseInt(day) < 10) {
             date = year + "-0" + month + "-0" + day;
-            System.out.println("Test 4 " + date);
         }
 
         ///////////////RETURN DATES///////////////////
@@ -78,49 +70,43 @@ public class Controller {
         String returnMonth = mainframe.getReturnMonth().getValue().toString();
         String returnDay = mainframe.getReturnDay().getValue().toString();
 
-
         String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
-
-        System.out.println("testdatum hemresa: " + returnDate);
 
         if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) >= 10) {
             returnDate = returnYear + "-0" + returnMonth + "-" + returnDay;
-            System.out.println("Test 5 " + returnDate);
         }
-        else if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
+        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
             returnDate = returnYear + "-" + returnMonth + "-0" + returnDay;
-            System.out.println("Test 6 " + returnDate);
         }
-        else if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
+        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
             returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
-            System.out.println("Test 7 " + returnDate);
         }
-        else if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
+        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
             returnDate = returnYear + "-0" + returnMonth + "-0" + returnDay;
-            System.out.println("Test 8 " + returnDate);
         }
 
 
         if (departureAirport.equals("")) {
-            // mainframe.getEditorPane1().setText("");
             message = "Please enter valid departure destination";
             mainframe.errorMessage(message);
+
         } else if (destinationAirport.equals("")) {
-            //mainframe.getEditorPane1().setText("");
             message = "Please enter valid arrival destination";
             mainframe.errorMessage(message);
+
         } else if (destinationAirport.equals("") && departureAirport.equals("")) {
-            //  mainframe.getEditorPane1().setText("");
             message = "Please enter valid destinations";
             mainframe.errorMessage(message);
+
         } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()) {
             AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
-            // API apiMessage = new API(departureAirport, destinationAirport, date, this);
-            //FakeAPI fake = new FakeAPI(departureAirport, destinationAirport, date, this);
+
             mainframe.getFromAirport().setText("");
             mainframe.getToAirport().setText("");
+
         } else {
             AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
+
             mainframe.getFromAirport().setText("");
             mainframe.getToAirport().setText("");
         }
@@ -134,11 +120,11 @@ public class Controller {
     }
 
 
-    public void createNewBooking(String name, String lastName, String address, String city, String zip, String country, String email, String bookingDetails, int bookingNumber) {
+    public void createNewBooking(String name, String lastName, String address, String city,
+                                 String zip, String country, String email, String bookingDetails, int bookingNumber) {
 
         booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, this);
         System.out.println(booking.toString());
-
     }
 
 

@@ -25,7 +25,7 @@ public class BookingGUI {
 
         // Set up the panel with a grid layout
         JPanel bookingsPanel = new JPanel(new GridBagLayout());
-        bookingsPanel.setBackground(Color.PINK);
+        //bookingsPanel.setBackground(Color.PINK);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(4, 4, 4, 4);

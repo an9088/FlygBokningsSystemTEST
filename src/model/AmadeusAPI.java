@@ -46,8 +46,8 @@ public class AmadeusAPI {
     }
 
     public AmadeusAPI() {
-
     }
+
 
     public void searchReturnTickets(String departureAirport, String destinationAirport, int nbrOfPassengers
             , String date, String returnDate) throws ResponseException {

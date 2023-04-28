@@ -39,7 +39,7 @@ public class BookingCreatorGUI {
         signUpFrame.setSize(400, 400);
 
         JPanel signUpPanel = new JPanel(new GridBagLayout());
-        signUpPanel.setBackground(Color.LIGHT_GRAY);
+       // signUpPanel.setBackground(Color.LIGHT_GRAY);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(7, 7, 7, 7);
@@ -64,7 +64,7 @@ public class BookingCreatorGUI {
         constraints.gridy = 1;
         signUpPanel.add(lastNameField, constraints);
 
-        JLabel address = new JLabel("Address");
+        JLabel address = new JLabel("Address:");
         constraints.gridx = 0;
         constraints.gridy = 2;
         signUpPanel.add(address, constraints);
@@ -74,25 +74,25 @@ public class BookingCreatorGUI {
         constraints.gridy = 2;
         signUpPanel.add(addressField, constraints);
 
-        JLabel city = new JLabel("City:");
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        signUpPanel.add(city, constraints);
-
-        JTextField cityField = new JTextField(20);
-        constraints.gridx = 1;
-        constraints.gridy = 3;
-        signUpPanel.add(cityField, constraints);
-
         JLabel zipCode = new JLabel("Zip Code:");
         constraints.gridx = 0;
-        constraints.gridy = 4;
+        constraints.gridy = 3;
         signUpPanel.add(zipCode, constraints);
 
         JTextField zipCodeField = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 4;
+        constraints.gridy = 3;
         signUpPanel.add(zipCodeField, constraints);
+
+        JLabel city = new JLabel("City:");
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        signUpPanel.add(city, constraints);
+
+        JTextField cityField = new JTextField(20);
+        constraints.gridx = 1;
+        constraints.gridy = 4;
+        signUpPanel.add(cityField, constraints);
 
         JLabel Country = new JLabel("Country:");
         constraints.gridx = 0;
@@ -141,13 +141,17 @@ public class BookingCreatorGUI {
 
                 if (name.equals("") || lastName.equals("") || address.equals("") ||
                         city.equals("") || zip.equals("") || country.equals("") || email.equals("")) {
-                    JOptionPane.showMessageDialog(signUpFrame, "Please enter empty field to complete the booking");
+                    String message = "Please enter empty field to complete the booking";
+                    errorMessage(message);
                 }
                 if (!(zip.length() == 5)) {
-                    JOptionPane.showMessageDialog(signUpFrame, "Zip code must contain five characters");
+                    String message = "Zip code must contain five characters";
+                    errorMessage(message);
                 }
                 if (!(email.contains("@"))) {
-                    JOptionPane.showMessageDialog(signUpFrame, "You must enter a valid email address");
+                   String message = "You must enter a valid email address";
+                    errorMessage(message);
+
                 } else if (!(name.equals("") || lastName.equals("") || address.equals("") || city.equals("")
                         || zip.equals("") || country.equals("")) && email.contains("@") && zip.length() == 5) {
 
@@ -159,5 +163,10 @@ public class BookingCreatorGUI {
                 }
             }
         });
+
+    }
+
+    private void errorMessage(String message) {
+        JOptionPane.showMessageDialog(signUpFrame, message);
     }
 }
