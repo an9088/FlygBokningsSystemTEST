@@ -23,6 +23,16 @@ public class Payment_Page {
     private JTextField expiryDateField;
 
     public Payment_Page() {
+
+
+        JFrame frame = new JFrame("Payment Page");
+        frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+
+
+        frame.setVisible(true);
         confirmPayButton.setText("Confirm & Pay");
         confirmPayButton.setBackground(new Color(0,123,255));
         confirmPayButton.setForeground(Color.WHITE);
