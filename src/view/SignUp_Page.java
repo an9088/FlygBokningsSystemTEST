@@ -16,6 +16,14 @@ public class SignUp_Page {
 
     public SignUp_Page() {
 
+        JFrame frame = new JFrame("Sign Up Page");
+        frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
+
         signUpButton.setBackground(new Color(0,123,255));
         signUpButton.setForeground(Color.WHITE);
         signUpButton.setText("Sign Up");

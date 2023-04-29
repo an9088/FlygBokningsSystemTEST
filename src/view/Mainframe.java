@@ -144,6 +144,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(loginButton)) {
             login = new LoginGUI();
+
+
         }
         if (e.getSource().equals(searchFligthsButton)) {
 
@@ -186,7 +188,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         }
 
         if (e.getSource().equals(paymentButton)) {
-            PaymentGUI payment = new PaymentGUI();
+            Payment_Page paymentPage = new Payment_Page();
+
+
         }
 
         if (e.getSource().equals(menu1)){
