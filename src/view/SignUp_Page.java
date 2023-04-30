@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +52,7 @@ public class SignUp_Page {
             }
         });
 
+
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,12 +61,23 @@ public class SignUp_Page {
                 String forename = forenameField.getText();
                 char[] password = passwordField1.getPassword();
 
-                if (validateEmail(email) && validatePassword(password)) {
-                    saveAccount(email, surname, forename, password);
-                    JOptionPane.showMessageDialog(null, "Account created successfully!");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid email or password. Password must be at least 8 characters long and contain a digit and a special symbol.");
+                if (!validateEmail(email)) {
+                    JOptionPane.showMessageDialog(null, "Invalid email address.");
+                    return;
                 }
+
+                if (!validatePassword(password)) {
+                    JOptionPane.showMessageDialog(null, "Invalid password. Password must be at least 8 characters long and contain a digit and a special symbol.");
+                    return;
+                }
+
+                if (emailExists(email)) {
+                    JOptionPane.showMessageDialog(null, "An account with this email already exists.");
+                    return;
+                }
+
+                saveAccount(email, surname, forename, password);
+                JOptionPane.showMessageDialog(null, "Account created successfully!");
             }
         });
     }
@@ -96,6 +110,27 @@ public class SignUp_Page {
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+
+    private boolean emailExists(String email) {
+        try {
+            Scanner scanner = new Scanner(new File(DB_FILENAME));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] fields = line.split(",");
+                if (fields.length > 0
+                        && fields[0].trim().equalsIgnoreCase(email.trim())) {
+                    scanner.close();
+                    return true;
+                }
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     private void saveAccount(String email, String surname, String forename, char[] password) {
