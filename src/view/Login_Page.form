@@ -24,7 +24,7 @@
               <text value="E-mail"/>
             </properties>
           </component>
-          <component id="4948c" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="4948c" class="javax.swing.JTextField" binding="emailField">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
