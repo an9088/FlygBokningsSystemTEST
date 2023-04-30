@@ -87,10 +87,41 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private void setupMenu() {
         JMenuBar menuBar = new JMenuBar();
 
-        menu1 = new JMenu("User");
-        menu1.add("Change Password");
-        menu1.add("Change Information");
-        menu1.add("Sign Out");
+
+
+        JMenu menu1 = new JMenu("Login / Sign up");
+        JMenuItem loginItem = new JMenuItem("Login");
+        loginItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object source = e.getSource();
+                if (source == loginItem) {
+                    Login_Page loginPage = new Login_Page();
+                }
+            }
+        });
+        menu1.add(loginItem);
+
+        JMenuItem signUpItem = new JMenuItem("Sign up");
+        signUpItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object source = e.getSource();
+                if (source == signUpItem) {
+                    SignUp_Page signUpPage = new SignUp_Page();
+                }
+            }
+        });
+        menu1.add(signUpItem);
+
+        menuBar.add(menu1);
+
+
+
+        //menu1 = new JMenu("User");
+        //menu1.add("Change Password");
+        //menu1.add("Change Information");
+        //menu1.add("Sign Out");
 
         menu2 = new JMenu("Bookings");
         menu2.add("Booking Information");
@@ -147,6 +178,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
 
         }
+
+
+
         if (e.getSource().equals(searchFligthsButton)) {
 
             try {

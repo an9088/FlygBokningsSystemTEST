@@ -15,6 +15,13 @@ public class Login_Page {
     private JLabel passwordHideButton;
 
     public Login_Page(){
+
+        JFrame frame = new JFrame("Login Page");
+        frame.setContentPane(mainPanel);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+
+        frame.setVisible(true);
         logInButton.setBackground(new Color(0,123,255));
         logInButton.setForeground(Color.WHITE);
 
