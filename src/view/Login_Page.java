@@ -12,14 +12,19 @@ import java.util.Scanner;
 
 public class Login_Page {
     private JPanel mainPanel;
-    private JTextField textField1;
+    private JTextField emailField;
     private JPasswordField passwordField1;
     private JCheckBox rememberMeCheckBox;
     private JLabel forgetPassWordLabelNOTUSED;
     private JButton logInButton;
     private JLabel passwordHideButton;
 
+    private Mainframe mainframe;
+
     private static final String DB_FILENAME = "accounts.txt";
+
+    private boolean isLoggedIn;
+
 
     public Login_Page(){
 
@@ -50,7 +55,7 @@ public class Login_Page {
         logInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String email = textField1.getText();
+                String email = emailField.getText();
                 char[] password = passwordField1.getPassword();
 
                 if (!validateEmail(email)) {
@@ -60,6 +65,7 @@ public class Login_Page {
 
                 if (authenticate(email, password)) {
                     JOptionPane.showMessageDialog(null, "Login successful!");
+                    frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Incorrect email or password.");
                 }
@@ -92,6 +98,13 @@ public class Login_Page {
 
 
         return false;
+    }
+
+
+
+
+    public String getEmail() {
+        return emailField.getText();
     }
 
 

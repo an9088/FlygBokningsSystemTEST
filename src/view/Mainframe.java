@@ -51,8 +51,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private ArrayList<String> messages = new ArrayList<String>();
     private LoginGUI login;
     private Controller controller;
-
+    private JMenuBar menuBar;
     private JMenu menu1, menu2, menu3, menu4;
+
 
     private JFrame frame;
 
@@ -66,6 +67,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
         createFrame();
+
+
+        menuBar = new JMenuBar();
+        setupMenu();
+        setJMenuBar(menuBar);
     }
 
 
@@ -87,9 +93,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private void setupMenu() {
         JMenuBar menuBar = new JMenuBar();
 
-
-
-        JMenu menu1 = new JMenu("Login / Sign up");
+        menu1 = new JMenu("Login / Sign up");
         JMenuItem loginItem = new JMenuItem("Login");
         loginItem.addActionListener(new ActionListener() {
             @Override
@@ -97,6 +101,17 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 Object source = e.getSource();
                 if (source == loginItem) {
                     Login_Page loginPage = new Login_Page();
+                    menuBar.remove(menu1);
+                    JMenu loggedInMenu = new JMenu(loginPage.getEmail());
+                    loggedInMenu.add("My Bookings");
+                    loggedInMenu.add("My Data");
+                    loggedInMenu.add("Change Password");
+                    loggedInMenu.add("Change Information");
+                    loggedInMenu.add("Sign Out");
+                    menuBar.add(loggedInMenu, 0);
+                    frame.setJMenuBar(menuBar);
+                    frame.revalidate();
+                    frame.repaint();
                 }
             }
         });
@@ -109,6 +124,17 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 Object source = e.getSource();
                 if (source == signUpItem) {
                     SignUp_Page signUpPage = new SignUp_Page();
+                    menuBar.remove(menu1);
+                    JMenu signedUpMenu = new JMenu(signUpPage.getEmail());
+                    signedUpMenu.add("My Bookings");
+                    signedUpMenu.add("My Data");
+                    signedUpMenu.add("Change Password");
+                    signedUpMenu.add("Change Information");
+                    signedUpMenu.add("Sign Out");
+                    menuBar.add(signedUpMenu, 0);
+                    frame.setJMenuBar(menuBar);
+                    frame.revalidate();
+                    frame.repaint();
                 }
             }
         });
@@ -116,33 +142,27 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         menuBar.add(menu1);
 
-
-
-        //menu1 = new JMenu("User");
-        //menu1.add("Change Password");
-        //menu1.add("Change Information");
-        //menu1.add("Sign Out");
-
-        menu2 = new JMenu("Bookings");
+        JMenu menu2 = new JMenu("Bookings");
         menu2.add("Booking Information");
         menu2.add("Delete Booking");
         menu2.add("Handle Booking");
 
-        menu3 = new JMenu("Help");
+        JMenu menu3 = new JMenu("Help");
         menu3.add("How To Search Flights");
         menu3.add("How To Make A Booking");
 
-        menu4 = new JMenu("General");
+        JMenu menu4 = new JMenu("General");
         menu4.add("General Info");
         menu4.add("Developers");
 
-        menuBar.add(menu1);
         menuBar.add(menu2);
         menuBar.add(menu3);
         menuBar.add(menu4);
         frame.setJMenuBar(menuBar);
-
     }
+
+
+
 
     private void setTodaysDate() {
 

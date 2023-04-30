@@ -21,6 +21,8 @@ public class SignUp_Page {
     private JPanel mainPanel;
     private JLabel passwordHideButton;
 
+    private boolean isSignedUp;
+
     private static final String DB_FILENAME = "accounts.txt";
     public SignUp_Page() {
 
@@ -78,8 +80,17 @@ public class SignUp_Page {
 
                 saveAccount(email, surname, forename, password);
                 JOptionPane.showMessageDialog(null, "Account created successfully!");
+
             }
         });
+
+        LoginButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                new Login_Page();
+                frame.dispose();
+            }
+        });
+
     }
 
 
@@ -153,6 +164,12 @@ public class SignUp_Page {
             e.printStackTrace();
         }
     }
+
+    public String getEmail() {
+        return emailField.getText();
+    }
+
+
 
 
 }
