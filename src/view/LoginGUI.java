@@ -169,37 +169,37 @@ public class LoginGUI {
 
         JLabel addressLabel = new JLabel("Address:");
         constraints.gridx = 0;
-        constraints.gridy = 0;
+        constraints.gridy = 2;
         signUpPanel.add(addressLabel, constraints);
 
         JTextField addressField = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 0;
+        constraints.gridy = 2;
         signUpPanel.add(addressField, constraints);
 
         JLabel emailLabel = new JLabel("Email:");
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         signUpPanel.add(emailLabel, constraints);
 
         JTextField emailField = new JTextField(20);
         constraints.gridx = 1;
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         signUpPanel.add(emailField, constraints);
 
         JLabel passwordLabel = new JLabel("Password:");
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         signUpPanel.add(passwordLabel, constraints);
 
         JPasswordField passwordField = new JPasswordField(20);
         constraints.gridx = 1;
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         signUpPanel.add(passwordField, constraints);
 
         JButton registerButton = new JButton("Register");
         constraints.gridx = 0;
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         constraints.gridwidth = 2;
         signUpPanel.add(registerButton, constraints);
 
