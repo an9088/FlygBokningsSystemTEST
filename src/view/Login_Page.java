@@ -38,7 +38,6 @@ public class Login_Page {
         logInButton.setForeground(Color.WHITE);
 
         passwordField1.setEchoChar((char)0);
-
         passwordHideButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         passwordHideButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
