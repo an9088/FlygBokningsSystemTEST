@@ -95,7 +95,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         menu1 = new JMenu("Login / Sign up");
         JMenuItem loginItem = new JMenuItem("Login");
-        loginItem.addActionListener(new ActionListener() {
+        /*loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object source = e.getSource();
@@ -113,11 +113,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                     frame.repaint();
                 }
             }
-        });
+        });*/
         menu1.add(loginItem);
 
         JMenuItem signUpItem = new JMenuItem("Sign up");
-        signUpItem.addActionListener(new ActionListener() {
+        /*signUpItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object source = e.getSource();
@@ -135,7 +135,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                     frame.repaint();
                 }
             }
-        });
+        });*/
         menu1.add(signUpItem);
 
         menuBar.add(menu1);
