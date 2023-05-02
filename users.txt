@@ -1,23 +1,2 @@
 
-Firstname: Mehdi
-Lastname: Muhebbi
-Email: messi.master@gmail.com
-Password: Messi12345
-
-Firstname: Dino
-Lastname: Ellyas
-Email: Dino.Ellyas@yahoo.se
-Password: DinoEllyas1-?
-
-Firstname: Mattias
-Lastname: Malm
-Email: malmmattias1@outlook.com
-Password: Skitduidet!
-
-
-
-Firstname: Ellyas
-Lastname: Rahimy
-Email: ellyasrahimy@gmail.com
-Password: Tjenare123
 
