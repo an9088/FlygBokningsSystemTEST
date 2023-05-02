@@ -104,7 +104,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                     menuBar.remove(menu1);
                     JMenu loggedInMenu = new JMenu(loginPage.getEmail());
                     loggedInMenu.add("My Bookings");
-                    loggedInMenu.add("My Data");
                     loggedInMenu.add("Change Password");
                     loggedInMenu.add("Change Information");
                     loggedInMenu.add("Sign Out");
@@ -127,7 +126,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                     menuBar.remove(menu1);
                     JMenu signedUpMenu = new JMenu(signUpPage.getEmail());
                     signedUpMenu.add("My Bookings");
-                    signedUpMenu.add("My Data");
                     signedUpMenu.add("Change Password");
                     signedUpMenu.add("Change Information");
                     signedUpMenu.add("Sign Out");
