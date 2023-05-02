@@ -42,46 +42,17 @@ public class Payment_Page {
 
 
 
-        addSuggestionText(codeField, "CVV");
-        addSuggestionText(expiryDateField, "MM/YY");
-        addSuggestionText(cardNumberField, "Card Number");
-        addSuggestionText(nameCardField, "Name on Card");
-        addSuggestionText(nameField, "John Doe");
-        addSuggestionText(emailField, "johndoe123@gmail.com");
+        guiUtils.addSuggestionText(codeField, "CVV");
+        guiUtils.addSuggestionText(expiryDateField, "MM/YY");
+        guiUtils.addSuggestionText(cardNumberField, "Card Number");
+        guiUtils.addSuggestionText(nameCardField, "Name on Card");
+        guiUtils.addSuggestionText(nameField, "John Doe");
+        guiUtils.addSuggestionText(emailField, "johndoe123@gmail.com");
 
         ((AbstractDocument) codeField.getDocument()).setDocumentFilter(new FixedLengthFilter(4));
         ((AbstractDocument) cardNumberField.getDocument()).setDocumentFilter(new FixedLengthFilter(16));
         ((AbstractDocument) expiryDateField.getDocument()).setDocumentFilter(new ExpiryDateFilter());
     }
-
-    private void addSuggestionText(JTextField field, String suggestion) {
-
-        Color gray = Color.GRAY;
-        field.setForeground(gray);
-
-
-        field.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-                if (field.getText().equals(suggestion)) {
-                    field.setText("");
-                    field.setForeground(Color.BLACK);
-                }
-            }
-
-            public void focusLost(FocusEvent e) {
-                if (field.getText().isEmpty()) {
-                    field.setText(suggestion);
-                    field.setForeground(gray);
-                }
-            }
-        });
-
-
-        if (field.getText().isEmpty()) {
-            field.setText(suggestion);
-        }
-    }
-
 
 
 

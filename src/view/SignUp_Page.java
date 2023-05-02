@@ -38,11 +38,11 @@ public class SignUp_Page {
         signUpButton.setForeground(Color.WHITE);
         signUpButton.setText("Sign Up");
 
-        passwordField1.setEchoChar((char)0);
-
 
         LoginButton.setForeground(Color.BLUE);
         LoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        passwordField1.setEchoChar((char)0);
         passwordHideButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         passwordHideButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
