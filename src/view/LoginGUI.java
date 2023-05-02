@@ -11,6 +11,7 @@ import java.io.*;
 /**
  * Klassen LoginGUI skapar ett grafiskt användargränssnitt för att hantera inloggning och registrering.
  */
+
 public class LoginGUI {
     private JFrame loginFrame;
     private JFrame signUpFrame;
