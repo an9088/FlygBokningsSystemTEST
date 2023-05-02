@@ -47,7 +47,7 @@ public class Account_Passanger_Info_Page {
             public void actionPerformed(ActionEvent e) {
                 boolean isValid = true;
 
-                // Check if each field either has text or a valid date
+
                 if (forenameField.getText().isEmpty()) {
                     isValid = false;
                 }
@@ -76,7 +76,7 @@ public class Account_Passanger_Info_Page {
                     isValid = false;
                 }
 
-                // Show message based on validity of fields
+
                 if (isValid) {
                     JOptionPane.showMessageDialog(null, "Your changes have been saved!");
                 } else {
