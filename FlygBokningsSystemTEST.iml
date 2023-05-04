@@ -19,5 +19,9 @@
     <orderEntry type="library" name="JTattoo-1.6.13" level="project" />
     <orderEntry type="library" name="flatlaf-3.1.1" level="project" />
     <orderEntry type="library" name="lib (2)" level="application" />
+    <orderEntry type="library" name="amadeus-java-7.0.0" level="project" />
+    <orderEntry type="library" name="flatlaf-3.1.1" level="project" />
+    <orderEntry type="library" name="flatlaf-intellij-themes-3.1.1" level="project" />
+    <orderEntry type="library" name="gson-2.10.1" level="project" />
   </component>
 </module>
