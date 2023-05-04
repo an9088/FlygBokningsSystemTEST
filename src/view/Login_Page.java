@@ -129,13 +129,6 @@ public class Login_Page {
 
         return false;
     }
-
-
-
-
-    public String getEmail() {
-        return emailField.getText();
-    }
-
+    
 
 }
