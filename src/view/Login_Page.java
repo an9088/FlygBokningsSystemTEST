@@ -88,6 +88,7 @@ public class Login_Page {
                                 JOptionPane.showMessageDialog(null, "Login successful, welcome dear Customer!");
                                 emailField.setText("");
                                 passwordField1.setText("");
+                                frame.dispose();
                                 return;
                             } else {
                                 foundEmail = false;

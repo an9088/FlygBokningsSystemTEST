@@ -3,10 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,29 +55,50 @@ public class SignUp_Page {
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String email = emailField.getText();
-                String surname = surnameField.getText();
-                String forename = forenameField.getText();
-                char[] password = passwordField1.getPassword();
+                // Implement your registration logic here
+                String firstName = forenameField.getText().trim();
+                String lastName = surnameField.getText().trim();
+                //String address = addressField.getText().trim();
+                //String zip = zipField.getText().trim();
+                //String country = countryField.getText().trim();
+                //String city = cityField.getText().trim();
+                String email = emailField.getText().trim();
+                String password = new String(passwordField1.getPassword()).trim();
 
-                if (!validateEmail(email)) {
-                    JOptionPane.showMessageDialog(null, "Invalid email address.");
+
+                // Check that all fields are filled
+                if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "All fields must be filled in.");
                     return;
                 }
 
-                if (!validatePassword(password)) {
-                    JOptionPane.showMessageDialog(null, "Invalid password. Password must be at least 8 characters long and contain a digit and a special symbol.");
+                // Check that the email contains the @ symbol
+                if (!email.contains("@")) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address.");
                     return;
                 }
 
-                if (emailExists(email)) {
-                    JOptionPane.showMessageDialog(null, "An account with this email already exists.");
+
+                // Save the user data to a text file
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
+                    writer.write("Firstname: " + firstName);
+                    writer.newLine();
+                    writer.write("Lastname: " + lastName);
+                    writer.newLine();
+                    writer.write("Email: " + email);
+                    writer.newLine();
+                    writer.write("Password: " + password);
+                    writer.newLine();
+                    writer.newLine();
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error saving user data: " + ex.getMessage());
                     return;
                 }
 
-                saveAccount(email, surname, forename, password);
-                JOptionPane.showMessageDialog(null, "Account created successfully!");
-
+                JOptionPane.showMessageDialog(null, "Registration Successful!");
+                frame.dispose();
             }
         });
 
@@ -92,85 +110,10 @@ public class SignUp_Page {
         });
 
     }
-
-
-    private boolean validatePassword(char[] password) {
-        String passwordString = new String(password);
-
-        if (passwordString.length() < 8) {
-            return false;
-        }
-
-        boolean hasDigit = false;
-        boolean hasSpecialSymbol = false;
-        for (int i = 0; i < passwordString.length(); i++) {
-            char c = passwordString.charAt(i);
-            if (Character.isDigit(c)) {
-                hasDigit = true;
-            } else if (!Character.isLetterOrDigit(c)) {
-                hasSpecialSymbol = true;
-            }
-        }
-
-        return hasDigit && hasSpecialSymbol;
-    }
-
-
-    private boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-
-
-    private boolean emailExists(String email) {
-        try {
-            Scanner scanner = new Scanner(new File(DB_FILENAME));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] fields = line.split(",");
-                if (fields.length > 0
-                        && fields[0].trim().equalsIgnoreCase(email.trim())) {
-                    scanner.close();
-                    return true;
-                }
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
-    private void saveAccount(String email, String surname, String forename, char[] password) {
-        try {
-            FileWriter writer = new FileWriter(DB_FILENAME, true);
-            writer.write(email + "," + new String(password) + "," + surname + "," + forename + "\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void createDatabaseFile() {
-        try {
-            File file = new File(DB_FILENAME);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getEmail() {
-        return emailField.getText();
-    }
-
-
-
-
 }
+
+
+
+
+
 
