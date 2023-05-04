@@ -95,10 +95,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         menu1 = new JMenu("Login / Sign up");
         JMenuItem loginItem = new JMenuItem("Login");
-        /*loginItem.addActionListener(new ActionListener() {
+        loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object source = e.getSource();
+                Login_Page loginPage = new Login_Page();
+                /*Object source = e.getSource();
                 if (source == loginItem) {
                     Login_Page loginPage = new Login_Page();
                     menuBar.remove(menu1);
@@ -111,9 +112,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                     frame.setJMenuBar(menuBar);
                     frame.revalidate();
                     frame.repaint();
-                }
+                }*/
             }
-        });*/
+        });
         menu1.add(loginItem);
 
         JMenuItem signUpItem = new JMenuItem("Sign up");

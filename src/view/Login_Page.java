@@ -6,8 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Login_Page {
@@ -56,19 +55,49 @@ public class Login_Page {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String email = emailField.getText();
-                char[] password = passwordField1.getPassword();
+                String password = new String(passwordField1.getPassword());
 
-                if (!validateEmail(email)) {
-                    JOptionPane.showMessageDialog(null, "Invalid email address.");
+                if (email.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "All fields are required to login.");
                     return;
                 }
 
-                if (authenticate(email, password)) {
-                    JOptionPane.showMessageDialog(null, "Login successful!");
-                    frame.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Incorrect email or password.");
+                try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+                    String line;
+                    boolean foundEmail = false;
+                    while ((line = reader.readLine()) != null) {
+                        String[] tokens = line.split(": ");
+                        if (tokens.length == 2) {
+                            String field = tokens[0];
+                            String value = tokens[1];
+                            if (field.equals("Email") && value.equals(email)) {
+                                foundEmail = true;
+                            } else if (foundEmail && field.equals("Password") && value.equals(password)) {
+                                String name = "";
+                                line = reader.readLine();
+                                if (line != null) {
+                                    tokens = line.split(": ");
+                                    if (tokens.length == 2) {
+                                        field = tokens[0];
+                                        value = tokens[1];
+                                        if (field.equals("Firstname")) {
+                                            name = value;
+                                        }
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(null, "Login successful, welcome dear Customer!");
+                                emailField.setText("");
+                                passwordField1.setText("");
+                                return;
+                            } else {
+                                foundEmail = false;
+                            }
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
+                JOptionPane.showMessageDialog(null, "Incorrect email or password");
             }
         });
     }
