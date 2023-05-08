@@ -101,14 +101,14 @@ public class Controller {
         } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()) {
             AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
 
-            mainframe.getFromAirport().setText("");
-            mainframe.getToAirport().setText("");
+            mainframe.getFromAirport().setText("Enter Departure City");
+            mainframe.getToAirport().setText("Enter Destination City");
 
         } else {
             AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
 
-            mainframe.getFromAirport().setText("");
-            mainframe.getToAirport().setText("");
+            mainframe.getFromAirport().setText("Enter Departure City");
+            mainframe.getToAirport().setText("Enter Destination City");
         }
 
     }

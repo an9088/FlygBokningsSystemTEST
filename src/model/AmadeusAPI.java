@@ -100,19 +100,30 @@ public class AmadeusAPI {
                             .and("departureDate", date)
                             .and("returnDate", returnDate)
                             .and("adults", nbrOfPassengers)
-                            .and("nonStop", true)
+                            //.and("nonStop", true)
                             .and("max", 10));// Sortera efter pris
 
 
             for (int i = 0; i < flightOffersSearches.length; i++) {
+
+                FlightOfferSearch.Itinerary[] itineraries = flightOffersSearches[i].getItineraries();
+
+
+                int stopovers = itineraries[0].getSegments().length - 1;
+                int returnStopovers = itineraries[1].getSegments().length - 1;
+
                 String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
-                String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
+                String destination = flightOffersSearches[i].getItineraries()[0]
+                        .getSegments()[flightOffersSearches[i].getItineraries()[0]
+                        .getSegments().length - 1].getArrival().getIataCode();
                 String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
                 String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
                 String price = flightOffersSearches[i].getPrice().getTotal();
 
                 String returnDeparture = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getDeparture().getIataCode(); // Lägger till returflygets avgångsinformation
-                String returnDestination = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getArrival().getIataCode(); // Lägger till returflygets destinationsinformation
+                String returnDestination = flightOffersSearches[i].getItineraries()[1]
+                        .getSegments()[flightOffersSearches[i].getItineraries()[1]
+                        .getSegments().length - 1].getArrival().getIataCode(); // Lägger till returflygets destinationsinformation
                 String returnDepartureTime = flightOffersSearches[i].getItineraries()[1].getSegments()[0].getDeparture().getAt();
                 String returnAirline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
                 String returnPrice = flightOffersSearches[i].getPrice().getTotal();
@@ -125,20 +136,27 @@ public class AmadeusAPI {
                                 "\nTo: " + destination +
                                 "\n<-->" +
                                 "\nReturn from: " + returnDeparture +
-                                "\nReturn to: " + returnDestination +
+                                "\nTo: " + returnDestination +
                                 "\n\nTotal price: " + finalPrice + "€\n";
 
                 String flightDisplayInfo =
                         "\nDeparture date: " + departureTime +
                                 "\nFrom: " + upperCaseAirport + " " + departure +
                                 "\nTo: " + upperCaseDestAirport + " " + destination +
-                                "\nAirline: " + airline +
-                                "\n<----->" +
-                                "\nDeparture date: " + returnDepartureTime +
-                                "\nReturn from: " + upperCaseDestAirport + " " + returnDeparture +
-                                "\nReturn to: " + upperCaseAirport + " " + returnDestination +
-                                "\nAirline: " + returnAirline +
-                                "\n\nTotal price: " + finalPrice + "€\n";
+                                "\nAirline: " + airline;
+                if (stopovers > 0) {
+                    flightDisplayInfo += "\nNumber of stops: " + stopovers;
+                }
+
+                flightDisplayInfo += "\n<----->" +
+                        "\nDeparture date: " + returnDepartureTime +
+                        "\nReturn from: " + upperCaseDestAirport + " " + returnDeparture +
+                        "\nReturn to: " + upperCaseAirport + " " + returnDestination +
+                        "\nAirline: " + returnAirline;
+                if (stopovers > 0) {
+                    flightDisplayInfo += "\nNumber of stops: " + returnStopovers;
+                }
+                flightDisplayInfo += "\n\nTotal price: " + finalPrice + "€\n";
 
                 System.out.println(finalPrice + "€");
                 flightDisplay.add(flightDisplayInfo);
@@ -195,13 +213,21 @@ public class AmadeusAPI {
                             .and("departureDate", date)
                             .and("returnDate", date)
                             .and("adults", nbrOfPassengers)
-                            .and("nonStop", true)
+                            //.and("nonStop", true)
                             .and("max", 10));// Sortera efter pris
 
 
             for (int i = 0; i < flightOffersSearches.length; i++) {
+
+                FlightOfferSearch.Itinerary[] itineraries = flightOffersSearches[i].getItineraries();
+
+                int stopovers = itineraries[0].getSegments().length - 1;
+                //  int returnStopovers = itineraries[1].getSegments().length - 1;
+
                 String departure = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getIataCode();
-                String destination = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getArrival().getIataCode();
+                String destination = flightOffersSearches[i].getItineraries()[0]
+                        .getSegments()[flightOffersSearches[i].getItineraries()[0]
+                        .getSegments().length - 1].getArrival().getIataCode();
                 String departureTime = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getDeparture().getAt();
                 String airline = flightOffersSearches[i].getItineraries()[0].getSegments()[0].getCarrierCode();
                 String price = flightOffersSearches[i].getPrice().getTotal();
@@ -216,9 +242,12 @@ public class AmadeusAPI {
                         "\nDeparture time: " + departureTime +
                                 "\nFrom: " + upperCaseAirport + " " + departure +
                                 "\nTo: " + upperCaseDestAirport + " " + destination +
-                                "\nAirline: " + airline +
-                                "\n\nTotal price: " + price + "€\n";
-                ;
+                                "\nAirline: " + airline;
+                if (stopovers > 0) {
+                    flightDisplayInfo1 += "\nNumber of stops: " + stopovers;
+                }
+                flightDisplayInfo1 += "\n\nTotal price: " + price + "€\n";
+
 
                 flightDisplay.add(flightDisplayInfo1);
                 flightInfo.add(flights1);

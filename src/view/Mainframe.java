@@ -15,12 +15,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener {
+public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener, FocusListener {
     private JPanel mainPanel;
     private JPanel northPanel;
     private JPanel southPanel;
@@ -66,6 +68,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
+        fromAirport.addFocusListener(this);
+        toAirport.addFocusListener(this);
         createFrame();
 
 
@@ -250,6 +254,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         if (e.getSource().equals(menu1)){
         }
 
+
     }
 
     public void errorMessage(String message) {
@@ -355,6 +360,35 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             }
 
         }
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        if(e.getSource().equals(fromAirport)){
+            if(!(fromAirport.equals(""))) {
+                fromAirport.setText("");
+            }
+
+        }
+        if(e.getSource().equals(toAirport)){
+            if(!(toAirport.equals(""))) {
+                toAirport.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+      /*  if(fromAirport.equals("")) {
+            fromAirport.setText("Enter Departure City");
+        }
+
+        if(toAirport.equals("")) {
+            toAirport.setText("Enter Destination City");
+        }
+
+       */
+
     }
 }
 

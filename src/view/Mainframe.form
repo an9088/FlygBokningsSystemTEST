@@ -43,7 +43,12 @@
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <enabled value="true"/>
+                  <font size="12" style="0"/>
+                  <foreground color="-6513508"/>
+                  <text value="Enter Destination City"/>
+                </properties>
               </component>
               <component id="f7ff9" class="javax.swing.JTextField" binding="fromAirport">
                 <constraints>
@@ -51,7 +56,12 @@
                     <preferred-size width="150" height="-1"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <font size="12" style="0"/>
+                  <foreground color="-6513508"/>
+                  <text value="Enter Departure City"/>
+                  <toolTipText value=""/>
+                </properties>
               </component>
               <component id="dc7b" class="javax.swing.JLabel">
                 <constraints>
