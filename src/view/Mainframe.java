@@ -102,27 +102,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object source = e.getSource();
-                if (source == loginItem) {
-                    Login_Page loginPage = new Login_Page();
-                    if (loginPage.login()) {
-                        try {
-                            menuBar.remove(menu1);
-                            JMenu loggedInMenu = new JMenu(loginPage.getEmail());
-                            loggedInMenu.add("My Bookings");
-                            loggedInMenu.add("Change Password");
-                            loggedInMenu.add("Change Information");
-                            loggedInMenu.add("Sign Out");
-                            menuBar.add(loggedInMenu, 0);
-                            frame.setJMenuBar(menuBar);
-                            frame.revalidate();
-                            frame.repaint();
-                        } catch (ClassCastException ex) {
-                            System.err.println("Caught ClassCastException: " + ex.getMessage());
-                            ex.printStackTrace();
-                        }
-                    }
-                }
+                Login_Page loginPage = new Login_Page();
+
             }
         });
 
@@ -133,20 +114,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             @Override
             public void actionPerformed(ActionEvent e) {
                 SignUp_Page signUpPage = new SignUp_Page();
-                /*Object source = e.getSource();
-                if (source == signUpItem) {
-                    SignUp_Page signUpPage = new SignUp_Page();
-                    menuBar.remove(menu1);
-                    JMenu signedUpMenu = new JMenu(signUpPage.getEmail());
-                    signedUpMenu.add("My Bookings");
-                    signedUpMenu.add("Change Password");
-                    signedUpMenu.add("Change Information");
-                    signedUpMenu.add("Sign Out");
-                    menuBar.add(signedUpMenu, 0);
-                    frame.setJMenuBar(menuBar);
-                    frame.revalidate();
-                    frame.repaint();
-                }*/
+
             }
         });
         menu1.add(signUpItem);
