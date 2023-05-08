@@ -61,7 +61,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     public Mainframe(Controller controller) {
         this.controller = controller;
-        loginButton.addActionListener(this);
+        //loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
         bookingsButton.addActionListener(this);
         paymentButton.addActionListener(this);
@@ -102,23 +102,30 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login_Page loginPage = new Login_Page();
-                /*Object source = e.getSource();
+                Object source = e.getSource();
                 if (source == loginItem) {
                     Login_Page loginPage = new Login_Page();
-                    menuBar.remove(menu1);
-                    JMenu loggedInMenu = new JMenu(loginPage.getEmail());
-                    loggedInMenu.add("My Bookings");
-                    loggedInMenu.add("Change Password");
-                    loggedInMenu.add("Change Information");
-                    loggedInMenu.add("Sign Out");
-                    menuBar.add(loggedInMenu, 0);
-                    frame.setJMenuBar(menuBar);
-                    frame.revalidate();
-                    frame.repaint();
-                }*/
+                    if (loginPage.login()) {
+                        try {
+                            menuBar.remove(menu1);
+                            JMenu loggedInMenu = new JMenu(loginPage.getEmail());
+                            loggedInMenu.add("My Bookings");
+                            loggedInMenu.add("Change Password");
+                            loggedInMenu.add("Change Information");
+                            loggedInMenu.add("Sign Out");
+                            menuBar.add(loggedInMenu, 0);
+                            frame.setJMenuBar(menuBar);
+                            frame.revalidate();
+                            frame.repaint();
+                        } catch (ClassCastException ex) {
+                            System.err.println("Caught ClassCastException: " + ex.getMessage());
+                            ex.printStackTrace();
+                        }
+                    }
+                }
             }
         });
+
         menu1.add(loginItem);
 
         JMenuItem signUpItem = new JMenuItem("Sign up");

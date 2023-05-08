@@ -17,7 +17,6 @@ public class SignUp_Page {
 
     private boolean isSignedUp;
 
-    private static final String DB_FILENAME = "accounts.txt";
     public SignUp_Page() {
 
         JFrame frame = new JFrame("Sign Up Page");
