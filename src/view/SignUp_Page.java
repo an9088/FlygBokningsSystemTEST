@@ -81,6 +81,20 @@ public class SignUp_Page {
                 }
 
 
+                // Check if the email is already registered
+                try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.startsWith("Email: " + email)) {
+                            JOptionPane.showMessageDialog(null, "This email is already registered.");
+                            return;
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error checking user data: " + ex.getMessage());
+                    return;
+                }
 
                 // Save the user data to a text file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
