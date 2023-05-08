@@ -75,6 +75,12 @@ public class SignUp_Page {
                     return;
                 }
 
+                // Check that the password meets the requirements
+                if (!isPasswordValid(password)) {
+                    return;
+                }
+
+
 
                 // Save the user data to a text file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
@@ -106,6 +112,28 @@ public class SignUp_Page {
             }
         });
 
+    }
+
+    private boolean isPasswordValid(String password) {
+        if (password.length() < 8) {
+            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
+            return false;
+        }
+
+        boolean hasSpecialCharacter = false;
+        for (char c : password.toCharArray()) {
+            if (!Character.isLetterOrDigit(c)) {
+                hasSpecialCharacter = true;
+                break;
+            }
+        }
+
+        if (!hasSpecialCharacter) {
+            JOptionPane.showMessageDialog(null, "Password must contain at least one special character.");
+            return false;
+        }
+
+        return true;
     }
 }
 
