@@ -5,7 +5,7 @@ public class Main {
 
 
         Controller controller = new Controller();
-        System.out.println("test");
+        System.out.println("test av din mamma");
 
 
     }
