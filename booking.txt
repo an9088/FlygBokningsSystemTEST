@@ -175,3 +175,31 @@ Zip code: 12345
 City: adsf
 Country: adsf
 
+Your booking number: 1
+Thank you Ellyas Rahimy for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-05-10T17:00:00
+From: Toronto YYZ
+To: Malmo MMX
+Airline: SK
+Number of stops: 2
+<----->
+Departure date: 2023-05-16T15:55:00
+Return from: Malmo MMX
+Return to: Toronto YYZ
+Airline: SK
+Number of stops: 1
+
+Total price: 3183.12€
+
+Full name: Ellyas Rahimy
+Email address: ellyasrahimy@gmail.com
+Address: Abojihadgatan 15
+Zip code: 31224
+City: Malmo
+Country: Sweden
+
