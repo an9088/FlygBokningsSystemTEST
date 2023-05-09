@@ -22,7 +22,7 @@ public class SignUp_Page {
         this.mainframe = mainframe;
         frame = new JFrame("Sign Up Page");
         frame.setContentPane(mainPanel);
-        frame.setSize(800, 600);
+        frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 

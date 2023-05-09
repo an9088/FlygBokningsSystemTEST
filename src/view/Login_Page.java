@@ -24,7 +24,7 @@ public class Login_Page {
         this.mainframe = mainframe;
         frame = new JFrame("Login Page");
         frame.setContentPane(mainPanel);
-        frame.setSize(800, 600);
+        frame.setSize(400, 250);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 

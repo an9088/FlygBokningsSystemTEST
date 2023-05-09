@@ -18,10 +18,19 @@ public class BookingCreatorGUI {
 
     private Controller controller;
 
-    private String bookingInfo;
+    private String bookingInfo, signedInBookingInfo;
+
+    private boolean isSignedIn;
 
     private static int bookingNumber = 0;
 
+
+    public BookingCreatorGUI(String signedInBookingInfo, boolean isSignedIn, Controller controller) {
+        this.signedInBookingInfo = signedInBookingInfo;
+        this.isSignedIn = isSignedIn;
+        this.controller = controller;
+
+    }
 
     public BookingCreatorGUI(String bookingInfo, Controller controller) {
         this.controller = controller;
@@ -165,6 +174,7 @@ public class BookingCreatorGUI {
         });
 
     }
+
 
     private void errorMessage(String message) {
         JOptionPane.showMessageDialog(signUpFrame, message);

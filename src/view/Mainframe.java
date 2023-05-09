@@ -1,7 +1,6 @@
 package view;
 
 import com.amadeus.exceptions.ResponseException;
-
 import controller.Controller;
 import org.xml.sax.SAXException;
 
@@ -15,14 +14,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener, FocusListener {
+public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener {
     private JPanel mainPanel;
     private JPanel northPanel;
     private JPanel southPanel;
@@ -59,9 +56,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     JMenuItem signUpItem;
     private JMenu menu1, menu2, menu3, menu4;
-
-
     private JFrame frame;
+
+    private boolean isSignedIn = false;
 
     public Mainframe(Controller controller) {
         this.controller = controller;
@@ -72,13 +69,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
-        fromAirport.addFocusListener(this);
-        toAirport.addFocusListener(this);
+        guiUtils.addSuggestionText(fromAirport, "Enter Departure City");
+        guiUtils.addSuggestionText(toAirport, "Enter Destination City");
         createFrame();
-
-
     }
-
 
     private void createFrame() {
 
@@ -93,7 +87,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        setupMenu();
+        //setupMenu();
     }
 
     public void setupMenu() {
@@ -105,6 +99,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login_Page loginPage = new Login_Page(Mainframe.this);
+                isSignedIn = true;
             }
         });
 
@@ -155,7 +150,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menu1.remove(item);
     }
 
-    public void removeMenuItemFromMenu1(int index){
+    public void removeMenuItemFromMenu1(int index) {
         if (index >= 0 && index < menu1.getItemCount()) {
             menu1.remove(index);
         } else {
@@ -202,8 +197,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     }
 
 
-
-
     private void setTodaysDate() {
 
         LocalDate today = LocalDate.now();
@@ -235,8 +228,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void actionPerformed(ActionEvent e) {
 
 
-
-
         if (e.getSource().equals(searchFligthsButton)) {
 
             try {
@@ -257,19 +248,24 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
             list1.addListSelectionListener((ListSelectionListener) this);
 
-
-
         }
         if (e.getSource().equals(book)) {
 
-            System.out.println(getEditorPane1().getText());
-            String bookingInfo = getEditorPane1().getText();
-            int i = list1.getSelectedIndex();
-            if(i < 0 || i >10) {
-                errorMessage("Please select a flight from the list to create a booking");
-            } else {
-                BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
-            }
+
+
+               // System.out.println(getEditorPane1().getText());
+                String bookingInfo = getEditorPane1().getText();
+                int i = list1.getSelectedIndex();
+                if (i < 0 || i > 10) {
+                    errorMessage("Please select a flight from the list to create a booking");
+                } else if (isSignedIn) {
+                    SignedUpBookingGUI easyBooking = new SignedUpBookingGUI(bookingInfo, controller);
+                } else {
+                    BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
+                }
+
+
+
 
         }
 
@@ -283,7 +279,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         }
 
-        if (e.getSource().equals(menu1)){
+        if (e.getSource().equals(menu1)) {
         }
 
 
@@ -304,13 +300,13 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void setDisplayMessage(ArrayList<String> message) {
 
 
-            DefaultListModel<String> listModel = new DefaultListModel<>();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
 
-            for (String msg : message) {
-                listModel.addElement(String.valueOf(msg));
-            }
+        for (String msg : message) {
+            listModel.addElement(String.valueOf(msg));
+        }
 
-            list1.setModel(listModel);
+        list1.setModel(listModel);
 
 
     }
@@ -392,35 +388,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             }
 
         }
-    }
-
-    @Override
-    public void focusGained(FocusEvent e) {
-        if(e.getSource().equals(fromAirport)){
-            if(!(fromAirport.equals(""))) {
-                fromAirport.setText("");
-            }
-
-        }
-        if(e.getSource().equals(toAirport)){
-            if(!(toAirport.equals(""))) {
-                toAirport.setText("");
-            }
-        }
-    }
-
-    @Override
-    public void focusLost(FocusEvent e) {
-      /*  if(fromAirport.equals("")) {
-            fromAirport.setText("Enter Departure City");
-        }
-
-        if(toAirport.equals("")) {
-            toAirport.setText("Enter Destination City");
-        }
-
-       */
-
     }
 }
 

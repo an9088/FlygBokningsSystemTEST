@@ -1,15 +1,9 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +20,7 @@ public abstract class guiUtils {
             public void focusGained(FocusEvent e) {
                 if (field.getText().equals(suggestion)) {
                     field.setText("");
-                    field.setForeground(Color.BLACK);
+                    //field.setForeground(Color.BLACK);
                 }
             }
 

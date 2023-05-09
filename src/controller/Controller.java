@@ -94,21 +94,20 @@ public class Controller {
             message = "Please enter valid arrival destination";
             mainframe.errorMessage(message);
 
-        } else if (destinationAirport.equals("") && departureAirport.equals("")) {
+        } else if (destinationAirport.equals("") && departureAirport.equals("") ||
+                (destinationAirport.equals("Enter Destination City") && departureAirport.equals("Enter Departure City"))) {
             message = "Please enter valid destinations";
             mainframe.errorMessage(message);
 
         } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()) {
+
             AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
 
-            mainframe.getFromAirport().setText("Enter Departure City");
-            mainframe.getToAirport().setText("Enter Destination City");
 
         } else {
+
             AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
 
-            mainframe.getFromAirport().setText("Enter Departure City");
-            mainframe.getToAirport().setText("Enter Destination City");
         }
 
     }
@@ -124,7 +123,6 @@ public class Controller {
                                  String zip, String country, String email, String bookingDetails, int bookingNumber) {
 
         booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, this);
-        System.out.println(booking.toString());
     }
 
 
