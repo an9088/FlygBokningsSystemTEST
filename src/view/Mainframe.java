@@ -64,7 +64,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         this.controller = controller;
         //loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
-        bookingsButton.addActionListener(this);
         paymentButton.addActionListener(this);
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
