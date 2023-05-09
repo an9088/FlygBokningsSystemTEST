@@ -67,23 +67,12 @@ public class SignUp_Page {
         }
     }
 
-
-        signUpButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Implement your registration logic here
-                String firstName = forenameField.getText().trim();
-                String lastName = surnameField.getText().trim();
-                String email = emailField.getText().trim();
-                String password = new String(passwordField1.getPassword()).trim();
-
     private void signUp() {
         // Implement your registration logic here
         String firstName = forenameField.getText().trim();
         String lastName = surnameField.getText().trim();
         String email = emailField.getText().trim();
         String password = new String(passwordField1.getPassword()).trim();
-
 
         if (!isInputValid(firstName, lastName, email, password)) {
             return;
