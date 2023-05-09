@@ -54,6 +54,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     private Controller controller;
     private JMenuBar menuBar;
+
+    JMenuItem loginItem;
+
+    JMenuItem signUpItem;
     private JMenu menu1, menu2, menu3, menu4;
 
 
@@ -73,9 +77,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         createFrame();
 
 
-        menuBar = new JMenuBar();
-        setupMenu();
-        setJMenuBar(menuBar);
     }
 
 
@@ -92,18 +93,18 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        setupMenu();
     }
 
-    private void setupMenu() {
-        JMenuBar menuBar = new JMenuBar();
+    public void setupMenu() {
+        menuBar = new JMenuBar();
 
         menu1 = new JMenu("Login / Sign up");
         JMenuItem loginItem = new JMenuItem("Login");
         loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login_Page loginPage = new Login_Page();
-
+                Login_Page loginPage = new Login_Page(Mainframe.this);
             }
         });
 
@@ -113,8 +114,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         signUpItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SignUp_Page signUpPage = new SignUp_Page();
-
+                SignUp_Page signUpPage = new SignUp_Page(Mainframe.this);
             }
         });
         menu1.add(signUpItem);
@@ -138,6 +138,67 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menuBar.add(menu3);
         menuBar.add(menu4);
         frame.setJMenuBar(menuBar);
+        frame.repaint();
+    }
+
+    public void setMenu1Text(String text) {
+        this.menu1.setText(text);
+    }
+
+    // Method to add JMenuItem to menu1
+    public void addMenuItemToMenu1(JMenuItem item) {
+        menu1.add(item);
+    }
+
+    // Method to remove JMenuItem from menu1
+    public void removeMenuItemFromMenu1(JMenuItem item) {
+        menu1.remove(item);
+    }
+
+    public void removeMenuItemFromMenu1(int index){
+        if (index >= 0 && index < menu1.getItemCount()) {
+            menu1.remove(index);
+        } else {
+            throw new IllegalArgumentException("Index out of bounds for removeMenuItemFromMenu1: " + index);
+        }
+    }
+
+    public int getMenu1ItemCount() {
+        return menu1.getItemCount();
+    }
+
+
+    public JMenuItem getLoginItem() {
+        return this.loginItem;
+    }
+
+    public JMenuItem getSignUpItem() {
+        return this.signUpItem;
+    }
+
+    // Setter methods for JMenuItems
+    public void setLoginItem(JMenuItem item) {
+        this.menu1.remove(this.loginItem);
+        this.loginItem = item;
+        this.menu1.add(this.loginItem);
+    }
+
+    public void setSignUpItem(JMenuItem item) {
+        this.menu1.remove(this.signUpItem);
+        this.signUpItem = item;
+        this.menu1.add(this.signUpItem);
+    }
+
+    public void setMenu2Text(String text) {
+        this.menu2.setText(text);
+    }
+
+    public void setMenu3Text(String text) {
+        this.menu3.setText(text);
+    }
+
+    public void setMenu4Text(String text) {
+        this.menu4.setText(text);
     }
 
 
