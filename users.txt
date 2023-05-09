@@ -3,3 +3,8 @@ Lastname: Muhebbi
 Email: mehdi.muhebbi@gmail.com
 Password: Mehdi1!8
 
+Firstname: Ellyas
+Lastname: Rahimy
+Email: ellyasrahimy@gmail.com
+Password: PappasGranne123@
+
