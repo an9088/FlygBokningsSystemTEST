@@ -54,10 +54,6 @@ public class SignUp_Page {
                 // Implement your registration logic here
                 String firstName = forenameField.getText().trim();
                 String lastName = surnameField.getText().trim();
-                //String address = addressField.getText().trim();
-                //String zip = zipField.getText().trim();
-                //String country = countryField.getText().trim();
-                //String city = cityField.getText().trim();
                 String email = emailField.getText().trim();
                 String password = new String(passwordField1.getPassword()).trim();
 
