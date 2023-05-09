@@ -96,7 +96,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         setupMenu();
     }
 
-    private void setupMenu() {
+    public void setupMenu() {
         menuBar = new JMenuBar();
 
         menu1 = new JMenu("Login / Sign up");
@@ -138,6 +138,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menuBar.add(menu3);
         menuBar.add(menu4);
         frame.setJMenuBar(menuBar);
+        frame.repaint();
     }
 
     public void setMenu1Text(String text) {
@@ -154,10 +155,18 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menu1.remove(item);
     }
 
-    // Method to remove JMenuItem from menu1 by index
-    public void removeMenuItemFromMenu1(int index) {
-        menu1.remove(index);
+    public void removeMenuItemFromMenu1(int index){
+        if (index >= 0 && index < menu1.getItemCount()) {
+            menu1.remove(index);
+        } else {
+            throw new IllegalArgumentException("Index out of bounds for removeMenuItemFromMenu1: " + index);
+        }
     }
+
+    public int getMenu1ItemCount() {
+        return menu1.getItemCount();
+    }
+
 
     public JMenuItem getLoginItem() {
         return this.loginItem;

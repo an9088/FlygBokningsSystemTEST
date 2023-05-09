@@ -18,11 +18,11 @@ public class Login_Page {
     private JLabel passwordHideButton;
 
     private Mainframe mainframe;
-    private boolean isLoggedIn;
+    private JFrame frame;
 
     public Login_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
-        JFrame frame = new JFrame("Login Page");
+        frame = new JFrame("Login Page");
         frame.setContentPane(mainPanel);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
@@ -50,22 +50,12 @@ public class Login_Page {
                     JOptionPane.showMessageDialog(null, "All fields are required to login.");
                     return;
                 }
-
-                boolean loginSuccessful = login();
-                if (loginSuccessful) {
-                    JOptionPane.showMessageDialog(null, "Login successful, welcome dear Customer!");
-                    emailField.setText("");
-                    passwordField1.setText("");
-                    frame.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Incorrect email or password");
-                }
+                login();
             }
         });
-
     }
 
-    public boolean login() {
+    public void login() {
         String email = getEmail();
         String password = getPassword();
 
@@ -80,31 +70,52 @@ public class Login_Page {
                     if (field.equals("Email") && value.equals(email)) {
                         foundEmail = true;
                     } else if (foundEmail && field.equals("Password") && value.equals(password)) {
-                        return true;
+                        JOptionPane.showMessageDialog(null, "Login successful, welcome dear Customer!");
+                        frame.dispose();
+                        updateMenu(email); // pass the email here
+                        emailField.setText("");
+                        passwordField1.setText("");
+                        return;
                     } else {
                         foundEmail = false;
                     }
                 }
             }
+            JOptionPane.showMessageDialog(null, "Incorrect email or password");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return false;
     }
 
+    void updateMenu(String email) {
+        mainframe.setMenu1Text(email);
 
-    void updateMenu(){
         JMenuItem myBookings = new JMenuItem("My Bookings");
+        myBookings.addActionListener(e -> JOptionPane.showMessageDialog(null, "My Bookings clicked"));
+
         JMenuItem chngInfo = new JMenuItem("Change information");
-        JMenuItem signOut = new JMenuItem("Signout");
-        mainframe.setMenu1Text(getEmail());
-        mainframe.removeMenuItemFromMenu1(0);
-        mainframe.removeMenuItemFromMenu1(1);
+        chngInfo.addActionListener(e -> JOptionPane.showMessageDialog(null, "Change Information clicked"));
+
+        JMenuItem signOut = new JMenuItem("Sign out");
+        signOut.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Sign Out clicked");
+            mainframe.setupMenu();
+        });
+
+        if(mainframe.getMenu1ItemCount() > 0) {
+            mainframe.removeMenuItemFromMenu1(0);
+        }
+        if(mainframe.getMenu1ItemCount() > 0) {
+            mainframe.removeMenuItemFromMenu1(0);
+        }
+
         mainframe.addMenuItemToMenu1(myBookings);
         mainframe.addMenuItemToMenu1(chngInfo);
         mainframe.addMenuItemToMenu1(signOut);
-
     }
+
+
+
 
 
 
