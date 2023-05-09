@@ -17,8 +17,10 @@ public class SignUp_Page {
 
     private boolean isSignedUp;
 
-    public SignUp_Page() {
+    Mainframe mainframe;
 
+    public SignUp_Page(Mainframe mainframe) {
+        this.mainframe = mainframe;
         JFrame frame = new JFrame("Sign Up Page");
         frame.setContentPane(mainPanel);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,7 +122,7 @@ public class SignUp_Page {
 
         LoginButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                new Login_Page();
+                new Login_Page(mainframe);
                 frame.dispose();
             }
         });

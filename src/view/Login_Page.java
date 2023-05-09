@@ -20,7 +20,8 @@ public class Login_Page {
     private Mainframe mainframe;
     private boolean isLoggedIn;
 
-    public Login_Page() {
+    public Login_Page(Mainframe mainframe) {
+        this.mainframe = mainframe;
         JFrame frame = new JFrame("Login Page");
         frame.setContentPane(mainPanel);
         frame.setSize(800, 600);
@@ -89,6 +90,20 @@ public class Login_Page {
             ex.printStackTrace();
         }
         return false;
+    }
+
+
+    void updateMenu(){
+        JMenuItem myBookings = new JMenuItem("My Bookings");
+        JMenuItem chngInfo = new JMenuItem("Change information");
+        JMenuItem signOut = new JMenuItem("Signout");
+        mainframe.setMenu1Text(getEmail());
+        mainframe.removeMenuItemFromMenu1(0);
+        mainframe.removeMenuItemFromMenu1(1);
+        mainframe.addMenuItemToMenu1(myBookings);
+        mainframe.addMenuItemToMenu1(chngInfo);
+        mainframe.addMenuItemToMenu1(signOut);
+
     }
 
 
