@@ -51,7 +51,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private JButton paymentButton;
 
     private ArrayList<String> messages = new ArrayList<String>();
-    private LoginGUI login;
+
     private Controller controller;
     private JMenuBar menuBar;
     private JMenu menu1, menu2, menu3, menu4;
@@ -172,11 +172,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(loginButton)) {
-            login = new LoginGUI();
 
-
-        }
 
 
 

@@ -133,11 +133,11 @@ public class AmadeusAPI {
 
                 String flights =
                         "\nFrom: " + departure +
-                                "\nTo: " + destination +
-                                "\n<-->" +
-                                "\nReturn from: " + returnDeparture +
-                                "\nTo: " + returnDestination +
-                                "\n\nTotal price: " + finalPrice + "€\n";
+                                "\n To: " + destination +
+                                "\n <-->" +
+                                "\n Return from: " + returnDeparture +
+                                "\n To: " + returnDestination +
+                                "\n\n Total price: " + finalPrice + "€\n";
 
                 String flightDisplayInfo =
                         "\nDeparture date: " + departureTime +
@@ -234,9 +234,9 @@ public class AmadeusAPI {
 
                 // Adding flight information to flightInfo ArrayList
                 String flights1 = "\nFrom: " + departure +
-                        "\nTo: " + destination +
-                        "\nAirline: " + airline +
-                        "\n\nTotal price: " + price + "€\n";
+                        "\n To: " + destination +
+                        "\n Airline: " + airline +
+                        "\n\n Total price: " + price + "€\n";
 
                 String flightDisplayInfo1 =
                         "\nDeparture time: " + departureTime +
