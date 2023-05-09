@@ -64,7 +64,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         this.controller = controller;
         //loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
-        paymentButton.addActionListener(this);
+       // paymentButton.addActionListener(this);
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
@@ -76,7 +76,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private void createFrame() {
 
         frame = new JFrame("Flygbokningssystem");
-        frame.setPreferredSize(new Dimension(835, 600));
+        frame.setPreferredSize(new Dimension(920, 600));
         setBorders();
         frame.setContentPane(mainPanel);
         setTodaysDate();
@@ -216,7 +216,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         border3 = BorderFactory.createTitledBorder("");
         border4 = BorderFactory.createTitledBorder("Flight Information");
         eastPanel.setBorder(border);
-        southPanel.setBorder(border1);
+        //southPanel.setBorder(border1);
         scrollDisplay.setBorder(border2);
         mainPanel.setBorder(border3);
         editorPane1.setBorder(border4);

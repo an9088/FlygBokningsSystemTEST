@@ -12,7 +12,7 @@ public class SignedUpBookingGUI {
 
     private Controller controller;
 
-    private String bookingInfo, signedInBookingInfo;
+    private String bookingInfo;
 
     private static int bookingNumber = 0;
 
