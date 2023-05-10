@@ -1,7 +1,7 @@
 package controller;
 
 import com.amadeus.exceptions.ResponseException;
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.*;
 import model.AmadeusAPI;
 import model.Booking;
 import org.xml.sax.SAXException;
@@ -27,7 +27,7 @@ public class Controller {
 
     public Controller() {
         try {
-            UIManager.setLookAndFeel(new FlatOneDarkIJTheme());
+            UIManager.setLookAndFeel(new FlatDarkPurpleIJTheme());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
