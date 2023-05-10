@@ -203,3 +203,59 @@ Zip code: 31224
 City: Malmo
 Country: Sweden
 
+Your booking number: 1
+Thank you John3 B for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-05-15T20:15:00
+From: Bangkok BKK
+To: Copenhagen CPH
+Airline: QR
+Number of stops: 1
+<----->
+Departure date: 2023-06-14T09:30:00
+Return from: Copenhagen CPH
+Return to: Bangkok BKK
+Airline: QR
+Number of stops: 1
+
+Total price: 1551.52€
+
+Full name: John3 B
+Email address: john3@gmail.com
+Address: Malmö
+Zip code: 24130
+City: Malmö
+Country: Sweden
+
+Your booking number: 2
+Thank you John3 a for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in null
+
+Here are your booking details for you upcoming flights:
+
+
+Departure date: 2023-05-15T20:15:00
+From: Bangkok BKK
+To: Copenhagen CPH
+Airline: QR
+Number of stops: 1
+<----->
+Departure date: 2023-06-14T09:30:00
+Return from: Copenhagen CPH
+Return to: Bangkok BKK
+Airline: QR
+Number of stops: 1
+
+Total price: 1551.52€
+
+Full name: John3 a
+Email address: john23232@gmail.com
+Address: a
+Zip code: 5555m
+City: slkdsd
+Country: lksdk
+

@@ -1,7 +1,7 @@
-Firstname: Mehdi
-Lastname: Muhebbi
-Email: mehdi.muhebbi@gmail.com
-Password: Mehdi1!8
+Firstname: John
+Lastname: Doe
+Email: John.doe@gmail.com
+Password: Testson!
 
 Firstname: Mattias
 Lastname: Malm
@@ -17,4 +17,9 @@ Firstname: Ellyas
 Lastname: Rahimy
 Email: ellyasrahimy@gmail.com
 Password: Hejsan 123
+
+Firstname: John
+Lastname: B
+Email: john@gmail.com
+Password: john1234^
 
