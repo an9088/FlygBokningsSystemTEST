@@ -125,9 +125,60 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menu3.add("How To Make A Booking");
 
         JMenu menu4 = new JMenu("General");
-        menu4.add("General Info");
-        menu4.add("Developers");
 
+
+        JMenuItem generalInfoItem = new JMenuItem("General Info");
+        generalInfoItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Welcome to FlightBuddy - Your Partner in the Sky!\n" +
+                        "\n" +
+                        "Do you hear that? That's the sound of the jet engines spooling up, preparing for another journey. Maybe it's the rustle of a boarding pass in your pocket, or the soft hum of anticipation for the trip that awaits. That's where we come in.\n" +
+                        "\n" +
+                        "We are FlightBuddy, your co-pilot in the journey of air travel. Born out of a passion for making travel accessible and fun, we're here to help you take to the skies. Our mission? To make booking flights as easy as a soft landing on a clear day.\n" +
+                        "\n" +
+                        "With FlightBuddy, the world is at your fingertips. Our intuitive and user-friendly platform allows you to compare prices, schedules, and services of different airlines all in one place. No more endless tabs or confusing jargon - we've cut through the turbulence to bring you a clear, straight flight path to your perfect journey.\n" +
+                        "\n" +
+                        "But we're more than just a flight booking system. We're a community. With a personalized login, you can save your preferences, track prices, and everything else you can think of! Talk about a first-class experience, right?\n" +
+                        "\n" +
+                        "Plus, we believe that travel should be filled with joy, not just at the destination, but in the journey as well. So, here's a little joke to lighten up your day:\n" +
+                        "\n" +
+                        "Why don't planes ever get lost? Because they always take flight paths!\n" +
+                        "\n" +
+                        "FlightBuddy is more than just a project. We're your passport to the world, turning complex flight data into simple, actionable steps. We're here to make sure that the only thing you need to worry about is whether you packed enough socks.\n" +
+                        "\n" +
+                        "So buckle up, stow your tray table, and prepare for takeoff. With FlightBuddy, the sky's not the limit - it's just the beginning!\n" +
+                        "\n" +
+                        "Welcome aboard, traveler. We're excited to be part of your journey.\n" +
+                        "\n" +
+                        "Yours,\n" +
+                        "The FlightBuddy Team", "General Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        menu4.add(generalInfoItem);
+
+        JMenuItem developersItem = new JMenuItem("Developers");
+        developersItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Meet the Masters of the Sky - The Developers of FlightBuddy!" +
+                        "\n"+
+                        "Mattias Malm - The Java Juggernaut\n" +
+                        "Mattias Malm, the man who creates Java classes faster than he brews his morning coffee. Rumor has it, Java itself calls him for tech support.\n" +
+                        "\n" +
+                        "Mehdi Muhebbi - The Binary Bard\n" +
+                        "Mehdi Muhebbi, a programmer so proficient that even his grocery lists are in binary. When he isn't coding, he's dreaming in Python.\n" +
+                        "\n" +
+                        "Dino Patarcec - The Algorithm Alchemist\n" +
+                        "Dino Patarcec, the wizard who turns coffee into code. It's said that Dino doesn't debug, the bugs simply surrender.\n" +
+                        "\n" +
+                        "Ellyas Rahimy - The Data Dynamo\n" +
+                        "Ellyas Rahimy, the data wrangler who tamed Big Data with a single SQL query. When he whispers to databases, they whisper back.", "Developers", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        menu4.add(developersItem);
+
+        menuBar.add(menu4);
         menuBar.add(menu2);
         menuBar.add(menu3);
         menuBar.add(menu4);
