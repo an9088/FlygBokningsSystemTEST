@@ -73,7 +73,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         createFrame();
     }
 
-    private void createFrame() {
+    /*private void createFrame() {
 
         frame = new JFrame("FlightBuddy");
         frame.setPreferredSize(new Dimension(920, 600));
@@ -87,6 +87,30 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         //setupMenu();
+    }*/
+
+
+    private void createFrame() {
+        frame = new JFrame("FlightBuddy");
+        frame.setPreferredSize(new Dimension(920, 600));
+        setBorders();
+        frame.setContentPane(mainPanel);
+        setTodaysDate();
+        spinnerAdult.setValue(1);
+        setupMenu();
+
+        // Skapa en JLabel för texten "FlightBuddy" och ställ in önskad storlek och färg
+        JLabel flightBuddyLabel = new JLabel("FlightBuddy");
+        flightBuddyLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Ändra storlek här
+        flightBuddyLabel.setForeground(Color.RED); // Ändra färg här
+
+        // Lägg till JLabel-komponenten i frame
+        frame.getContentPane().add(flightBuddyLabel, BorderLayout.NORTH);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     public void setupMenu() {
