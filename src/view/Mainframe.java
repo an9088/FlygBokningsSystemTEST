@@ -75,7 +75,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     private void createFrame() {
 
-        frame = new JFrame("Flygbokningssystem");
+        frame = new JFrame("FlightBuddy");
         frame.setPreferredSize(new Dimension(920, 600));
         setBorders();
         frame.setContentPane(mainPanel);
