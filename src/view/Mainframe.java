@@ -122,11 +122,66 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menu2.add("Handle Booking");
 
         JMenu menu3 = new JMenu("Help");
-        menu3.add("How To Search Flights");
-        menu3.add("How To Make A Booking");
+
+        JMenuItem howToSearchFlights = new JMenuItem("How To Search Flights");
+
+        howToSearchFlights.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Here are the instructions on how to search for flights.\n" +
+                    "\n" +
+                    "1. Write the city you want to fly from (departure city) and the city you want to fly to (destination city).\n" +
+                    "\n" +
+                    "2. Choose how many passengers that are going with you on this trip.\n" +
+                    "\n" +
+                    "3. Now choose the dates for departure and return. If you want to do a one way trip, then press the button 'One Way Ticket Only'.\n" +
+                    "\n" +
+                    "4. After you have done all the previous steps, press the 'Search Flights' button.\n" +
+                    "\n" +
+                    "Now you can choose which flight you want to take.\n" +
+                    "\n" +
+                    "Now you are all set. Hope you have a nice trip. Thank you for choosing FlightBuddy.\n" +
+                    "\n" +
+                    "Sincerely,\n" +
+                        "The FlightBuddy Team", "How to search flights", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        menu3.add(howToSearchFlights);
+
 
         JMenu menu4 = new JMenu("General");
 
+        JMenuItem howToMakeABooking = new JMenuItem("How To Make A Booking");
+
+        howToMakeABooking.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Here are the instructions on how to book a flight.\n" +
+                        "\n" +
+                        "1. After you have searched for a flight, choose a specific flight that you want to book by clicking on the flight.\n" +
+                        "\n" +
+                        "2. Now press the button 'Book Flight'.\n" +
+                        "\n" +
+                        "3. After that a window will pop up that requires your information. Fill in your information in those text fields.\n" +
+                        "\n" +
+                        "4. When all the information has been filled in the text fields, press the 'Create Booking' button\n" +
+                        "\n" +
+                        "5. After the 'Create Booking' button has been pressed, a confirmation on the booking will be shown. \n" +
+                        "\n" +
+                        "6. A message will be shown to you that informs you that your booking has been confirmed. Press the 'Ok' button \n" +
+                        "\n" +
+                        "7. A window will now pop up with your flight information.\n" +
+                        "\n" +
+                        "8. Lastly press the 'Ok' button.\n" +
+                        "\n" +
+                        "Now you are all set. Hope you have a nice trip. Thank you for choosing FlightBuddy.\n" +
+                        "\n" +
+                        "Sincerely,\n" +
+                        "The FlightBuddy Team", "How to search flights", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        menu3.add(howToMakeABooking);
 
         JMenuItem generalInfoItem = new JMenuItem("General Info");
         generalInfoItem.addActionListener(new ActionListener() {
