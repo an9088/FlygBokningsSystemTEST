@@ -71,6 +71,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         guiUtils.addSuggestionText(fromAirport, "Enter Departure City");
         guiUtils.addSuggestionText(toAirport, "Enter Destination City");
         createFrame();
+        SignUp_Page signUpPage = new SignUp_Page(this);
     }
 
     private void createFrame() {
@@ -91,9 +92,13 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
 
     public void setupMenu() {
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
 
-        menu1 = new JMenu("Login / Sign up");
+        ImageIcon userIcon = new ImageIcon("img/icons/user-icon.png");
+
+        JButton userButton = new JButton(userIcon);
+        JPopupMenu popupMenu = new JPopupMenu();
+
         JMenuItem loginItem = new JMenuItem("Login");
         loginItem.addActionListener(new ActionListener() {
             @Override
@@ -102,8 +107,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 isSignedIn = true;
             }
         });
-
-        menu1.add(loginItem);
+        popupMenu.add(loginItem);
 
         JMenuItem signUpItem = new JMenuItem("Sign up");
         signUpItem.addActionListener(new ActionListener() {
@@ -112,9 +116,16 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 SignUp_Page signUpPage = new SignUp_Page(Mainframe.this);
             }
         });
-        menu1.add(signUpItem);
+        popupMenu.add(signUpItem);
 
-        menuBar.add(menu1);
+        userButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                popupMenu.show(userButton, 0, userButton.getHeight());
+            }
+        });
+
+        menuBar.add(userButton);
 
         JMenu menu2 = new JMenu("Bookings");
         menu2.add("Booking Information");
