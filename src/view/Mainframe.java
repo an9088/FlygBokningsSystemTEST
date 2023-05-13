@@ -80,7 +80,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     private void createFrame() {
         frame = new JFrame();
-        frame.setTitle("FlightBuddy");
+        Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
+        String title = "<html><body><b><font size='5' color='#FFFFFF'>FlightBuddy</font></b></body></html>"; // HTML formatted title with white color
+        frame.setTitle(title); // Set the HTML formatted title
+
         frame.setPreferredSize(new Dimension(920, 600));
         setBorders();
         frame.setContentPane(mainPanel);

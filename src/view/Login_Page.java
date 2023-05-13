@@ -22,7 +22,10 @@ public class Login_Page {
 
     public Login_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
-        frame = new JFrame("Login Page");
+        frame = new JFrame();
+        Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
+        String title = "<html><body><b><font size='5' color='#FFFFFF'>Login</font></b></body></html>"; // HTML formatted title with white color
+        frame.setTitle(title); // Set the HTML formatted title
         frame.setContentPane(mainPanel);
         frame.setSize(400, 250);
         frame.setLocationRelativeTo(null);
