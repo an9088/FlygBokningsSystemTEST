@@ -90,29 +90,41 @@ public class Login_Page {
     void updateMenu(String email) {
         mainframe.setMenu1Text(email);
 
+        JButton userButton = mainframe.getUserButton();
+        JPopupMenu popupMenu = userButton.getComponentPopupMenu();
+
+        if (popupMenu == null) {
+            popupMenu = new JPopupMenu();
+            userButton.setComponentPopupMenu(popupMenu);
+        }
+
         JMenuItem myBookings = new JMenuItem("My Bookings");
         myBookings.addActionListener(e -> JOptionPane.showMessageDialog(null, "My Bookings clicked"));
+        mainframe.addMenuItemToMenu1(myBookings);
 
         JMenuItem chngInfo = new JMenuItem("Change information");
         chngInfo.addActionListener(e -> JOptionPane.showMessageDialog(null, "Change Information clicked"));
+        mainframe.addMenuItemToMenu1(chngInfo);
 
         JMenuItem signOut = new JMenuItem("Sign out");
         signOut.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "Sign Out clicked");
             mainframe.setupMenu();
+            mainframe.setExtendedState(JFrame.NORMAL);
+            mainframe.setUndecorated(false);
+            mainframe.revalidate();
+            mainframe.repaint();
         });
-
-        if(mainframe.getMenu1ItemCount() > 0) {
-            mainframe.removeMenuItemFromMenu1(0);
-        }
-        if(mainframe.getMenu1ItemCount() > 0) {
-            mainframe.removeMenuItemFromMenu1(0);
-        }
-
-        mainframe.addMenuItemToMenu1(myBookings);
-        mainframe.addMenuItemToMenu1(chngInfo);
         mainframe.addMenuItemToMenu1(signOut);
+
+
     }
+
+
+
+
+
+
 
 
 

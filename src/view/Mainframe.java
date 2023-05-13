@@ -58,6 +58,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private JMenu menu1, menu2, menu3, menu4;
     private JFrame frame;
 
+    JPopupMenu popupMenu;
+
+    JButton userButton;
+
     private boolean isSignedIn = false;
 
     public Mainframe(Controller controller) {
@@ -75,8 +79,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     }
 
     private void createFrame() {
-
-        frame = new JFrame("FlightBuddy");
+        frame = new JFrame();
+        frame.setTitle("FlightBuddy");
         frame.setPreferredSize(new Dimension(920, 600));
         setBorders();
         frame.setContentPane(mainPanel);
@@ -87,17 +91,23 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        //setupMenu();
+
+        // Modify the title font
+        Font titleFont = new Font("Arial", Font.BOLD, 24);
+        JRootPane rootPane = frame.getRootPane();
+        rootPane.setFont(titleFont);
     }
 
 
+
     public void setupMenu() {
+
         JMenuBar menuBar = new JMenuBar();
 
-        ImageIcon userIcon = new ImageIcon("img/icons/user-icon.png");
+        ImageIcon userIcon = new ImageIcon("img/icons/user-icon2.png");
 
-        JButton userButton = new JButton(userIcon);
-        JPopupMenu popupMenu = new JPopupMenu();
+         userButton = new JButton(userIcon);
+         popupMenu = new JPopupMenu();
 
         JMenuItem loginItem = new JMenuItem("Login");
         loginItem.addActionListener(new ActionListener() {
@@ -125,14 +135,36 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             }
         });
 
+        //menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(userButton);
 
-        JMenu menu2 = new JMenu("Bookings");
-        menu2.add("Booking Information");
-        menu2.add("Delete Booking");
-        menu2.add("Handle Booking");
 
-        JMenu menu3 = new JMenu("Help");
+        ImageIcon bookingsIcon = new ImageIcon("img/icons/bookings-icon.png");
+        JButton bookingsButton = new JButton(bookingsIcon);
+        JPopupMenu bookingsPopupMenu = new JPopupMenu();
+
+        JMenuItem bookingInfoItem = new JMenuItem("Booking Information");
+        bookingsPopupMenu.add(bookingInfoItem);
+
+        JMenuItem deleteBookingItem = new JMenuItem("Delete Booking");
+        bookingsPopupMenu.add(deleteBookingItem);
+
+        JMenuItem handleBookingItem = new JMenuItem("Handle Booking");
+        bookingsPopupMenu.add(handleBookingItem);
+
+        bookingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bookingsPopupMenu.show(bookingsButton, 0, bookingsButton.getHeight());
+            }
+        });
+
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(bookingsButton);
+
+        ImageIcon helpIcon = new ImageIcon("img/icons/support.png");
+        JButton helpButton = new JButton(helpIcon);
+        JPopupMenu helpPopupMenu = new JPopupMenu();
 
         JMenuItem howToSearchFlights = new JMenuItem("How To Search Flights");
 
@@ -157,10 +189,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                         "The FlightBuddy Team", "How to search flights", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        menu3.add(howToSearchFlights);
-
-
-        JMenu menu4 = new JMenu("General");
+        helpPopupMenu.add(howToSearchFlights);
 
         JMenuItem howToMakeABooking = new JMenuItem("How To Make A Booking");
 
@@ -192,8 +221,25 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             }
         });
 
-        menu3.add(howToMakeABooking);
+        helpPopupMenu.add(howToMakeABooking);
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                helpPopupMenu.show(helpButton, 0, helpButton.getHeight());
+            }
+        });
 
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(helpButton);
+
+
+
+
+
+
+        ImageIcon generalIcon = new ImageIcon("img/icons/general-icon.png");
+        JButton generalButton = new JButton(generalIcon);
+        JPopupMenu generalPopupMenu = new JPopupMenu();
         JMenuItem generalInfoItem = new JMenuItem("General Info");
         generalInfoItem.addActionListener(new ActionListener() {
             @Override
@@ -222,7 +268,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                         "The FlightBuddy Team", "General Info", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        menu4.add(generalInfoItem);
+        generalPopupMenu.add(generalInfoItem);
 
         JMenuItem developersItem = new JMenuItem("Developers");
         developersItem.addActionListener(new ActionListener() {
@@ -243,42 +289,57 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                         "Ellyas Rahimy, the data wrangler who tamed Big Data with a single SQL query. When he whispers to databases, they whisper back.", "Developers", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        menu4.add(developersItem);
+        generalPopupMenu.add(developersItem);
 
-        menuBar.add(menu4);
-        menuBar.add(menu2);
-        menuBar.add(menu3);
-        menuBar.add(menu4);
+        generalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generalPopupMenu.show(helpButton, 0, generalButton.getHeight());
+            }
+        });
+
+        menuBar.add(Box.createHorizontalStrut(10));
+        menuBar.add(generalButton);
+
+
+
         frame.setJMenuBar(menuBar);
-        frame.repaint();
+
     }
 
-    public void setMenu1Text(String text) {
-        this.menu1.setText(text);
+    public JButton getUserButton() {
+        return userButton;
     }
 
-    // Method to add JMenuItem to menu1
+    public void setMenu1Text(String email) {
+        popupMenu.removeAll(); // Remove existing menu items
+
+        JMenuItem emailItem = new JMenuItem(email);
+        emailItem.setEnabled(false); // Disable the item so it cannot be clicked
+
+        popupMenu.add(emailItem); // Add the email item to menu1
+    }
+
+
     public void addMenuItemToMenu1(JMenuItem item) {
-        menu1.add(item);
+        // Add the JMenuItem to the popupMenu
+        popupMenu.add(item);
     }
 
-    // Method to remove JMenuItem from menu1
     public void removeMenuItemFromMenu1(JMenuItem item) {
-        menu1.remove(item);
+        // Remove the JMenuItem from the popupMenu
+        popupMenu.remove(item);
     }
 
     public void removeMenuItemFromMenu1(int index) {
-        if (index >= 0 && index < menu1.getItemCount()) {
-            menu1.remove(index);
-        } else {
-            throw new IllegalArgumentException("Index out of bounds for removeMenuItemFromMenu1: " + index);
-        }
+        // Remove the JMenuItem at the specified index from the popupMenu
+        popupMenu.remove(index);
     }
 
     public int getMenu1ItemCount() {
-        return menu1.getItemCount();
+        // Get the number of items in the popupMenu
+        return popupMenu.getComponentCount();
     }
-
 
     public JMenuItem getLoginItem() {
         return this.loginItem;
@@ -288,30 +349,27 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         return this.signUpItem;
     }
 
-    // Setter methods for JMenuItems
     public void setLoginItem(JMenuItem item) {
-        this.menu1.remove(this.loginItem);
         this.loginItem = item;
-        this.menu1.add(this.loginItem);
     }
 
     public void setSignUpItem(JMenuItem item) {
-        this.menu1.remove(this.signUpItem);
         this.signUpItem = item;
-        this.menu1.add(this.signUpItem);
     }
 
     public void setMenu2Text(String text) {
-        this.menu2.setText(text);
+        menu2.setText(text);
     }
 
     public void setMenu3Text(String text) {
-        this.menu3.setText(text);
+        menu3.setText(text);
     }
 
     public void setMenu4Text(String text) {
-        this.menu4.setText(text);
+        menu4.setText(text);
     }
+
+
 
 
     private void setTodaysDate() {
