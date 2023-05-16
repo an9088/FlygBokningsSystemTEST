@@ -1,5 +1,6 @@
 package view;
 
+import model.UserRegistrationService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,9 +18,11 @@ public class SignUp_Page {
     private JFrame frame;
 
     Mainframe mainframe;
+    UserRegistrationService userRegistrationService;
 
     public SignUp_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
+        this.userRegistrationService = new UserRegistrationService();
         frame = new JFrame();
         Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
         String title = "<html><body><b><font size='5' color='#FFFFFF'>Sign up</font></b></body></html>"; // HTML formatted title with white color
@@ -71,18 +74,17 @@ public class SignUp_Page {
     }
 
     private void signUp() {
-        // Implement your registration logic here
         String firstName = forenameField.getText().trim();
         String lastName = surnameField.getText().trim();
         String email = emailField.getText().trim();
         String password = new String(passwordField1.getPassword()).trim();
 
-        if (!isInputValid(firstName, lastName, email, password)) {
+        if (!userRegistrationService.isInputValid(firstName, lastName, email, password)) {
             return;
         }
 
         try {
-            saveUserData(firstName, lastName, email, password);
+            userRegistrationService.saveUserData(firstName, lastName, email, password);
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error saving user data: " + ex.getMessage());
@@ -92,79 +94,6 @@ public class SignUp_Page {
         JOptionPane.showMessageDialog(null, "Registration Successful!");
         updateMenu(email);
         frame.dispose();
-    }
-
-    private boolean isInputValid(String firstName, String lastName, String email, String password) {
-        // Check that all fields are filled
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled in.");
-            return false;
-        }
-
-        // Check that the email contains the @ symbol
-        if (!email.contains("@")) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid email address.");
-            return false;
-        }
-
-        // Check that the password meets the requirements
-        if (!isPasswordValid(password)) {
-            return false;
-        }
-
-        // Check if the email is already registered
-        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Email: " + email)) {
-                    JOptionPane.showMessageDialog(null, "This email is already registered.");
-                    return false;
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error checking user data: " + ex.getMessage());
-            return false;
-        }
-
-        return true;
-    }
-
-    private void saveUserData(String firstName, String lastName, String email, String password) throws IOException {
-        // Save the user data to a text file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
-            writer.write("Firstname: " + firstName);
-            writer.newLine();
-            writer.write("Lastname: " + lastName);
-            writer.newLine();
-            writer.write("Email: " + email);
-            writer.newLine();
-            writer.write("Password: " + password);
-            writer.newLine();
-            writer.newLine();
-        }
-    }
-
-    private boolean isPasswordValid(String password) {
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
-            return false;
-        }
-
-        boolean hasSpecialCharacter = false;
-        for (char c : password.toCharArray()) {
-            if (!Character.isLetterOrDigit(c)) {
-                hasSpecialCharacter = true;
-                break;
-            }
-        }
-
-        if (!hasSpecialCharacter) {
-            JOptionPane.showMessageDialog(null, "Password must contain at least one special character.");
-            return false;
-        }
-
-        return true;
     }
 
     void updateMenu(String email) {

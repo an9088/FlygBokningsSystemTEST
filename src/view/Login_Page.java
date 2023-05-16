@@ -90,7 +90,7 @@ public class Login_Page {
         }
     }
 
-    void updateMenu(String email) {
+    public void updateMenu(String email) {
         mainframe.setMenu1Text(email);
 
         JButton userButton = mainframe.getUserButton();
@@ -122,18 +122,6 @@ public class Login_Page {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private boolean validateEmail(String email) {
