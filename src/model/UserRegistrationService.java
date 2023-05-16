@@ -5,6 +5,8 @@ import java.io.*;
 
 public class UserRegistrationService {
 
+    private static final int MIN_PASSWORD_LENGTH = 8;
+
     private String firstName;
     private String lastName;
     private String email;
@@ -66,8 +68,8 @@ public class UserRegistrationService {
     }
 
     private boolean isPasswordValid(String password) {
-        if (password.length() < 8) {
-            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
+        if (password.length() < MIN_PASSWORD_LENGTH) {
+            JOptionPane.showMessageDialog(null, "Password must be at least " + MIN_PASSWORD_LENGTH + " characters long!");
             return false;
         }
 
