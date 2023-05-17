@@ -8,11 +8,6 @@ Lastname: Malm
 Email: malmmattias1@outlook.com
 Password: matteus!!
 
-Firstname: poop
-Lastname: poopson
-Email: johnson123@gmail.com
-Password: 1234test!
-
 Firstname: Ellyas
 Lastname: Rahimy
 Email: ellyasrahimy@gmail.com
