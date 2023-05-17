@@ -6,7 +6,6 @@ import java.io.*;
 public class UserRegistrationService {
 
     private static final int MIN_PASSWORD_LENGTH = 8;
-
     private String firstName;
     private String lastName;
     private String email;
