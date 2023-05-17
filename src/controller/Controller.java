@@ -24,6 +24,8 @@ public class Controller {
 
     private ArrayList<String> flightDisplay;
 
+    private AmadeusAPI amadeus;
+
 
     public Controller() {
         try {
@@ -63,12 +65,12 @@ public class Controller {
 
         } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()) {
 
-            AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
+            amadeus = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
             mainframe.getFromAirport().setText("");
             mainframe.getToAirport().setText("");
         } else {
 
-            AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
+            amadeus = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
             mainframe.getFromAirport().setText("");
             mainframe.getToAirport().setText("");
         }
@@ -82,10 +84,10 @@ public class Controller {
     }
 
 
-    public void createNewBooking(String name, String lastName, String address, String city,
-                                 String zip, String country, String email, String bookingDetails, int bookingNumber) {
+    public void createNewBooking(String fullName, String address, String city,
+                                 String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
 
-        booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, this);
+        booking = new Booking(fullName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
     }
 
 
@@ -154,5 +156,19 @@ public class Controller {
     }
 
 
+    public String getAirport() {
+        String airport = amadeus.getDestinationAirport();
+        return airport;
+    }
+
+    public String getSignedInEmail() {
+      return mainframe.getSignedInEmail();
+    }
+
+    public void createNewGuestBooking(String name, String lastName, String address, String city, String zip, String country,
+                                      String email, String bookingDetails, String airport, int bookingNumber) {
+        booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
+
+    }
 }
 

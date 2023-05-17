@@ -18,23 +18,17 @@ public class BookingCreatorGUI {
 
     private Controller controller;
 
-    private String bookingInfo, signedInBookingInfo;
+    private String bookingInfo;
 
-    private boolean isSignedIn;
+    private String airport;
 
     private static int bookingNumber = 0;
 
 
-    public BookingCreatorGUI(String signedInBookingInfo, boolean isSignedIn, Controller controller) {
-        this.signedInBookingInfo = signedInBookingInfo;
-        this.isSignedIn = isSignedIn;
-        this.controller = controller;
-
-    }
-
-    public BookingCreatorGUI(String bookingInfo, Controller controller) {
-        this.controller = controller;
+    public BookingCreatorGUI(String bookingInfo, String airport, Controller controller) {
         this.bookingInfo = bookingInfo;
+        this.airport = airport;
+        this.controller = controller;
         createBookingField();
     }
 
@@ -139,6 +133,7 @@ public class BookingCreatorGUI {
             public void actionPerformed(ActionEvent e) {
 
                 String bookingDetails = getBookingInfo();
+
                 String name = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String address = addressField.getText();
@@ -166,8 +161,8 @@ public class BookingCreatorGUI {
 
                     bookingNumber++;
                     JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
-                    controller.createNewBooking(name, lastName, address, city, zip, country, email, bookingDetails, bookingNumber);
-
+                    //controller.createNewBooking(name, lastName, address, city, zip, country, email, bookingDetails, bookingNumber);
+                    controller.createNewGuestBooking(name, lastName, address, city, zip, country, email, bookingDetails, controller.getAirport(), bookingNumber);
                     signUpFrame.setVisible(false);
                 }
             }

@@ -175,6 +175,7 @@ public class AmadeusAPI {
         departureAirport = formatAirportName(departureAirport);
         destinationAirport = formatAirportName(destinationAirport);
 
+
         departureCode = getIataCode(departureAirport);
         destinationCode = getIataCode(destinationAirport);
 
@@ -282,6 +283,12 @@ public class AmadeusAPI {
         if (airport.equals("Örebro")) {
             airport = "Oerebro";
         }
+        if(airport.equals("Göteborg")) {
+            airport = "Goeteborg";
+        }
+        if(airport.equals("Växjö")) {
+            airport = "Vaexjoe";
+        }
         return airport;
     }
 
@@ -318,7 +325,11 @@ public class AmadeusAPI {
         return upperCaseDestAirport;
     }
 
-    public String getUpperCaseDestAirport() {
-        return upperCaseDestAirport;
+    public String getDestinationAirport() {
+        return formatAirportName(destinationAirport);
+    }
+
+    public void setDestinationAirport(String destinationAirport) {
+        this.destinationAirport = destinationAirport;
     }
 }

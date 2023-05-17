@@ -15,10 +15,28 @@ public class Booking {
     private Controller controller;
 
     private ArrayList bookings = new ArrayList();
-    private String name, lastName, address, zip, country, city, email, bookingDetails;
+    private String name, lastName, address, zip, country, city, email, bookingDetails, airport, fullName;
 
 
-    public Booking(String name, String lastName, String address, String city, String zip, String country, String email, int bookingNumber, String bookingDetails, Controller controller) {
+    public Booking(String fullName, String address, String city, String zip, String country, String email,
+                   int bookingNumber, String bookingDetails, String airport, Controller controller) {
+        this.fullName = fullName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.country = country;
+        this.email = email;
+        this.bookingNumber = bookingNumber;
+        this.controller = controller;
+        this.bookingDetails = bookingDetails;
+        this.airport = airport;
+
+        bookingConfirmationForSignedInUser(fullName, address, city, zip, country, email, airport, bookingNumber, bookingDetails);
+    }
+
+
+    public Booking(String name, String lastName, String address, String city, String zip, String country,
+                   String email, int bookingNumber, String bookingDetails, String airport, Controller controller) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
@@ -29,20 +47,20 @@ public class Booking {
         this.bookingNumber = bookingNumber;
         this.controller = controller;
         this.bookingDetails = bookingDetails;
+        this.airport = airport;
 
-        bookingConfirmation(name, lastName, address, city, zip, country, email, bookingDetails);
+        bookingConfirmation(name, lastName, address, city, zip, country, email, airport, bookingDetails, bookingNumber);
     }
 
-    private void bookingConfirmation(String name, String lastName, String address, String city,
-                                     String zip, String country, String email, String bookingDetails) {
 
-        AmadeusAPI amadeus = new AmadeusAPI();
-        String destination = amadeus.getUpperCaseDestAirport();
+    private void bookingConfirmation(String name, String lastName, String address, String city,
+                                     String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
+
         
-        String bookingMessage = "Your booking number: " + bookingNumber + "\n" +
+        String bookingMessage = "Your booking number: " + bookingNumber + "\n\n" +
                 "Thank you " + name + " " + lastName + " for using this application for booking your flight tickets. \n" +
-                "We hope you will have a pleasant stay in " + destination + "\n\n" +
-                "Here are your booking details for you upcoming flights:\n\n" + bookingDetails +
+                "We hope you will have a pleasant stay in " + bookingDetails + "\n" +
+                "Here are your booking details for your upcoming trip:\n\n" + airport  +
                 "\nFull name: " + name + " " + lastName + "\n" +
                 "Email address: " + email + "\n" +
                 "Address: " + address + "\n" +
@@ -57,25 +75,23 @@ public class Booking {
 
     }
 
-    public int getNbrOfTravelers() {
-        return nbrOfTravelers;
-    }
+    private void bookingConfirmationForSignedInUser(String fullName, String address, String city, String zip,
+                                                    String country, String email, String airport, int bookingNumber, String bookingDetails) {
 
-    public void setNbrOfTravelers(int nbrOfTravelers) {
-        this.nbrOfTravelers = nbrOfTravelers;
-    }
+        String bookingMessage = "Your booking number: " + bookingNumber + "\n\n" +
+                "Thank you " + fullName + " for using this application for booking your flight tickets. \n" +
+                "We hope you will have a pleasant stay in " +  bookingDetails + "\n" +
+                "Here are your booking details for your upcoming trip:\n\n" + airport +
+                "\nFull name: " + fullName + "\n" +
+                "Email address: " + email + "\n" +
+                "Address: " + address + "\n" +
+                "Zip code: " + zip + "\n" +
+                "City: " + city + "\n" +
+                "Country: " + country + "\n";
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", zip='" + zip + '\'' +
-                ", country='" + country + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+
+        controller.showBookingConfirmation(bookingMessage);
+        saveBookingToFile(bookingMessage);
     }
 
 

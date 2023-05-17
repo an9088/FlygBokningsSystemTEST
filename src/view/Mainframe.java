@@ -332,6 +332,21 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         popupMenu.add(emailItem); // Add the email item to menu1
     }
 
+    public String getSignedInEmail() {
+        String email = null;
+        if (isSignedIn == true) {
+            Component[] components = popupMenu.getComponents();
+            for (Component component : components) {
+                if (component instanceof JMenuItem) {
+                    JMenuItem item = (JMenuItem) component;
+                    email = item.getText();
+                    break;
+                }
+            }
+        }
+        return email;
+    }
+
 
     public void addMenuItemToMenu1(JMenuItem item) {
         // Add the JMenuItem to the popupMenu
@@ -412,13 +427,14 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
             // System.out.println(getEditorPane1().getText());
             String bookingInfo = getEditorPane1().getText();
+            String currentAirport = controller.getAirport();
             int i = list1.getSelectedIndex();
             if (i < 0 || i > 10) {
                 errorMessage("Please select a flight from the list to create a booking");
             } else if (isSignedIn) {
                 SignedUpBookingGUI easyBooking = new SignedUpBookingGUI(bookingInfo, controller);
             } else {
-                BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
+                BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, currentAirport, controller);
             }
 
 
