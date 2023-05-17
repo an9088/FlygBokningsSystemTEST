@@ -20,6 +20,7 @@ public class Login_Page {
     private Mainframe mainframe;
     private JFrame frame;
 
+
     public Login_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
         frame = new JFrame();

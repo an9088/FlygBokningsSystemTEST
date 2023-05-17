@@ -18,7 +18,7 @@ public class Controller {
 
     private Booking booking;
 
-    private String message;
+    private String message, date, returnDate;
 
     private ArrayList<String> flightInfo;
 
@@ -43,71 +43,34 @@ public class Controller {
 
         int nbrOfPassengers = (int) mainframe.getSpinnerAdult().getValue();
 
-        String year = mainframe.getYear().getValue().toString();
-        String month = mainframe.getMonth().getValue().toString();
-        String day = mainframe.getDay().getValue().toString();
+        date = getDepartureDate();
+        returnDate = getReturnDate();
 
-        String date = year + "-" + month + "-" + day;
-
-        ///////////////DEPARTURE DATES///////////////////
-
-        if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {
-            date = year + "-0" + month + "-" + day;
-        }
-        if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) < 10) {
-            date = year + "-" + month + "-0" + day;
-        }
-        if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) >= 10) {
-            date = year + "-" + month + "-" + day;
-        }
-        if (Integer.parseInt(month) < 10 && Integer.parseInt(day) < 10) {
-            date = year + "-0" + month + "-0" + day;
-        }
-
-        ///////////////RETURN DATES///////////////////
-
-        String returnYear = mainframe.getReturnYear().getValue().toString();
-        String returnMonth = mainframe.getReturnMonth().getValue().toString();
-        String returnDay = mainframe.getReturnDay().getValue().toString();
-
-        String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
-
-        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) >= 10) {
-            returnDate = returnYear + "-0" + returnMonth + "-" + returnDay;
-        }
-        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
-            returnDate = returnYear + "-" + returnMonth + "-0" + returnDay;
-        }
-        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
-            returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
-        }
-        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
-            returnDate = returnYear + "-0" + returnMonth + "-0" + returnDay;
-        }
+        System.out.println("Departure: " + date + "\nReturn date: " + returnDate);
 
 
-        if (departureAirport.equals("")) {
+        if (departureAirport.equals("") || departureAirport.equals("Enter Departure City")) {
             message = "Please enter valid departure destination";
             mainframe.errorMessage(message);
 
-        } else if (destinationAirport.equals("")) {
+        } else if (destinationAirport.equals("") || destinationAirport.equals("Enter Destination City")) {
             message = "Please enter valid arrival destination";
             mainframe.errorMessage(message);
 
-        } else if (destinationAirport.equals("") && departureAirport.equals("") ||
-                (destinationAirport.equals("Enter Destination City") && departureAirport.equals("Enter Departure City"))) {
+        } else if (departureAirport.equals("") && destinationAirport.equals("")) {
             message = "Please enter valid destinations";
             mainframe.errorMessage(message);
 
         } else if (mainframe.getOneWayTicketOnlyCheckBox().isSelected()) {
 
             AmadeusAPI oneWayTicket = new AmadeusAPI(departureAirport, destinationAirport, date, nbrOfPassengers, this);
-
-
+            mainframe.getFromAirport().setText("");
+            mainframe.getToAirport().setText("");
         } else {
 
             AmadeusAPI returnTicket = new AmadeusAPI(departureAirport, destinationAirport, date, returnDate, nbrOfPassengers, this);
-
+            mainframe.getFromAirport().setText("");
+            mainframe.getToAirport().setText("");
         }
 
     }
@@ -137,5 +100,59 @@ public class Controller {
     public void errorCode(String message) {
         mainframe.errorMessage(message);
     }
+
+    public String getDepartureDate() {
+
+        String year = mainframe.getYear().getValue().toString();
+        String month = mainframe.getMonth().getValue().toString();
+        String day = mainframe.getDay().getValue().toString();
+
+        String date = year + "-" + month + "-" + day;
+
+        ///////////////DEPARTURE DATES///////////////////
+
+        if (Integer.parseInt(month) < 10 && Integer.parseInt(day) >= 10) {
+            date = year + "-0" + month + "-" + day;
+        }
+        if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) < 10) {
+            date = year + "-" + month + "-0" + day;
+        }
+        if (Integer.parseInt(month) >= 10 && Integer.parseInt(day) >= 10) {
+            date = year + "-" + month + "-" + day;
+        }
+        if (Integer.parseInt(month) < 10 && Integer.parseInt(day) < 10) {
+            date = year + "-0" + month + "-0" + day;
+        }
+
+        return date;
+    }
+
+    public String getReturnDate() {
+
+        ///////////////RETURN DATES///////////////////
+
+        String returnYear = mainframe.getReturnYear().getValue().toString();
+        String returnMonth = mainframe.getReturnMonth().getValue().toString();
+        String returnDay = mainframe.getReturnDay().getValue().toString();
+
+        String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
+
+        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) >= 10) {
+            returnDate = returnYear + "-0" + returnMonth + "-" + returnDay;
+        }
+        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
+            returnDate = returnYear + "-" + returnMonth + "-0" + returnDay;
+        }
+        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
+            returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
+        }
+        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
+            returnDate = returnYear + "-0" + returnMonth + "-0" + returnDay;
+        }
+
+        return returnDate;
+    }
+
+
 }
 

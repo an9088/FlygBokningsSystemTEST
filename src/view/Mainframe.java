@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener {
     private JPanel mainPanel;
     private JPanel northPanel;
-    private JPanel southPanel;
     private JTextField fromAirport;
     private JPanel eastPanel;
     private JTextField toAirport;
@@ -31,30 +30,25 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private JCheckBox oneWayTicketOnlyCheckBox;
     private Border border, border1, border2, border3, border4;
     private JEditorPane editorPane1;
-    private JButton bookingsButton;
-    private JButton loginButton;
     private JSpinner year;
     private JSpinner month;
     private JSpinner day;
     private JScrollPane scrollDisplay;
     private JButton book;
 
-    private BookingCreatorGUI booking;
-
     private JList list1;
     private JSpinner returnYear;
     private JSpinner returnMonth;
     private JSpinner returnDay;
-    private JButton paymentButton;
+    private JPanel calendarPanel;
+    private JPanel calendarPanel2;
 
     private ArrayList<String> messages = new ArrayList<String>();
-
     private Controller controller;
-    private JMenuBar menuBar;
-
     JMenuItem loginItem;
 
     JMenuItem signUpItem;
+
     private JMenu menu1, menu2, menu3, menu4;
     private JFrame frame;
 
@@ -62,18 +56,24 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     JButton userButton;
 
+    private DefaultListModel<String> listModel;
+
     private boolean isSignedIn = false;
+
+
+
+
 
     public Mainframe(Controller controller) {
         this.controller = controller;
-        //loginButton.addActionListener(this);
         searchFligthsButton.addActionListener(this);
-       // paymentButton.addActionListener(this);
         book.addActionListener(this);
         list1.addListSelectionListener((ListSelectionListener) this);
         oneWayTicketOnlyCheckBox.addChangeListener(this);
         guiUtils.addSuggestionText(fromAirport, "Enter Departure City");
         guiUtils.addSuggestionText(toAirport, "Enter Destination City");
+        System.out.println("Widht eastPanel: " + eastPanel.getWidth());
+
         createFrame();
         SignUp_Page signUpPage = new SignUp_Page(this);
     }
@@ -83,6 +83,12 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
         String title = "<html><body><b><font size='5' color='#FFFFFF'>FlightBuddy</font></b></body></html>"; // HTML formatted title with white color
         frame.setTitle(title); // Set the HTML formatted title
+        /*JDateChooser dateChooser = new JDateChooser();
+        calendarPanel.add(dateChooser);
+        JDateChooser d2 = new JDateChooser();
+        calendarPanel2.add(d2);
+
+         */
 
         frame.setPreferredSize(new Dimension(920, 600));
         setBorders();
@@ -92,6 +98,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         setupMenu();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -102,24 +109,25 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     }
 
 
-
     public void setupMenu() {
+
+        isSignedIn = false;
 
         JMenuBar menuBar = new JMenuBar();
 
         ImageIcon userIcon = new ImageIcon("img/icons/user-icon2.png");
 
-         userButton = new JButton(userIcon);
-         popupMenu = new JPopupMenu();
+        userButton = new JButton(userIcon);
+        popupMenu = new JPopupMenu();
 
         JMenuItem loginItem = new JMenuItem("Login");
         loginItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login_Page loginPage = new Login_Page(Mainframe.this);
-                isSignedIn = true;
             }
         });
+
         popupMenu.add(loginItem);
 
         JMenuItem signUpItem = new JMenuItem("Sign up");
@@ -129,6 +137,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 SignUp_Page signUpPage = new SignUp_Page(Mainframe.this);
             }
         });
+
+
         popupMenu.add(signUpItem);
 
         userButton.addActionListener(new ActionListener() {
@@ -175,20 +185,20 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Here are the instructions on how to search for flights.\n" +
-                    "\n" +
-                    "1. Write the city you want to fly from (departure city) and the city you want to fly to (destination city).\n" +
-                    "\n" +
-                    "2. Choose how many passengers that are going with you on this trip.\n" +
-                    "\n" +
-                    "3. Now choose the dates for departure and return. If you want to do a one way trip, then press the button 'One Way Ticket Only'.\n" +
-                    "\n" +
-                    "4. After you have done all the previous steps, press the 'Search Flights' button.\n" +
-                    "\n" +
-                    "Now you can choose which flight you want to take.\n" +
-                    "\n" +
-                    "Now you are all set. Hope you have a nice trip. Thank you for choosing FlightBuddy.\n" +
-                    "\n" +
-                    "Sincerely,\n" +
+                        "\n" +
+                        "1. Write the city you want to fly from (departure city) and the city you want to fly to (destination city).\n" +
+                        "\n" +
+                        "2. Choose how many passengers that are going with you on this trip.\n" +
+                        "\n" +
+                        "3. Now choose the dates for departure and return. If you want to do a one way trip, then press the button 'One Way Ticket Only'.\n" +
+                        "\n" +
+                        "4. After you have done all the previous steps, press the 'Search Flights' button.\n" +
+                        "\n" +
+                        "Now you can choose which flight you want to take.\n" +
+                        "\n" +
+                        "Now you are all set. Hope you have a nice trip. Thank you for choosing FlightBuddy.\n" +
+                        "\n" +
+                        "Sincerely,\n" +
                         "The FlightBuddy Team", "How to search flights", JOptionPane.INFORMATION_MESSAGE);
             }
         });
@@ -236,14 +246,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menuBar.add(helpButton);
 
 
-
-
-
-
         ImageIcon generalIcon = new ImageIcon("img/icons/general-icon.png");
         JButton generalButton = new JButton(generalIcon);
         JPopupMenu generalPopupMenu = new JPopupMenu();
         JMenuItem generalInfoItem = new JMenuItem("General Info");
+
         generalInfoItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -271,6 +278,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                         "The FlightBuddy Team", "General Info", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+
         generalPopupMenu.add(generalInfoItem);
 
         JMenuItem developersItem = new JMenuItem("Developers");
@@ -278,7 +286,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Meet the Masters of the Sky - The Developers of FlightBuddy!" +
-                        "\n"+
+                        "\n" +
                         "Mattias Malm - The Java Juggernaut\n" +
                         "Mattias Malm, the man who creates Java classes faster than he brews his morning coffee. Rumor has it, Java itself calls him for tech support.\n" +
                         "\n" +
@@ -305,7 +313,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menuBar.add(generalButton);
 
 
-
         frame.setJMenuBar(menuBar);
 
     }
@@ -315,6 +322,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     }
 
     public void setMenu1Text(String email) {
+
+        isSignedIn = true;
         popupMenu.removeAll(); // Remove existing menu items
 
         JMenuItem emailItem = new JMenuItem(email);
@@ -344,35 +353,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         return popupMenu.getComponentCount();
     }
 
-    public JMenuItem getLoginItem() {
-        return this.loginItem;
-    }
-
-    public JMenuItem getSignUpItem() {
-        return this.signUpItem;
-    }
-
-    public void setLoginItem(JMenuItem item) {
-        this.loginItem = item;
-    }
-
-    public void setSignUpItem(JMenuItem item) {
-        this.signUpItem = item;
-    }
-
-    public void setMenu2Text(String text) {
-        menu2.setText(text);
-    }
-
-    public void setMenu3Text(String text) {
-        menu3.setText(text);
-    }
-
-    public void setMenu4Text(String text) {
-        menu4.setText(text);
-    }
-
-
 
 
     private void setTodaysDate() {
@@ -395,7 +375,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         border3 = BorderFactory.createTitledBorder("");
         border4 = BorderFactory.createTitledBorder("Flight Information");
         eastPanel.setBorder(border);
-        //southPanel.setBorder(border1);
         scrollDisplay.setBorder(border2);
         mainPanel.setBorder(border3);
         editorPane1.setBorder(border4);
@@ -409,6 +388,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         if (e.getSource().equals(searchFligthsButton)) {
 
             try {
+
                 editorPane1.setText("");
                 list1.removeListSelectionListener(this);
                 controller.searchAvailableFlights();
@@ -430,36 +410,19 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         if (e.getSource().equals(book)) {
 
 
-
-               // System.out.println(getEditorPane1().getText());
-                String bookingInfo = getEditorPane1().getText();
-                int i = list1.getSelectedIndex();
-                if (i < 0 || i > 10) {
-                    errorMessage("Please select a flight from the list to create a booking");
-                } else if (isSignedIn) {
-                    SignedUpBookingGUI easyBooking = new SignedUpBookingGUI(bookingInfo, controller);
-                } else {
-                    BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
-                }
-
-
+            // System.out.println(getEditorPane1().getText());
+            String bookingInfo = getEditorPane1().getText();
+            int i = list1.getSelectedIndex();
+            if (i < 0 || i > 10) {
+                errorMessage("Please select a flight from the list to create a booking");
+            } else if (isSignedIn) {
+                SignedUpBookingGUI easyBooking = new SignedUpBookingGUI(bookingInfo, controller);
+            } else {
+                BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, controller);
+            }
 
 
         }
-
-        if (e.getSource().equals(bookingsButton)) {
-            BookingGUI gui = new BookingGUI();
-        }
-
-        if (e.getSource().equals(paymentButton)) {
-            Payment_Page paymentPage = new Payment_Page();
-
-
-        }
-
-        if (e.getSource().equals(menu1)) {
-        }
-
 
     }
 
@@ -478,10 +441,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void setDisplayMessage(ArrayList<String> message) {
 
 
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+       listModel = new DefaultListModel<>();
 
         for (String msg : message) {
-            listModel.addElement(String.valueOf(msg));
+                listModel.addElement(String.valueOf(msg));
+
         }
 
         list1.setModel(listModel);
@@ -567,6 +531,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         }
     }
+
+    public JPanel getEastPanel() {
+        return eastPanel;
+    }
+
 }
 
 

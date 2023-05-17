@@ -37,6 +37,7 @@ public abstract class guiUtils {
         }
     }
 
+
     public static boolean isValidDate(String dateText) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         dateFormat.setLenient(false);
