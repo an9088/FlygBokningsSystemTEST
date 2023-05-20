@@ -99,7 +99,13 @@ public class SignUp_Page {
     void updateMenu(String email) {
         mainframe.setMenu1Text(email);
         JMenuItem myBookings = new JMenuItem("My Bookings");
-        myBookings.addActionListener(e -> JOptionPane.showMessageDialog(null, "My Bookings clicked"));
+        myBookings.addActionListener(e -> {
+            Booking_History_Page bookingPage = new Booking_History_Page();
+            bookingPage.showWindow();
+            bookingPage.setUserTitle(email);
+            bookingPage.loadBookingsFromFile(email + ".txt");
+        });
+
 
         JMenuItem chngInfo = new JMenuItem("Change information");
         chngInfo.addActionListener(e -> JOptionPane.showMessageDialog(null, "Change Information clicked"));

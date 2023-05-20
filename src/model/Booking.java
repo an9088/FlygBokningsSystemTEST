@@ -192,6 +192,7 @@ public class Booking {
         String fileName = email + ".txt";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            writer.newLine();
             writer.write(">>> " + generateBookingTitle() + " <<<"); // Delimiter with generated title
             writer.newLine();
             writer.write(bookingMessage);

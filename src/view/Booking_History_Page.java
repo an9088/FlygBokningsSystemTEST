@@ -6,9 +6,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +14,6 @@ public class Booking_History_Page {
     private JPanel mainPanel;
     private JList<String> pastBookingsList;
     private JEditorPane bookingDetails;
-    private JButton deleteBookingButton;
 
     private JPanel menu;
     private JLabel userTitle;
@@ -36,13 +33,14 @@ public class Booking_History_Page {
     }
 
     private void initializeUI() {
+        bookingListModel = new DefaultListModel<>(); // Initialize the bookingListModel
         pastBookingsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         pastBookingsList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedIndex = pastBookingsList.getSelectedIndex();
-                    if (selectedIndex >= 0) {
+                    if (selectedIndex >= 0 && selectedIndex < bookingListModel.getSize()) {
                         String selectedBooking = pastBookingsList.getSelectedValue();
                         String bookingDetailsText = getBookingDetailsText(selectedBooking);
                         bookingDetails.setText(bookingDetailsText);
@@ -51,31 +49,24 @@ public class Booking_History_Page {
             }
         });
 
-        deleteBookingButton.addActionListener(e -> {
-            int selectedIndex = pastBookingsList.getSelectedIndex();
-            if (selectedIndex >= 0) {
-                DefaultListModel<String> model = (DefaultListModel<String>) pastBookingsList.getModel();
-                model.remove(selectedIndex);
-                bookingDetails.setText("");
-            }
-        });
+
     }
 
-    private String getBookingDetailsText(String booking) {
-        String[] parts = booking.split(" - ");
-        if (parts.length == 2) {
-            return parts[1]; // Only display the details, excluding the booking ID
-        }
-        return "";
-    }
+
+
+
 
 
     public void showWindow() {
-        JFrame frame = new JFrame("Booking History");
+        JFrame frame = new JFrame();
+        Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
+        String title = "<html><body><b><font size='5' color='#FFFFFF'>Booking History</font></b></body></html>"; // HTML formatted title with white color
+        frame.setTitle(title); // Set the HTML formatted title
         frame.setContentPane(mainPanel);
         frame.setPreferredSize(new Dimension(920, 600));
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     public void setUserTitle(String title) {
@@ -84,46 +75,80 @@ public class Booking_History_Page {
 
     public void loadBookingsFromFile(String fileName) {
         DefaultListModel<String> bookingListModel = new DefaultListModel<>();
-        StringBuilder bookingDetailsText = new StringBuilder();
+        List<List<String>> bookingDetailsList = new ArrayList<>();
         String currentBookingTitle = "";
+        List<String> currentBookingDetails = new ArrayList<>();
         boolean isBookingSection = false;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith(">>> ")) {
-                    // Extract the booking title from the delimiter
+                if (line.startsWith(">>> [BookingID: ")) {
+                    // Start a new booking section
+                    if (!currentBookingTitle.isEmpty()) {
+                        // Add previous booking details to the list
+                        bookingDetailsList.add(currentBookingDetails);
+                    }
                     currentBookingTitle = line.substring(4, line.length() - 4);
                     bookingListModel.addElement(currentBookingTitle);
+                    currentBookingDetails = new ArrayList<>();
                     isBookingSection = true;
                 } else if (line.equals("=== END OF BOOKING ===")) {
+                    // End of current booking section
                     isBookingSection = false;
                 } else if (isBookingSection) {
-                    // Add the booking details to the editor pane
-                    bookingDetailsText.append(line).append("\n");
+                    // Add the line to the current booking details
+                    currentBookingDetails.add(line);
                 }
+            }
+
+            // Add the last booking details to the list
+            if (!currentBookingTitle.isEmpty()) {
+                bookingDetailsList.add(currentBookingDetails);
             }
         } catch (IOException e) {
             System.out.println("Failed to load bookings from file: " + e.getMessage());
+            // Handle the exception by setting an empty model
+            pastBookingsList.setModel(new DefaultListModel<>());
+            bookingDetails.setText("");
+            return;
         }
 
         pastBookingsList.setModel(bookingListModel);
         bookingDetails.setText("");
 
-        pastBookingsList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    int selectedIndex = pastBookingsList.getSelectedIndex();
-                    if (selectedIndex >= 0) {
-                        String selectedBooking = pastBookingsList.getSelectedValue();
-                        String bookingDetailsText = getBookingDetailsText(selectedBooking);
-                        bookingDetails.setText(bookingDetailsText);
-                    }
+        pastBookingsList.addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                int selectedIndex = pastBookingsList.getSelectedIndex();
+                if (selectedIndex >= 0 && selectedIndex < bookingDetailsList.size()) {
+                    List<String> detailsText = bookingDetailsList.get(selectedIndex);
+                    String formattedDetailsText = String.join("\n", detailsText);
+                    bookingDetails.setText(formattedDetailsText);
                 }
             }
         });
     }
+
+
+
+
+
+
+    private String getBookingDetailsText(String booking) {
+        String[] parts = booking.split(" - ");
+        if (parts.length == 2) {
+            String details = parts[1];
+
+            // Modify font and font size using HTML tags
+            String htmlText = "<html><span style='font-family: Arial; font-size: 12pt;'>" + details + "</span></html>";
+
+            return htmlText;
+        }
+        return "";
+    }
+
+
+
 
 
 
