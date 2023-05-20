@@ -8,14 +8,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 
-public class LoginPage {
+public class Login_Page {
     private static final String USERS_FILE_PATH = "users.txt";
     private JPanel mainPanel;
     private JTextField emailField;
     private JPasswordField passwordField;
 
     private JCheckBox rememberMeCheckBox;
-    
+
     private JLabel forgetPassWordLabelNOTUSED;
     private JButton logInButton;
     private JLabel passwordHideButton;
@@ -23,7 +23,7 @@ public class LoginPage {
     private Mainframe mainframe;
     private JFrame frame;
 
-    public LoginPage(Mainframe mainframe) {
+    public Login_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
         frame = new JFrame();
         setupFrame();
