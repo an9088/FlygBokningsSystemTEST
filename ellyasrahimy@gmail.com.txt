@@ -179,3 +179,34 @@ City: dasdasdas
 Country: dasdasdasd
 
 === END OF BOOKING ===
+
+>>> [BookingID: 1684621901077-114] - Ellyas Rahimy - [Booking number: 412825] <<<
+Your booking number: 412825
+
+Thank you Ellyas Rahimy for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Dubai
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-22T10:35:00
+From: Copenhagen CPH
+To: Dubai DXB
+Airline: TK
+Number of stops: 1
+<----->
+Departure date: 2023-05-26T13:35:00
+Return from: Dubai DXB
+Return to: Copenhagen CPH
+Airline: TK
+Number of stops: 1
+
+Total price: 1601.8€
+
+Full name: Ellyas Rahimy
+Email address: ellyasrahimy@gmail.com
+Address: asdjkgaksj 12
+Zip code: 12334
+City: Malmo
+Country: Sweden
+
+=== END OF BOOKING ===
