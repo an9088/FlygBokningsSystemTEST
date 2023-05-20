@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 
 public class Login_Page {
-    private static final String USERS_FILE_PATH = "users.txt";
     private JPanel mainPanel;
     private JTextField emailField;
     private JPasswordField passwordField;
