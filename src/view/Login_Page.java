@@ -1,5 +1,7 @@
 package view;
 
+import model.UserAuthentication;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,8 +25,12 @@ public class Login_Page {
     private Mainframe mainframe;
     private JFrame frame;
 
+    // Add UserAuthentication as a field
+    private UserAuthentication userAuth;
+
     public Login_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
+        this.userAuth = new UserAuthentication();
         frame = new JFrame();
         setupFrame();
         setupListeners();
@@ -68,7 +74,7 @@ public class Login_Page {
             JOptionPane.showMessageDialog(null, "All fields are required to login.");
             return;
         }
-        if (!validateEmail(getEmail())) {
+        if (!userAuth.validateEmail(getEmail())) {
             JOptionPane.showMessageDialog(null, "Email is not valid");
             return;
         }
@@ -79,27 +85,11 @@ public class Login_Page {
         String email = getEmail();
         String password = getPassword();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
-            String line;
-            boolean foundEmail = false;
-            while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split(": ");
-                if (tokens.length == 2) {
-                    String field = tokens[0];
-                    String value = tokens[1];
-                    if (field.equals("Email") && value.equals(email)) {
-                        foundEmail = true;
-                    } else if (foundEmail && field.equals("Password") && value.equals(password)) {
-                        loginSuccessful(email);
-                        return;
-                    } else {
-                        foundEmail = false;
-                    }
-                }
-            }
+        // Use UserAuthentication to validate user
+        if(userAuth.validateUser(email, password)) {
+            loginSuccessful(email);
+        } else {
             JOptionPane.showMessageDialog(null, "Incorrect email or password");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Failed to read users data");
         }
     }
 
@@ -152,11 +142,6 @@ public class Login_Page {
     private JPopupMenu createPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
         return popupMenu;
-    }
-
-    private boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
-        return email.matches(emailRegex);
     }
 
     public String getEmail() {
