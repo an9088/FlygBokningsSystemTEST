@@ -5,7 +5,7 @@ import controller.Controller;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Booking {
 
@@ -14,9 +14,16 @@ public class Booking {
 
     private Controller controller;
 
-    private ArrayList bookings = new ArrayList();
-    private String name, lastName, address, zip, country, city, email, bookingDetails, airport, fullName;
-
+    private String name;
+    private String lastName;
+    private String address;
+    private String zip;
+    private String country;
+    private String city;
+    private String email;
+    private String bookingDetails;
+    private String airport;
+    private String fullName;
 
     public Booking(String fullName, String address, String city, String zip, String country, String email,
                    int bookingNumber, String bookingDetails, String airport, Controller controller) {
@@ -33,7 +40,6 @@ public class Booking {
 
         bookingConfirmationForSignedInUser(fullName, address, city, zip, country, email, airport, bookingNumber, bookingDetails);
     }
-
 
     public Booking(String name, String lastName, String address, String city, String zip, String country,
                    String email, int bookingNumber, String bookingDetails, String airport, Controller controller) {
@@ -52,15 +58,108 @@ public class Booking {
         bookingConfirmation(name, lastName, address, city, zip, country, email, airport, bookingDetails, bookingNumber);
     }
 
+    public int getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public void setBookingNumber(int bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
+
+    public int getNbrOfTravelers() {
+        return nbrOfTravelers;
+    }
+
+    public void setNbrOfTravelers(int nbrOfTravelers) {
+        this.nbrOfTravelers = nbrOfTravelers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBookingDetails() {
+        return bookingDetails;
+    }
+
+    public void setBookingDetails(String bookingDetails) {
+        this.bookingDetails = bookingDetails;
+    }
+
+    public String getAirport() {
+        return airport;
+    }
+
+    public void setAirport(String airport) {
+        this.airport = airport;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     private void bookingConfirmation(String name, String lastName, String address, String city,
                                      String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
-
-        
         String bookingMessage = "Your booking number: " + bookingNumber + "\n\n" +
                 "Thank you " + name + " " + lastName + " for using this application for booking your flight tickets. \n" +
                 "We hope you will have a pleasant stay in " + bookingDetails + "\n" +
-                "Here are your booking details for your upcoming trip:\n\n" + airport  +
+                "Here are your booking details for your upcoming trip:\n\n" + airport +
                 "\nFull name: " + name + " " + lastName + "\n" +
                 "Email address: " + email + "\n" +
                 "Address: " + address + "\n" +
@@ -68,19 +167,15 @@ public class Booking {
                 "City: " + city + "\n" +
                 "Country: " + country + "\n";
 
-
         controller.showBookingConfirmation(bookingMessage);
-        saveBookingToFile(bookingMessage);
-
-
+        saveBookingToFileForGuestUser(bookingMessage);
     }
 
     private void bookingConfirmationForSignedInUser(String fullName, String address, String city, String zip,
                                                     String country, String email, String airport, int bookingNumber, String bookingDetails) {
-
         String bookingMessage = "Your booking number: " + bookingNumber + "\n\n" +
                 "Thank you " + fullName + " for using this application for booking your flight tickets. \n" +
-                "We hope you will have a pleasant stay in " +  bookingDetails + "\n" +
+                "We hope you will have a pleasant stay in " + bookingDetails + "\n" +
                 "Here are your booking details for your upcoming trip:\n\n" + airport +
                 "\nFull name: " + fullName + "\n" +
                 "Email address: " + email + "\n" +
@@ -89,16 +184,45 @@ public class Booking {
                 "City: " + city + "\n" +
                 "Country: " + country + "\n";
 
-
         controller.showBookingConfirmation(bookingMessage);
-        saveBookingToFile(bookingMessage);
+        saveBookingToFileForSignedInUser(email,bookingMessage);
+    }
+
+    private void saveBookingToFileForSignedInUser(String email, String bookingMessage) {
+        String fileName = email + ".txt";
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            writer.write(">>> " + generateBookingTitle() + " <<<"); // Delimiter with generated title
+            writer.newLine();
+            writer.write(bookingMessage);
+            writer.newLine();
+            writer.write("=== END OF BOOKING ==="); // Delimiter
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to save booking to file: " + e.getMessage());
+        }
     }
 
 
-    private void saveBookingToFile(String bookingMessage){
 
+    private String generateUniqueBookingId() {
+        long timestamp = System.currentTimeMillis();
+        Random random = new Random();
+        int randomNumber = random.nextInt(1000) + 1;
+        return "BookingID: " + timestamp + "-" + randomNumber;
+    }
+
+    public String generateBookingTitle() {
+        String uniqueId = generateUniqueBookingId();
+        String title = "[" + uniqueId + "] - " + getFullName() + " - [" + "Booking number: " + getBookingNumber() + "]";
+        return title;
+    }
+
+
+    private void saveBookingToFileForGuestUser(String bookingMessage) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("booking.txt",true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("guest_bookings.txt", true));
             writer.write(bookingMessage);
             writer.newLine();
             writer.close();
@@ -106,7 +230,4 @@ public class Booking {
             System.out.println("Failed to save booking to file" + e.getMessage());
         }
     }
-
-
-
 }

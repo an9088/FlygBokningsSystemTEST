@@ -1,0 +1,28 @@
+>>> [BookingID: 1684588198781-783] - Ellyas Rahimy - [Booking number: 1] <<<
+Your booking number: 1
+
+Thank you Ellyas Rahimy for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Bangkok
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-21T14:25:00
+From: Copenhagen CPH
+To: Bangkok BKK
+Airline: TG
+<----->
+Departure date: 2023-05-27T01:10:00
+Return from: Bangkok BKK
+Return to: Copenhagen CPH
+Airline: TG
+
+Total price: 1820.1€
+
+Full name: Ellyas Rahimy
+Email address: ellyasrahimy@gmail.com
+Address: dasda
+Zip code: 22222
+City: sadasddsa
+Country: dsada
+
+=== END OF BOOKING ===

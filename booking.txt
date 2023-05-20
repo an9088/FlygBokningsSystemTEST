@@ -369,3 +369,31 @@ Zip code: 24544
 City: Staffanstorp
 Country: Sweden
 
+Your booking number: 1
+
+Thank you Ellyas Rahimy for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Bangkok
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-20T19:15:00
+From: Copenhagen CPH
+To: Bangkok BKK
+Airline: AY
+Number of stops: 1
+<----->
+Departure date: 2023-05-25T07:15:00
+Return from: Bangkok BKK
+Return to: Copenhagen CPH
+Airline: AY
+Number of stops: 1
+
+Total price: 1803.22€
+
+Full name: Ellyas Rahimy
+Email address: ellyasrahimy@gmail.com
+Address: dasdas
+Zip code: 23234
+City: poopstan
+Country: Sweden
+

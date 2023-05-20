@@ -103,8 +103,14 @@ public class Login_Page {
         }
 
         JMenuItem myBookings = new JMenuItem("My Bookings");
-        myBookings.addActionListener(e -> JOptionPane.showMessageDialog(null, "My Bookings clicked"));
+        myBookings.addActionListener(e -> {
+            Booking_History_Page bookingPage = new Booking_History_Page();
+            bookingPage.showWindow();
+            bookingPage.setUserTitle(email);
+            bookingPage.loadBookingsFromFile(email + ".txt");
+        });
         mainframe.addMenuItemToMenu1(myBookings);
+
 
         JMenuItem chngInfo = new JMenuItem("Change information");
         chngInfo.addActionListener(e -> JOptionPane.showMessageDialog(null, "Change Information clicked"));
@@ -125,10 +131,6 @@ public class Login_Page {
     }
 
 
-    private boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
-        return email.matches(emailRegex);
-    }
 
     public String getEmail() {
         return emailField.getText();

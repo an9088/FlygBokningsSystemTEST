@@ -4,7 +4,9 @@ import com.amadeus.exceptions.ResponseException;
 import com.formdev.flatlaf.intellijthemes.*;
 import model.AmadeusAPI;
 import model.Booking;
+import model.BookingHistoryHandler;
 import org.xml.sax.SAXException;
+import view.Booking_History_Page;
 import view.Mainframe;
 
 import javax.swing.*;
@@ -87,7 +89,12 @@ public class Controller {
     public void createNewBooking(String fullName, String address, String city,
                                  String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
 
-        booking = new Booking(fullName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
+        Booking booking = new Booking(fullName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
+
+
+
+
+
     }
 
 
@@ -169,6 +176,70 @@ public class Controller {
                                       String email, String bookingDetails, String airport, int bookingNumber) {
         booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
 
+    }
+
+    public void processPayment(String name, String email, String cardNumber, String nameOnCard, String expiryDate, String cvvCode) {
+        // Perform payment processing logic here
+        // Example: Validate inputs, make API calls, update model, etc.
+
+        // Validate email
+        if (!isValidEmail(email)) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: Invalid email");
+            return;
+        }
+
+        // Validate card number length
+        if (cardNumber.length() != 16) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: Invalid card number length");
+            return;
+        }
+
+        // Validate expiry date format and validity
+        if (!isValidExpiryDate(expiryDate)) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: Invalid expiry date");
+            return;
+        }
+
+        // Validate CVV code length
+        if (cvvCode.length() != 3) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: Invalid CVV code length");
+            return;
+        }
+
+        // All checks passed, process the payment
+        JOptionPane.showMessageDialog(null, "Payment Successful");
+    }
+
+    private boolean isValidEmail(String email) {
+        // Basic email validation by checking for the presence of '@'
+        return email.contains("@");
+    }
+
+    private boolean isValidExpiryDate(String expiryDate) {
+        // Validate expiry date format (MM/YY)
+        if (expiryDate.length() != 5 || expiryDate.charAt(2) != '/') {
+            return false;
+        }
+
+        // Validate month and year values
+        String[] parts = expiryDate.split("/");
+        int month, year;
+        try {
+            month = Integer.parseInt(parts[0]);
+            year = Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        // Validate month and year ranges
+        if (month < 1 || month > 12 || year < 0) {
+            return false;
+        }
+
+        // Additional validation for expiry date in the future
+        // You can customize this logic based on your requirements
+
+        return true;
     }
 }
 

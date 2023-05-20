@@ -73,6 +73,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         guiUtils.addSuggestionText(fromAirport, "Enter Departure City");
         guiUtils.addSuggestionText(toAirport, "Enter Destination City");
         System.out.println("Widht eastPanel: " + eastPanel.getWidth());
+        editorPane1.setEditable(false);
 
         createFrame();
         SignUp_Page signUpPage = new SignUp_Page(this);
@@ -152,28 +153,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         menuBar.add(userButton);
 
 
-        ImageIcon bookingsIcon = new ImageIcon("img/icons/bookings-icon.png");
-        JButton bookingsButton = new JButton(bookingsIcon);
-        JPopupMenu bookingsPopupMenu = new JPopupMenu();
 
-        JMenuItem bookingInfoItem = new JMenuItem("Booking Information");
-        bookingsPopupMenu.add(bookingInfoItem);
-
-        JMenuItem deleteBookingItem = new JMenuItem("Delete Booking");
-        bookingsPopupMenu.add(deleteBookingItem);
-
-        JMenuItem handleBookingItem = new JMenuItem("Handle Booking");
-        bookingsPopupMenu.add(handleBookingItem);
-
-        bookingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                bookingsPopupMenu.show(bookingsButton, 0, bookingsButton.getHeight());
-            }
-        });
-
-        menuBar.add(Box.createHorizontalStrut(10));
-        menuBar.add(bookingsButton);
 
         ImageIcon helpIcon = new ImageIcon("img/icons/support.png");
         JButton helpButton = new JButton(helpIcon);

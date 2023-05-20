@@ -1,11 +1,11 @@
 package view;
 
+import controller.Controller;
+
 import javax.swing.*;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Payment_Page {
     private JPanel mainPanel;
@@ -14,128 +14,75 @@ public class Payment_Page {
     private JCheckBox checkBox1;
     private JTextField cardNumberField;
     private JTextField nameCardField;
-    private JPanel contactPanel;
-    private JPanel paymentPanel;
-    private JPanel paymentMethodPanel;
-    private JPanel paymentInfoPanel;
-    private JPanel paymentInfoPanel2;
     private JButton confirmPayButton;
     private JTextField codeField;
     private JTextField expiryDateField;
 
+    private JPanel paymentPanel;
+
+
+
+    private JPanel contactPanel;
+    private JPanel paymentInfoPanel;
+    private JPanel paymentMethodPanel;
+    private JPanel paymentInfoPanel2;
+
+    private Controller controller;
+
     public Payment_Page() {
+        controller = new Controller();
 
+        initializeUI();
+        addSuggestionTextFields();
+        setupButtonActions();
+    }
 
+    private void initializeUI() {
         JFrame frame = new JFrame("Payment Page");
         frame.setContentPane(mainPanel);
-       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-        frame.setVisible(true);
         confirmPayButton.setText("Confirm & Pay");
-        confirmPayButton.setBackground(new Color(0,123,255));
+        confirmPayButton.setBackground(new Color(0, 123, 255));
         confirmPayButton.setForeground(Color.WHITE);
 
+        frame.setVisible(true);
+    }
 
-
-
-
-
+    private void addSuggestionTextFields() {
         guiUtils.addSuggestionText(codeField, "CVV");
         guiUtils.addSuggestionText(expiryDateField, "MM/YY");
         guiUtils.addSuggestionText(cardNumberField, "Card Number");
         guiUtils.addSuggestionText(nameCardField, "Name on Card");
         guiUtils.addSuggestionText(nameField, "John Doe");
         guiUtils.addSuggestionText(emailField, "johndoe123@gmail.com");
-
-        ((AbstractDocument) codeField.getDocument()).setDocumentFilter(new FixedLengthFilter(4));
-        ((AbstractDocument) cardNumberField.getDocument()).setDocumentFilter(new FixedLengthFilter(16));
-        ((AbstractDocument) expiryDateField.getDocument()).setDocumentFilter(new ExpiryDateFilter());
     }
 
+    private void setupButtonActions() {
+        confirmPayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String email = emailField.getText();
+                String cardNumber = cardNumberField.getText();
+                String nameOnCard = nameCardField.getText();
+                String expiryDate = expiryDateField.getText();
+                String cvvCode = codeField.getText();
 
+                controller.processPayment(name, email, cardNumber, nameOnCard, expiryDate, cvvCode);
+            }
+        });
+    }
 
 
     public static void main(String[] args) {
-
-        Payment_Page paymentPage = new Payment_Page();
-
-
-        JFrame frame = new JFrame("Payment Page");
-        frame.setContentPane(paymentPage.mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-
-
-        frame.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Payment_Page();
+            }
+        });
     }
-
-
-    private class ExpiryDateFilter extends DocumentFilter {
-        @Override
-        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            String input = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
-            if (input.length() > 4) {
-                return;
-            }
-
-            super.insertString(fb, offset, string, attr);
-
-            if (input.length() == 2) {
-                fb.insertString(fb.getDocument().getLength(), "/", null);
-            }
-        }
-
-        @Override
-        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            String input = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
-            if (input.length() > 5) {
-                return;
-            }
-
-            super.replace(fb, offset, length, text, attrs);
-
-            if (input.length() == 2) {
-                fb.insertString(fb.getDocument().getLength(), "/", null);
-            }
-        }
-    }
-
-    private class FixedLengthFilter extends DocumentFilter {
-        private int maxLength;
-
-        public FixedLengthFilter(int maxLength) {
-            super();
-            this.maxLength = maxLength;
-        }
-
-        @Override
-        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
-                throws BadLocationException {
-            String input = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
-
-            if (input.length() <= maxLength ) {
-                return;
-            }
-        }
-
-        @Override
-        public void replace(FilterBypass fb, int offset, int length, String string, AttributeSet attrs)
-                throws BadLocationException {
-            String input = fb.getDocument().getText(0, fb.getDocument().getLength()) + string;
-
-            if (input.length() - length + string.length() <= maxLength) {
-                fb.replace(offset, length, string, attrs);
-            }
-        }
-    }
-
-
 }
-
-
-
-
