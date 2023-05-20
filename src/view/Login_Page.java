@@ -9,10 +9,13 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 
 public class Login_Page {
+    private static final String USERS_FILE_PATH = "users.txt";
     private JPanel mainPanel;
     private JTextField emailField;
-    private JPasswordField passwordField1;
+    private JPasswordField passwordField;
+
     private JCheckBox rememberMeCheckBox;
+
     private JLabel forgetPassWordLabelNOTUSED;
     private JButton logInButton;
     private JLabel passwordHideButton;
@@ -20,13 +23,17 @@ public class Login_Page {
     private Mainframe mainframe;
     private JFrame frame;
 
-
     public Login_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
         frame = new JFrame();
-        Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
-        String title = "<html><body><b><font size='5' color='#FFFFFF'>Login</font></b></body></html>"; // HTML formatted title with white color
-        frame.setTitle(title); // Set the HTML formatted title
+        setupFrame();
+        setupListeners();
+    }
+
+    private void setupFrame() {
+        Font font = new Font("Arial", Font.BOLD, 16);
+        String title = "<html><body><b><font size='5' color='#FFFFFF'>Login</font></b></body></html>";
+        frame.setTitle(title);
         frame.setContentPane(mainPanel);
         frame.setSize(400, 250);
         frame.setLocationRelativeTo(null);
@@ -34,36 +41,45 @@ public class Login_Page {
 
         logInButton.setBackground(new Color(0, 123, 255));
         logInButton.setForeground(Color.WHITE);
-
-        passwordField1.setEchoChar((char) 0);
+        passwordField.setEchoChar((char) 0);
         passwordHideButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    private void setupListeners() {
         passwordHideButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (passwordField1.getEchoChar() == (char) 0) {
-                    passwordField1.setEchoChar('*');
-                } else {
-                    passwordField1.setEchoChar((char) 0);
-                }
+                togglePasswordVisibility();
             }
         });
 
-        logInButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (emailField.getText().isEmpty() || passwordField1.getPassword().length == 0) {
-                    JOptionPane.showMessageDialog(null, "All fields are required to login.");
-                    return;
-                }
-                login();
-            }
-        });
+        logInButton.addActionListener(e -> attemptLogin());
+    }
+
+    private void togglePasswordVisibility() {
+        if (passwordField.getEchoChar() == (char) 0) {
+            passwordField.setEchoChar('*');
+        } else {
+            passwordField.setEchoChar((char) 0);
+        }
+    }
+
+    private void attemptLogin() {
+        if (emailField.getText().isEmpty() || passwordField.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "All fields are required to login.");
+            return;
+        }
+        if (!validateEmail(getEmail())) {
+            JOptionPane.showMessageDialog(null, "Email is not valid");
+            return;
+        }
+        login();
     }
 
     public void login() {
         String email = getEmail();
         String password = getPassword();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
             String line;
             boolean foundEmail = false;
             while ((line = reader.readLine()) != null) {
@@ -74,11 +90,7 @@ public class Login_Page {
                     if (field.equals("Email") && value.equals(email)) {
                         foundEmail = true;
                     } else if (foundEmail && field.equals("Password") && value.equals(password)) {
-                        JOptionPane.showMessageDialog(null, "Login successful, welcome dear Customer!");
-                        frame.dispose();
-                        updateMenu(email); // pass the email here
-                        emailField.setText("");
-                        passwordField1.setText("");
+                        loginSuccessful(email);
                         return;
                     } else {
                         foundEmail = false;
@@ -87,57 +99,71 @@ public class Login_Page {
             }
             JOptionPane.showMessageDialog(null, "Incorrect email or password");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to read users data");
         }
+    }
+
+    private void loginSuccessful(String email) {
+        JOptionPane.showMessageDialog(null, "Login successful, welcome dear Customer!");
+        frame.dispose();
+        updateMenu(email);
+        resetFields();
+    }
+
+    private void resetFields() {
+        emailField.setText("");
+        passwordField.setText("");
     }
 
     public void updateMenu(String email) {
         mainframe.setMenu1Text(email);
-
-        JButton userButton = mainframe.getUserButton();
-        JPopupMenu popupMenu = userButton.getComponentPopupMenu();
-
-        if (popupMenu == null) {
-            popupMenu = new JPopupMenu();
-            userButton.setComponentPopupMenu(popupMenu);
-        }
-
-        JMenuItem myBookings = new JMenuItem("My Bookings");
-        myBookings.addActionListener(e -> {
-            Booking_History_Page bookingPage = new Booking_History_Page();
-            bookingPage.showWindow();
-            bookingPage.setUserTitle(email);
-            bookingPage.loadBookingsFromFile(email + ".txt");
-        });
-        mainframe.addMenuItemToMenu1(myBookings);
-
-
-        JMenuItem chngInfo = new JMenuItem("Change information");
-        chngInfo.addActionListener(e -> JOptionPane.showMessageDialog(null, "Change Information clicked"));
-        mainframe.addMenuItemToMenu1(chngInfo);
-
-        JMenuItem signOut = new JMenuItem("Sign out");
-        signOut.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Sign Out clicked");
-            mainframe.setupMenu();
-            mainframe.setExtendedState(JFrame.NORMAL);
-            mainframe.setUndecorated(false);
-            mainframe.revalidate();
-            mainframe.repaint();
-        });
-        mainframe.addMenuItemToMenu1(signOut);
-
-
+        setupUserMenu();
     }
 
+    private void setupUserMenu() {
+        JButton userButton = mainframe.getUserButton();
+        JPopupMenu popupMenu = createPopupMenu();
 
+        userButton.setComponentPopupMenu(popupMenu);
+        mainframe.addMenuItemToMenu1(createMenuItem("My Bookings"));
+        mainframe.addMenuItemToMenu1(createMenuItem("Change information"));
+        mainframe.addMenuItemToMenu1(createMenuItem("Sign out", this::signOut));
+    }
+
+    private void signOut(ActionEvent e) {
+        JOptionPane.showMessageDialog(null, "Sign Out clicked");
+        mainframe.setupMenu();
+        mainframe.setExtendedState(JFrame.NORMAL);
+        mainframe.setUndecorated(false);
+        mainframe.revalidate();
+        mainframe.repaint();
+    }
+
+    private JMenuItem createMenuItem(String title) {
+        return createMenuItem(title, e -> JOptionPane.showMessageDialog(null, title + " clicked"));
+    }
+
+    private JMenuItem createMenuItem(String title, ActionListener listener) {
+        JMenuItem menuItem = new JMenuItem(title);
+        menuItem.addActionListener(listener);
+        return menuItem;
+    }
+
+    private JPopupMenu createPopupMenu() {
+        JPopupMenu popupMenu = new JPopupMenu();
+        return popupMenu;
+    }
+
+    private boolean validateEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
+        return email.matches(emailRegex);
+    }
 
     public String getEmail() {
         return emailField.getText();
     }
 
     public String getPassword() {
-        return new String(passwordField1.getPassword());
+        return new String(passwordField.getPassword());
     }
-
 }
