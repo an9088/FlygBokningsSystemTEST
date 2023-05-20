@@ -1,8 +1,15 @@
 package model;
 
 import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.*;
+
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.IOException;
+import java.util.Properties;
+
+
 
 public class automatedEmail {
 
@@ -29,7 +36,9 @@ public class automatedEmail {
         // Set your Gmail account credentials
         username = "FlightBuddyApplication@gmail.com";
         System.out.println(username);
-        password = "jefymmfzbusxshyr";
+
+        password = "jypziyxoicijdzrb";
+
         System.out.println(password);
 
         // Get system properties
@@ -64,13 +73,21 @@ public class automatedEmail {
             // Create a multipart message
             MimeMultipart multipart = new MimeMultipart();
 
+            // Now set the actual message
+            message.setText(bookingInformation);
+
+
+            // Send message
+
+
             // Create the text part of the message
             MimeBodyPart textPart = new MimeBodyPart();
             textPart.setText(bookingInformation);
 
             // Create the image part of the message
             MimeBodyPart imagePart = new MimeBodyPart();
-            imagePart.attachFile("img/icons/FlightBuddy-4.png");
+
+            imagePart.attachFile("img/icons/FlightBuddy.pdf");
 
             // Add the parts to the multipart message
             multipart.addBodyPart(textPart);
@@ -80,12 +97,15 @@ public class automatedEmail {
             message.setContent(multipart);
 
             // Send the message
+
             Transport.send(message);
             System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {
             mex.printStackTrace();
+
         } catch (Exception ex) {
             ex.printStackTrace();
+
         }
     }
 }
