@@ -26,9 +26,11 @@ public class Booking_History_Page {
         bookingDetails.setEditable(false);
 
         Border detailsBorder = new LineBorder(Color.GRAY);
+        detailsBorder = BorderFactory.createTitledBorder("Booking Details");
         bookingDetails.setBorder(detailsBorder);
 
         Border listBorder = new LineBorder(Color.GRAY);
+        listBorder = BorderFactory.createTitledBorder("Booking History");
         pastBookingsList.setBorder(listBorder);
     }
 
