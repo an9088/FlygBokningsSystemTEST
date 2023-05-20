@@ -1,12 +1,11 @@
 package model;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.IOException;
 import java.util.Properties;
 
 
@@ -39,7 +38,7 @@ public class automatedEmail {
         // Set your Gmail account credentials
         username = "flightbuddyapplication@gmail.com";
         System.out.println(username);
-        password = "xuhxunycpqeawvbq";
+        password = "jypziyxoicijdzrb";
         System.out.println(password);
 
         // Get system properties
@@ -72,14 +71,38 @@ public class automatedEmail {
             // Set Subject: header field
             message.setSubject("This is your booking!");
 
+            // Create a multipart message
+            MimeMultipart multipart = new MimeMultipart();
+
             // Now set the actual message
             message.setText(bookingInformation);
 
+
             // Send message
+
+            // Create the text part of the message
+            MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setText(bookingInformation);
+
+            // Create the image part of the message
+            MimeBodyPart imagePart = new MimeBodyPart();
+            imagePart.attachFile("img/icons/FlightBuddy.pdf");
+
+            // Add the parts to the multipart message
+            multipart.addBodyPart(textPart);
+            multipart.addBodyPart(imagePart);
+
+            // Set the content of the message to the multipart
+            message.setContent(multipart);
+
+            // Send the message
+
             Transport.send(message);
             System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {
             mex.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
