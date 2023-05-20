@@ -54,3 +54,81 @@ Zip code: 13234
 City: dsaasdasdads
 Country: dassadads
 
+Your booking number: 473773
+
+Thank you Mattias Malm for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Stockholm
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-22T12:40:00
+From: Malmo MMX
+To: Stockholm ARN
+Airline: SK
+<----->
+Departure date: 2023-05-25T08:20:00
+Return from: Stockholm ARN
+Return to: Malmo MMX
+Airline: SK
+
+Total price: 272.72€
+
+Full name: Mattias Malm
+Email address: malmmattias1@outlook.com
+Address: Magnoliavägen 3
+Zip code: 24544
+City: Staffanstorp
+Country: Sweden
+
+Your booking number: 604394
+
+Thank you Mattias Malm for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Stockholm
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-22T12:40:00
+From: Malmo MMX
+To: Stockholm ARN
+Airline: SK
+<----->
+Departure date: 2023-05-25T08:20:00
+Return from: Stockholm ARN
+Return to: Malmo MMX
+Airline: SK
+
+Total price: 272.72€
+
+Full name: Mattias Malm
+Email address: malmmattias1@outlook.com
+Address: Magnoliavägen 3
+Zip code: 24544
+City: Staffanstorp
+Country: Sweden
+
+Your booking number: 868366
+
+Thank you Mattias Malm for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Stockholm
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-21T16:55:00
+From: Malmo MMX
+To: Stockholm ARN
+Airline: SK
+<----->
+Departure date: 2023-05-22T21:35:00
+Return from: Stockholm ARN
+Return to: Malmo MMX
+Airline: SK
+
+Total price: 198.3€
+
+Full name: Mattias Malm
+Email address: malmmattias1@outlook.com
+Address: Magnoliavägen 3
+Zip code: 24544
+City: Staffanstorp
+Country: Sweden
+
