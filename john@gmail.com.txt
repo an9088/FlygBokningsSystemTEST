@@ -1,0 +1,31 @@
+
+>>> [BookingID: 1684594616400-676] - John B - [Booking number: 657413] <<<
+Your booking number: 657413
+
+Thank you John B for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Tokyo
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-21T09:35:00
+From: Copenhagen CPH
+To: Tokyo NRT
+Airline: LX
+Number of stops: 1
+<----->
+Departure date: 2023-06-22T11:10:00
+Return from: Tokyo NRT
+Return to: Copenhagen CPH
+Airline: LX
+Number of stops: 1
+
+Total price: 1988.7€
+
+Full name: John B
+Email address: john@gmail.com
+Address: dassdaads
+Zip code: 12345
+City: dasasdadsdsa
+Country: USA USA
+
+=== END OF BOOKING ===
