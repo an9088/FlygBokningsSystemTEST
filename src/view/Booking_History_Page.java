@@ -138,14 +138,11 @@ public class Booking_History_Page {
         String[] parts = booking.split(" - ");
         if (parts.length == 2) {
             String details = parts[1];
-
-            // Modify font and font size using HTML tags
-            String htmlText = "<html><span style='font-family: Arial; font-size: 12pt;'>" + details + "</span></html>";
-
-            return htmlText;
+            return details;
         }
         return "";
     }
+
 
 
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class SignedUpBookingGUI {
     private JFrame signUpFrame;
@@ -17,7 +18,6 @@ public class SignedUpBookingGUI {
 
     private String bookingInfo, fullName;
 
-    private static int bookingNumber = 0;
 
 
     public SignedUpBookingGUI(String bookingInfo, Controller controller) {
@@ -150,9 +150,9 @@ public class SignedUpBookingGUI {
                 }
                 else if (!(address.equals("") || city.equals("") || country.equals("")) && zip.length() == 5) {
 
-                    bookingNumber++;
+
                     JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
-                    controller.createNewBooking(fullName, address, city, zip, country, email, destination, bookingDetails, bookingNumber);
+                    controller.createNewBooking(fullName, address, city, zip, country, email, destination, bookingDetails, generateBookingNumber());
 
                     signUpFrame.setVisible(false);
                 }
@@ -190,6 +190,10 @@ public class SignedUpBookingGUI {
         return firstName + " " + lastName;
     }
 
+    private int generateBookingNumber() {
+        Random random = new Random();
+        return random.nextInt(900000) + 100000; // Generate a 6-digit random number
+    }
 
 
 

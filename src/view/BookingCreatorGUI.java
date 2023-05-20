@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 /**
  * @author Ellyas Rahimy
@@ -22,7 +23,6 @@ public class BookingCreatorGUI {
 
     private String airport;
 
-    private static int bookingNumber = 0;
 
 
     public BookingCreatorGUI(String bookingInfo, String airport, Controller controller) {
@@ -159,15 +159,20 @@ public class BookingCreatorGUI {
                 } else if (!(name.equals("") || lastName.equals("") || address.equals("") || city.equals("")
                         || zip.equals("") || country.equals("")) && email.contains("@") && zip.length() == 5) {
 
-                    bookingNumber++;
+
                     JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
                     //controller.createNewBooking(name, lastName, address, city, zip, country, email, bookingDetails, bookingNumber);
-                    controller.createNewGuestBooking(name, lastName, address, city, zip, country, email, bookingDetails, controller.getAirport(), bookingNumber);
+                    controller.createNewGuestBooking(name, lastName, address, city, zip, country, email, bookingDetails, controller.getAirport(), generateBookingNumber());
                     signUpFrame.setVisible(false);
                 }
             }
         });
 
+    }
+
+    private int generateBookingNumber() {
+        Random random = new Random();
+        return random.nextInt(900000) + 100000; // Generate a 6-digit random number
     }
 
 
