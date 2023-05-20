@@ -24,6 +24,10 @@ public class Login_Page {
     private Mainframe mainframe;
     private JFrame frame;
 
+    private String email;
+
+    private String password;
+
     // Add UserAuthentication as a field
     private UserAuthentication userAuth;
 
@@ -81,8 +85,8 @@ public class Login_Page {
     }
 
     public void login() {
-        String email = getEmail();
-        String password = getPassword();
+         email = getEmail();
+         password = getPassword();
 
         // Use UserAuthentication to validate user
         if(userAuth.validateUser(email, password)) {
@@ -106,6 +110,7 @@ public class Login_Page {
 
     public void updateMenu(String email) {
         mainframe.setMenu1Text(email);
+        email = getEmail();
         setupUserMenu();
     }
 
@@ -115,7 +120,6 @@ public class Login_Page {
 
         userButton.setComponentPopupMenu(popupMenu);
         mainframe.addMenuItemToMenu1(createMenuItem("My Bookings"));
-        mainframe.addMenuItemToMenu1(createMenuItem("Change information"));
         mainframe.addMenuItemToMenu1(createMenuItem("Sign out", this::signOut));
     }
 
@@ -129,8 +133,19 @@ public class Login_Page {
     }
 
     private JMenuItem createMenuItem(String title) {
-        return createMenuItem(title, e -> JOptionPane.showMessageDialog(null, title + " clicked"));
+        if (title.equals("My Bookings")) {
+            // Do something when the title is "My Bookings"
+            return createMenuItem(title, e -> {
+                Booking_History_Page bookingPage = new Booking_History_Page();
+                bookingPage.showWindow();
+                bookingPage.setUserTitle(email);
+                bookingPage.loadBookingsFromFile( email + ".txt");
+            });
+        } else {
+            return createMenuItem(title, e -> JOptionPane.showMessageDialog(null, title + " clicked"));
+        }
     }
+
 
     private JMenuItem createMenuItem(String title, ActionListener listener) {
         JMenuItem menuItem = new JMenuItem(title);

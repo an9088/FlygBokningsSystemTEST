@@ -1,6 +1,6 @@
 Firstname: John
 Lastname: Doe
-Email: balls@gmail.com
+Email:  midibasketi@gmail.com
 Password: Testson!
 
 Firstname: Mattias
