@@ -148,3 +148,34 @@ City: dasdasd
 Country: USA
 
 === END OF BOOKING ===
+
+>>> [BookingID: 1684595238403-931] - Ellyas Rahimy - [Booking number: 302136] <<<
+Your booking number: 302136
+
+Thank you Ellyas Rahimy for using this application for booking your flight tickets. 
+We hope you will have a pleasant stay in Dubrovnik
+Here are your booking details for your upcoming trip:
+
+
+Departure date: 2023-05-21T11:20:00
+From: Copenhagen CPH
+To: Dubrovnik DBV
+Airline: OU
+Number of stops: 1
+<----->
+Departure date: 2023-06-22T06:15:00
+Return from: Dubrovnik DBV
+Return to: Copenhagen CPH
+Airline: OU
+Number of stops: 1
+
+Total price: 352.76€
+
+Full name: Ellyas Rahimy
+Email address: ellyasrahimy@gmail.com
+Address: dasdadasd
+Zip code: 12345
+City: dasdasdas
+Country: dasdasdasd
+
+=== END OF BOOKING ===
