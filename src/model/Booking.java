@@ -158,16 +158,18 @@ public class Booking {
 
     private void bookingConfirmation(String name, String lastName, String address, String city,
                                      String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
+
         String bookingMessage = "Your booking number: " + bookingNumber + "\n\n" +
-                "Thank you " + name + " " + lastName + " for using this application for booking your flight tickets. \n" +
-                "We hope you will have a pleasant stay in " + bookingDetails + "\n" +
-                "Here are your booking details for your upcoming trip:\n\n" + airport +
+                "Thank you " + name + " " + lastName + " for using FlightBuddy for booking your flight tickets. " +
+                "We hope you will have a pleasant stay in " + bookingDetails + "!\n\n" +
+                "Here are your booking details for your upcoming trip:\n" + airport +
                 "\nFull name: " + name + " " + lastName + "\n" +
                 "Email address: " + email + "\n" +
                 "Address: " + address + "\n" +
                 "Zip code: " + zip + "\n" +
                 "City: " + city + "\n" +
-                "Country: " + country + "\n";
+                "Country: " + country + "\n\n" +
+                "Sincerely, the FlightBuddy team \n\n";
 
         controller.showBookingConfirmation(bookingMessage);
         saveBookingToFileForGuestUser(bookingMessage);
@@ -176,16 +178,18 @@ public class Booking {
 
     private void bookingConfirmationForSignedInUser(String fullName, String address, String city, String zip,
                                                     String country, String email, String airport, int bookingNumber, String bookingDetails) {
+
         String bookingMessage = "Your booking number: " + bookingNumber + "\n\n" +
-                "Thank you " + fullName + " for using this application for booking your flight tickets. \n" +
-                "We hope you will have a pleasant stay in " + bookingDetails + "\n" +
-                "Here are your booking details for your upcoming trip:\n\n" + airport +
+                "Thank you " + fullName + " for using FlightBuddy for booking your flight tickets. " +
+                "We hope you will have a pleasant stay in " + bookingDetails + "!\n\n" +
+                "Here are your booking details for your upcoming trip:\n" + airport +
                 "\nFull name: " + fullName + "\n" +
                 "Email address: " + email + "\n" +
                 "Address: " + address + "\n" +
                 "Zip code: " + zip + "\n" +
                 "City: " + city + "\n" +
-                "Country: " + country + "\n";
+                "Country: " + country + "\n\n" +
+                "Sincerely, the FlightBuddy team \n\n";
 
         controller.showBookingConfirmation(bookingMessage);
         saveBookingToFileForSignedInUser(email,bookingMessage);
