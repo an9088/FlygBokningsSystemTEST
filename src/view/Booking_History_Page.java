@@ -1,11 +1,15 @@
 package view;
 
+import com.amadeus.Booking;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +22,11 @@ public class Booking_History_Page {
     private JPanel menu;
     private JLabel userTitle;
     private JPanel bookingHistoryPanel;
+    private JButton deleteBookingButton;
 
     private DefaultListModel<String> bookingListModel;
+
+    String filepath = "users.txt";
 
     public Booking_History_Page() {
         initializeUI();
@@ -32,6 +39,23 @@ public class Booking_History_Page {
         Border listBorder = new LineBorder(Color.GRAY);
         listBorder = BorderFactory.createTitledBorder("Booking History");
         pastBookingsList.setBorder(listBorder);
+
+        deleteBookingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = pastBookingsList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    String selectedBooking = pastBookingsList.getSelectedValue(); // Retrieve the selected booking directly from the JList
+                    bookingListModel.remove(selectedIndex);
+                    updateFileContents();
+                    bookingDetails.setText("");
+                    JOptionPane.showMessageDialog(mainPanel, "Booking deleted successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(mainPanel, "Please select a booking to delete.");
+                }
+            }
+        });
+
     }
 
     private void initializeUI() {
@@ -53,10 +77,6 @@ public class Booking_History_Page {
 
 
     }
-
-
-
-
 
 
     public void showWindow() {
@@ -132,10 +152,6 @@ public class Booking_History_Page {
     }
 
 
-
-
-
-
     private String getBookingDetailsText(String booking) {
         String[] parts = booking.split(" - ");
         if (parts.length == 2) {
@@ -145,17 +161,23 @@ public class Booking_History_Page {
         return "";
     }
 
+    private void updateFileContents() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt"))) {
+            for (int i = 1; i < bookingListModel.getSize(); i++) {
+                String booking = bookingListModel.getElementAt(i);
+                writer.write(">>> [BookingID: " + booking + "]\n");
+                String bookingDetails = getBookingDetailsText(booking);
+                writer.write(bookingDetails);
+                writer.write("=== END OF BOOKING ===\n");
+            }
+        } catch (IOException ex) {
+            System.out.println("Failed to update file contents: " + ex.getMessage());
+        }
+    }
 
 
-
-
-
-
-
-
-
-
-
-
+    public JButton getDeleteBookingButton() {
+        return deleteBookingButton;
+    }
 }
 

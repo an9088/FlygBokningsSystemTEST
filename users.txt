@@ -18,3 +18,8 @@ Lastname: B
 Email: john@gmail.com
 Password: john1234^
 
+Firstname: skunked
+Lastname: skunkedd
+Email: Hejsan1@gmail.com
+Password: Skunked 32
+
