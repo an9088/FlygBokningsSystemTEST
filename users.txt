@@ -23,3 +23,8 @@ Lastname: skunkedd
 Email: Hejsan1@gmail.com
 Password: Skunked 32
 
+Firstname: skunk
+Lastname: skunka
+Email: skunkad@gmail.com
+Password: skunkad 313
+
