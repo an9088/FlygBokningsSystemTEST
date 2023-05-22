@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 
 
@@ -40,6 +41,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private JSpinner returnYear;
     private JSpinner returnMonth;
     private JSpinner returnDay;
+    private JScrollPane flightInfoBorder;
     private JPanel calendarPanel;
     private JPanel calendarPanel2;
 
@@ -58,10 +60,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     private DefaultListModel<String> listModel;
 
+    SpinnerNumberModel monthValue, yearValue, dayValue, returnYearValue, returnMonthValue, returnDayValue, adults;
+
     private boolean isSignedIn = false;
-
-
-
 
 
     public Mainframe(Controller controller) {
@@ -74,6 +75,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         guiUtils.addSuggestionText(toAirport, "Enter Destination City");
         System.out.println("Widht eastPanel: " + eastPanel.getWidth());
         editorPane1.setEditable(false);
+        year.addChangeListener(this);
+        month.addChangeListener(this);
+        day.addChangeListener(this);
 
         createFrame();
         SignUp_Page signUpPage = new SignUp_Page(this);
@@ -84,6 +88,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
         String title = "<html><body><b><font size='5' color='#FFFFFF'>FlightBuddy</font></b></body></html>"; // HTML formatted title with white color
         frame.setTitle(title); // Set the HTML formatted title
+        adults = new SpinnerNumberModel(1, 1, 9, 1);
+        spinnerAdult.setModel(adults);
         /*JDateChooser dateChooser = new JDateChooser();
         calendarPanel.add(dateChooser);
         JDateChooser d2 = new JDateChooser();
@@ -91,11 +97,12 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
          */
 
+
         frame.setPreferredSize(new Dimension(920, 600));
         setBorders();
         frame.setContentPane(mainPanel);
         setTodaysDate();
-        spinnerAdult.setValue(1);
+
         setupMenu();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -151,8 +158,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         //menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(userButton);
-
-
 
 
         ImageIcon helpIcon = new ImageIcon("img/icons/support.png");
@@ -349,11 +354,35 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     }
 
 
-
     private void setTodaysDate() {
 
         LocalDate today = LocalDate.now();
 
+        int minYear = today.getYear();
+        int maxDay = 31;
+
+        yearValue = new SpinnerNumberModel(minYear, minYear, minYear + 2, 1);
+        year.setModel(yearValue);
+
+        monthValue = new SpinnerNumberModel(today.getMonthValue(), 1, 12, 1);
+        month.setModel(monthValue);
+
+        dayValue = new SpinnerNumberModel(today.getDayOfMonth(), 1, maxDay, 1);
+        day.setModel(dayValue);
+
+        returnYearValue = new SpinnerNumberModel(minYear, minYear, minYear + 2, 1);
+        returnYear.setModel(returnYearValue);
+
+        returnMonthValue = new SpinnerNumberModel(today.getMonthValue(), 1, 12, 1);
+        returnMonth.setModel(returnMonthValue);
+
+        returnDayValue = new SpinnerNumberModel(today.getDayOfMonth(), 1, maxDay, 1);
+        returnDay.setModel(returnDayValue);
+
+
+
+
+/*
         year.setValue(today.getYear());
         month.setValue(today.getMonthValue());
         day.setValue(today.getDayOfMonth());
@@ -361,6 +390,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         returnYear.setValue(today.getYear());
         returnMonth.setValue(today.getMonthValue());
         returnDay.setValue(today.getDayOfMonth());
+
+ */
     }
 
     private void setBorders() {
@@ -372,7 +403,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         eastPanel.setBorder(border);
         scrollDisplay.setBorder(border2);
         mainPanel.setBorder(border3);
-        editorPane1.setBorder(border4);
+        flightInfoBorder.setBorder(border4);
 
     }
 
@@ -387,15 +418,8 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 editorPane1.setText("");
                 list1.removeListSelectionListener(this);
                 controller.searchAvailableFlights();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            } catch (ParserConfigurationException ex) {
-                throw new RuntimeException(ex);
-            } catch (SAXException ex) {
-                throw new RuntimeException(ex);
-            } catch (ResponseException ex) {
+            } catch (IOException | InterruptedException | ParserConfigurationException | SAXException |
+                     ResponseException ex) {
                 throw new RuntimeException(ex);
             }
 
@@ -437,10 +461,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     public void setDisplayMessage(ArrayList<String> message) {
 
 
-       listModel = new DefaultListModel<>();
+        listModel = new DefaultListModel<>();
 
         for (String msg : message) {
-                listModel.addElement(String.valueOf(msg));
+            listModel.addElement(String.valueOf(msg));
 
         }
 
@@ -507,6 +531,56 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 returnDay.setEnabled(true);
 
             }
+
+        }
+        if (e.getSource().equals(year)) {
+            int selectedYear = (int) year.getValue();
+            returnYear.setValue(selectedYear);
+        }
+        if (e.getSource().equals(month)) {
+
+            int selectedMonth = (int) month.getValue();
+            returnMonth.setValue(selectedMonth);
+
+
+            if (selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9 || selectedMonth == 11) {
+                if ((int) day.getValue() == 31) {
+                    day.setValue(30);
+                    returnDay.setValue(30);
+                }
+                SpinnerNumberModel dayModel = (SpinnerNumberModel) day.getModel();
+                dayModel.setMaximum(30);
+            }
+            // Kontrollera om month är inställt på februari (månadsnummer 2)
+            else if (selectedMonth == 2) {
+                if ((int) day.getValue() == 30 || (int) day.getValue() == 31) {
+                    day.setValue(28);
+                    returnDay.setValue(28);
+                }
+                int selectedYear = (int) year.getValue();
+                int maxDays = 28; // Standard maxvärde för februari
+
+                // Kontrollera om det är ett skottår
+                if (Year.isLeap(selectedYear)) {
+                    maxDays = 29; // Om det är ett skottår, ändra maxvärdet till 29
+                }
+                // Uppdatera maxvärdet för day spinner
+                SpinnerNumberModel dayModel = (SpinnerNumberModel) day.getModel();
+                dayModel.setMaximum(maxDays);
+            } else {
+                // Återställ standard maxvärde för övriga månader (31)
+                SpinnerNumberModel dayModel = (SpinnerNumberModel) day.getModel();
+                dayModel.setMaximum(31);
+            }
+        }
+
+        if (e.getSource().equals(day)) {
+            int selectedDay = (int) day.getValue();
+            returnDay.setValue(selectedDay);
+        }
+
+        if (e.getSource().equals(returnMonth)) {
+
         }
     }
 

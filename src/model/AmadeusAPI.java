@@ -90,7 +90,10 @@ public class AmadeusAPI {
                 }
 
             } catch (ResponseException e) {
-                throw new RuntimeException(e);
+                String message = "It was not possible to find any trips for these dates";
+                controller.errorCode(message);
+                return;
+               // throw new RuntimeException(e);
             }
 
 
