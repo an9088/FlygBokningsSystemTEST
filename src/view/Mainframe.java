@@ -437,8 +437,10 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
                 errorMessage("Please select a flight from the list to create a booking");
             } else if (isSignedIn) {
                 SignedUpBookingGUI easyBooking = new SignedUpBookingGUI(bookingInfo, controller);
+                Payment_Page paymentPage = new Payment_Page(controller);
             } else {
                 BookingCreatorGUI booking = new BookingCreatorGUI(bookingInfo, currentAirport, controller);
+                Payment_Page paymentPage = new Payment_Page(controller);
             }
 
 

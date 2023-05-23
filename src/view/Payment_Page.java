@@ -11,7 +11,7 @@ public class Payment_Page {
     private JPanel mainPanel;
     private JTextField nameField;
     private JTextField emailField;
-    private JCheckBox checkBox1;
+    private JCheckBox cardCheckbox;
     private JTextField cardNumberField;
     private JTextField nameCardField;
     private JButton confirmPayButton;
@@ -26,6 +26,8 @@ public class Payment_Page {
     private JPanel paymentInfoPanel;
     private JPanel paymentMethodPanel;
     private JPanel paymentInfoPanel2;
+    private JCheckBox masterCardVisaChkBox;
+    private JCheckBox amexChkBox;
 
     private Controller controller;
 
@@ -42,7 +44,7 @@ public class Payment_Page {
         frame.setContentPane(mainPanel);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         confirmPayButton.setText("Confirm & Pay");
         confirmPayButton.setBackground(new Color(0, 123, 255));
