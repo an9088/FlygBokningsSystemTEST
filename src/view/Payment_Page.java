@@ -96,7 +96,11 @@ public class Payment_Page {
 
                 boolean isAmexCard = amexChkBox.isSelected();
                 boolean isMasterCardVisa = masterCardVisaChkBox.isSelected();
-                controller.processPayment(name, email, cardNumber, nameOnCard, expiryDate, cvvCode, isAmexCard, isMasterCardVisa);
+                boolean paymentSuccessful = controller.processPayment(name, email, cardNumber, nameOnCard, expiryDate, cvvCode, isAmexCard, isMasterCardVisa);
+
+                if (paymentSuccessful) {
+                    frame.dispose(); // Close the frame if payment is successful
+                }
             }
         });
     }

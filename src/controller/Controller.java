@@ -177,45 +177,53 @@ public class Controller {
 
     }
 
-    public void processPayment(String name, String email, String cardNumber, String nameOnCard, String expiryDate, String cvvCode, boolean isAmexCard, boolean isMasterCardVisa) {
+    public boolean processPayment(String name, String email, String cardNumber, String nameOnCard, String expiryDate, String cvvCode, boolean isAmexCard, boolean isMasterCardVisa) {
+        // Check if either Mastercard/Visa or American Express is selected
+        if (!isMasterCardVisa && !isAmexCard) {
+            JOptionPane.showMessageDialog(null, "Please select either Mastercard/Visa or American Express");
+            return false;
+        }
+
         // Perform payment processing logic here
         // Example: Validate inputs, make API calls, update model, etc.
 
         // Validate email
         if (!isValidEmail(email)) {
             JOptionPane.showMessageDialog(null, "Payment Failed: Invalid email");
-            return;
+            return false;
         }
 
         // Validate card number length
         if (isAmexCard && cardNumber.length() != 15) {
             JOptionPane.showMessageDialog(null, "Payment Failed: American Express card number should be 15 digits long");
-            return;
+            return false;
         } else if (isMasterCardVisa && cardNumber.length() != 16) {
             JOptionPane.showMessageDialog(null, "Payment Failed: Mastercard/Visa card number should be 16 digits long");
-            return;
+            return false;
         }
 
         // Validate expiry date format and validity
         if (!isValidExpiryDate(expiryDate)) {
             JOptionPane.showMessageDialog(null, "Payment Failed: Invalid expiry date");
-            return;
+            return false;
         }
 
         // Validate CVV code length
         if (isAmexCard && cvvCode.length() != 4) {
             JOptionPane.showMessageDialog(null, "Payment Failed: American Express CVV code should be 4 digits long");
-            return;
+            return false;
         } else if (isMasterCardVisa && cvvCode.length() != 3) {
             JOptionPane.showMessageDialog(null, "Payment Failed: Mastercard/Visa CVV code should be 3 digits long");
-            return;
+            return false;
         }
 
         // All checks passed, process the payment
         JOptionPane.showMessageDialog(null, "Payment Successful");
-
-
+        return true;
     }
+
+
+
 
 
 
