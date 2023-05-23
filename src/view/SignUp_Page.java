@@ -53,7 +53,7 @@ public class SignUp_Page {
         signUpButton.setBackground(new Color(0,123,255));
         signUpButton.setForeground(Color.WHITE);
         signUpButton.setText("Sign Up");
-        LoginButton.setForeground(Color.BLUE);
+        LoginButton.setForeground(new Color(51, 153, 255));
         LoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         passwordField1.setEchoChar((char)0);
