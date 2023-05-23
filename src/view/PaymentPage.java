@@ -107,7 +107,7 @@ public class PaymentPage {
         emailField.setText(email);
 
 
-        if(fullName!=null && email!=null){
+        if(fullNameGuest!=null && email!=null){
             nameField.setEditable(false);
             emailField.setEditable(false);
         }else{
