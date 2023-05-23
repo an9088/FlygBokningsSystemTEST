@@ -11,7 +11,6 @@ public class Payment_Page {
     private JPanel mainPanel;
     private JTextField nameField;
     private JTextField emailField;
-    private JCheckBox cardCheckbox;
     private JTextField cardNumberField;
     private JTextField nameCardField;
     private JButton confirmPayButton;
@@ -73,7 +72,9 @@ public class Payment_Page {
                 String expiryDate = expiryDateField.getText();
                 String cvvCode = codeField.getText();
 
-                controller.processPayment(name, email, cardNumber, nameOnCard, expiryDate, cvvCode);
+                boolean isAmexCard = amexChkBox.isSelected();
+                boolean isMasterCardVisa = masterCardVisaChkBox.isSelected();
+                controller.processPayment(name, email, cardNumber, nameOnCard, expiryDate, cvvCode, isAmexCard, isMasterCardVisa);
             }
         });
     }

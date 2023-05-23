@@ -4,7 +4,6 @@ import com.amadeus.exceptions.ResponseException;
 import com.formdev.flatlaf.intellijthemes.*;
 import model.AmadeusAPI;
 import model.Booking;
-import model.BookingHistoryHandler;
 import org.xml.sax.SAXException;
 import view.Booking_History_Page;
 import view.Mainframe;
@@ -177,7 +176,7 @@ public class Controller {
 
     }
 
-    public void processPayment(String name, String email, String cardNumber, String nameOnCard, String expiryDate, String cvvCode) {
+    public void processPayment(String name, String email, String cardNumber, String nameOnCard, String expiryDate, String cvvCode, boolean isAmexCard, boolean isMasterCardVisa) {
         // Perform payment processing logic here
         // Example: Validate inputs, make API calls, update model, etc.
 
@@ -188,8 +187,11 @@ public class Controller {
         }
 
         // Validate card number length
-        if (cardNumber.length() != 16) {
-            JOptionPane.showMessageDialog(null, "Payment Failed: Invalid card number length");
+        if (isAmexCard && cardNumber.length() != 15) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: American Express card number should be 15 digits long");
+            return;
+        } else if (isMasterCardVisa && cardNumber.length() != 16) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: Mastercard/Visa card number should be 16 digits long");
             return;
         }
 
@@ -200,14 +202,19 @@ public class Controller {
         }
 
         // Validate CVV code length
-        if (cvvCode.length() != 3) {
-            JOptionPane.showMessageDialog(null, "Payment Failed: Invalid CVV code length");
+        if (isAmexCard && cvvCode.length() != 4) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: American Express CVV code should be 4 digits long");
+            return;
+        } else if (isMasterCardVisa && cvvCode.length() != 3) {
+            JOptionPane.showMessageDialog(null, "Payment Failed: Mastercard/Visa CVV code should be 3 digits long");
             return;
         }
 
         // All checks passed, process the payment
         JOptionPane.showMessageDialog(null, "Payment Successful");
     }
+
+
 
     private boolean isValidEmail(String email) {
         // Basic email validation by checking for the presence of '@'
