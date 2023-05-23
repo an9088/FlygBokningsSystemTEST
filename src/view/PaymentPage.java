@@ -99,6 +99,9 @@ public class PaymentPage {
         this.bookingDetails = bookingDetails;
         this.controller = controller;
 
+        initializeUI();
+        addSuggestionTextFields();
+        setupButtonActions();
         String fullNameGuest = name + lastName;
         nameField.setText(fullNameGuest);
         emailField.setText(email);
