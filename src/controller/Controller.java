@@ -38,7 +38,6 @@ public class Controller {
         mainframe = new Mainframe(this);
     }
 
-
     public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException, ResponseException {
 
 
