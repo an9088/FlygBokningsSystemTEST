@@ -128,3 +128,69 @@ Sincerely, the FlightBuddy team
 
 
 === END OF BOOKING ===
+
+>>> [BookingID: 1684855707462-25] - John B - [Booking number: 668735] <<<
+Your booking number: 668735
+
+Thank you John B for using FlightBuddy for booking your flight tickets. We hope you will have a pleasant stay in Stockholm!
+
+Here are your booking details for your upcoming trip:
+
+Departure date: 2023-05-23T23:00:00
+From: Bangkok BKK
+To: Stockholm ARN
+Airline: LH
+Number of stops: 1
+<----->
+Departure date: 2023-06-23T15:55:00
+Return from: Stockholm ARN
+Return to: Bangkok BKK
+Airline: LH
+Number of stops: 1
+
+Total price: 1716.3€
+
+Full name: John B
+Email address: john@gmail.com
+Address: addas
+Zip code: 12345
+City: dsadasdas
+Country: dasads
+
+Sincerely, the FlightBuddy team 
+
+
+=== END OF BOOKING ===
+
+>>> [BookingID: 1684856999402-455] - John B - [Booking number: 413378] <<<
+Your booking number: 413378
+
+Thank you John B for using FlightBuddy for booking your flight tickets. We hope you will have a pleasant stay in Tokyo!
+
+Here are your booking details for your upcoming trip:
+
+Departure date: 2023-05-23T23:30:00
+From: Bangkok BKK
+To: Tokyo NRT
+Airline: KE
+Number of stops: 1
+<----->
+Departure date: 2023-06-23T13:55:00
+Return from: Tokyo NRT
+Return to: Bangkok BKK
+Airline: KE
+Number of stops: 1
+
+Total price: 1636.4€
+
+Full name: John B
+Email address: john@gmail.com
+Address: dassda
+Zip code: 12345
+City: dsaasd
+Country: asdasd
+
+Sincerely, the FlightBuddy team 
+
+
+=== END OF BOOKING ===

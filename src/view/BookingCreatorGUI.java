@@ -158,11 +158,10 @@ public class BookingCreatorGUI {
 
                 } else if (!(name.equals("") || lastName.equals("") || address.equals("") || city.equals("")
                         || zip.equals("") || country.equals("")) && email.contains("@") && zip.length() == 5) {
-
-                    int BookingNumber = generateBookingNumber();
-                    JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
-                    controller.createNewGuestBooking(name, lastName, address, city, zip, country, email, bookingDetails, controller.getAirport(), BookingNumber);
-                    signUpFrame.setVisible(false);
+                    String airport = controller.getAirport().toString();
+                    PaymentPage paymentPage = new PaymentPage( name,  lastName,  address,  city,  zip, country,
+                             email,  bookingDetails , airport,  controller);
+                    signUpFrame.dispose();
 
                 }
             }

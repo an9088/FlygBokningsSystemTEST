@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class PaymentPage {
     private JPanel mainPanel;
@@ -35,10 +36,34 @@ public class PaymentPage {
 
     private JFrame frame;
 
+    private String fullName;
+    private String address;
+    private String city;
+    private String zip;
+    private String country;
+    private String email;
+    private String destination;
+    private String bookingDetails;
+
+    private String name;
+    private String lastName;
+
+    private String airport;
+
     private boolean paymentCompleted;
 
-    public PaymentPage(Controller controller) {
+    private int constructorType;
 
+    public PaymentPage(String fullName, String address, String city, String zip, String country, String email, String destination, String bookingDetails, Controller controller) {
+        this.constructorType = 1;
+        this.fullName = fullName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.country = country;
+        this.email = email;
+        this.destination = destination;
+        this.bookingDetails = bookingDetails;
         this.controller = controller;
         initializeUI();
         addSuggestionTextFields();
@@ -46,9 +71,36 @@ public class PaymentPage {
         this.paymentCompleted = false;
 
 
-        String fullName = getSignedInUserFullName();
-        String email = controller.getSignedInEmail();
         nameField.setText(fullName);
+        emailField.setText(email);
+
+
+        if(fullName!=null && email!=null){
+            nameField.setEditable(false);
+            emailField.setEditable(false);
+        }else{
+            nameField.setText(" ");
+            emailField.setText(" ");
+        }
+
+    }
+
+    public PaymentPage(String name, String lastName, String address, String city, String zip, String country,
+                       String email, String bookingDetails ,String airport, Controller controller){
+        this.constructorType = 2;
+        this.name = name;
+        this.lastName = name;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.airport = airport;
+        this.country = country;
+        this.email = email;
+        this.bookingDetails = bookingDetails;
+        this.controller = controller;
+
+        String fullNameGuest = name + lastName;
+        nameField.setText(fullNameGuest);
         emailField.setText(email);
 
 
@@ -101,6 +153,14 @@ public class PaymentPage {
                 boolean paymentSuccessful = controller.processPayment(name, email, cardNumber, nameOnCard, expiryDate, cvvCode, isAmexCard, isMasterCardVisa);
 
                 if (paymentSuccessful) {
+                    JOptionPane.showMessageDialog(frame, "Your booking has been confirmed");
+
+                    if (constructorType == 1) {
+                        controller.createNewBooking(fullName, address, city, zip, country, email, destination, bookingDetails, generateBookingNumber());
+                    } else if (constructorType == 2) {
+                        controller.createNewGuestBooking(name, lastName, address, city, zip, country, email, bookingDetails, airport, generateBookingNumber());
+                    }
+
                     frame.dispose(); // Close the frame if payment is successful
                     paymentCompleted = true;
                 }
@@ -143,6 +203,10 @@ public class PaymentPage {
     }
 
 
+    private int generateBookingNumber() {
+        Random random = new Random();
+        return random.nextInt(900000) + 100000; // Generate a 6-digit random number
+    }
 
 
 
