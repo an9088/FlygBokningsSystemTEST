@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Payment_Page {
+public class PaymentPage {
     private JPanel mainPanel;
     private JTextField nameField;
     private JTextField emailField;
@@ -35,7 +35,7 @@ public class Payment_Page {
 
     private JFrame frame;
 
-    public Payment_Page(Controller controller) {
+    public PaymentPage(Controller controller) {
 
         this.controller = controller;
         initializeUI();

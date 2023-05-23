@@ -150,7 +150,7 @@ public class SignedUpBookingGUI {
                 }
                 else if (!(address.equals("") || city.equals("") || country.equals("")) && zip.length() == 5) {
 
-
+                    PaymentPage paymentPage = new PaymentPage(controller);
                     JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
                     controller.createNewBooking(fullName, address, city, zip, country, email, destination, bookingDetails, generateBookingNumber());
 

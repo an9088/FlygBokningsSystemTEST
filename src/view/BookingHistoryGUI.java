@@ -1,7 +1,5 @@
 package view;
 
-import com.amadeus.Booking;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -14,7 +12,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Booking_History_Page {
+public class BookingHistoryGUI {
     private JPanel mainPanel;
     private JList<String> pastBookingsList;
     private JEditorPane bookingDetails;
@@ -28,7 +26,7 @@ public class Booking_History_Page {
 
     String filepath = "users.txt";
 
-    public Booking_History_Page() {
+    public BookingHistoryGUI() {
         initializeUI();
         bookingDetails.setEditable(false);
 

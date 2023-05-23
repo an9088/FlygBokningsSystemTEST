@@ -136,7 +136,7 @@ public class Login_Page {
         if (title.equals("My Bookings")) {
             // Do something when the title is "My Bookings"
             return createMenuItem(title, e -> {
-                Booking_History_Page bookingPage = new Booking_History_Page();
+                BookingHistoryGUI bookingPage = new BookingHistoryGUI();
                 bookingPage.showWindow();
                 bookingPage.setUserTitle(email);
                 bookingPage.loadBookingsFromFile( email + ".txt");

@@ -100,7 +100,7 @@ public class SignUp_Page {
         mainframe.setMenu1Text(email);
         JMenuItem myBookings = new JMenuItem("My Bookings");
         myBookings.addActionListener(e -> {
-            Booking_History_Page bookingPage = new Booking_History_Page();
+            BookingHistoryGUI bookingPage = new BookingHistoryGUI();
             bookingPage.showWindow();
             bookingPage.setUserTitle(email);
             bookingPage.loadBookingsFromFile(email + ".txt");

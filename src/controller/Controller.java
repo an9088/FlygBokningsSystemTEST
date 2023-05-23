@@ -5,7 +5,7 @@ import com.formdev.flatlaf.intellijthemes.*;
 import model.AmadeusAPI;
 import model.Booking;
 import org.xml.sax.SAXException;
-import view.Booking_History_Page;
+import view.BookingHistoryGUI;
 import view.Mainframe;
 
 import javax.swing.*;
