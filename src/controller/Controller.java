@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
+    private boolean paymentSuccessful;
     private Mainframe mainframe;
 
     private Booking booking;
@@ -212,6 +213,8 @@ public class Controller {
 
         // All checks passed, process the payment
         JOptionPane.showMessageDialog(null, "Payment Successful");
+
+
     }
 
 

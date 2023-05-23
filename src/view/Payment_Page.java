@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Payment_Page {
     private JPanel mainPanel;
@@ -30,16 +33,35 @@ public class Payment_Page {
 
     private Controller controller;
 
+    private JFrame frame;
+
     public Payment_Page(Controller controller) {
 
         this.controller = controller;
         initializeUI();
         addSuggestionTextFields();
         setupButtonActions();
+
+
+
+        String fullName = getSignedInUserFullName();
+        String email = controller.getSignedInEmail();
+        nameField.setText(fullName);
+        emailField.setText(email);
+
+
+        if(fullName!=null && email!=null){
+            nameField.setEditable(false);
+            emailField.setEditable(false);
+        }else{
+            nameField.setText(" ");
+            emailField.setText(" ");
+        }
+
     }
 
     private void initializeUI() {
-        JFrame frame = new JFrame("Payment Page");
+        frame = new JFrame("Payment Page");
         frame.setContentPane(mainPanel);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
@@ -78,6 +100,38 @@ public class Payment_Page {
             }
         });
     }
+
+    private String getSignedInUserFullName() {
+        String email = controller.getSignedInEmail();
+        String firstName = null;
+        String lastName = null;
+        String prevLine = null;
+        String currentLine = null;
+        String prevPrevLine = null;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+            while ((currentLine = reader.readLine()) != null) {
+                if (currentLine.startsWith("Email: ") && currentLine.substring("Email: ".length()).equals(email)) {
+                    if (prevPrevLine != null && prevPrevLine.startsWith("Firstname: ")) {
+                        firstName = prevPrevLine.substring("Firstname: ".length());
+                    }
+                    if (prevLine != null && prevLine.startsWith("Lastname: ")) {
+                        lastName = prevLine.substring("Lastname: ".length());
+                    }
+                    break;
+                }
+                prevPrevLine = prevLine;
+                prevLine = currentLine;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return firstName + " " + lastName;
+    }
+
+
+
 
 
 
