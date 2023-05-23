@@ -35,13 +35,15 @@ public class PaymentPage {
 
     private JFrame frame;
 
+    private boolean paymentCompleted;
+
     public PaymentPage(Controller controller) {
 
         this.controller = controller;
         initializeUI();
         addSuggestionTextFields();
         setupButtonActions();
-
+        this.paymentCompleted = false;
 
 
         String fullName = getSignedInUserFullName();
@@ -100,6 +102,7 @@ public class PaymentPage {
 
                 if (paymentSuccessful) {
                     frame.dispose(); // Close the frame if payment is successful
+                    paymentCompleted = true;
                 }
             }
         });
@@ -135,6 +138,9 @@ public class PaymentPage {
     }
 
 
+    public boolean isPaymentCompleted() {
+        return paymentCompleted;
+    }
 
 
 
