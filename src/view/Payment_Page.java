@@ -29,9 +29,9 @@ public class Payment_Page {
 
     private Controller controller;
 
-    public Payment_Page() {
-        controller = new Controller();
+    public Payment_Page(Controller controller) {
 
+        this.controller = controller;
         initializeUI();
         addSuggestionTextFields();
         setupButtonActions();
@@ -77,12 +77,5 @@ public class Payment_Page {
     }
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Payment_Page();
-            }
-        });
-    }
+
 }
