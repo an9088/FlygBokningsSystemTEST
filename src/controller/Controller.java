@@ -35,14 +35,21 @@ public class Controller {
 
     public void searchAvailableFlights() {
 
-
         String departureAirport = mainframe.getFromAirport().getText();
         String destinationAirport = mainframe.getToAirport().getText();
 
         int nbrOfPassengers = (int) mainframe.getSpinnerAdult().getValue();
 
-        date = getDepartureDate();
-        returnDate = getReturnDate();
+        String year = mainframe.getYear().getValue().toString();
+        String month = mainframe.getMonth().getValue().toString();
+        String day = mainframe.getDay().getValue().toString();
+
+        String returnYear = mainframe.getReturnYear().getValue().toString();
+        String returnMonth = mainframe.getReturnMonth().getValue().toString();
+        String returnDay = mainframe.getReturnDay().getValue().toString();
+
+        date = formatDates(year, month, day);
+        returnDate = formatDates(returnYear, returnMonth, returnDay);
 
         System.out.println("Departure: " + date + "\nReturn date: " + returnDate);
 
@@ -85,13 +92,8 @@ public class Controller {
 
         Booking booking = new Booking(fullName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
 
-
-
-
-
     }
-
-
+    
     public void showBookingConfirmation(String bookingMessage) {
         mainframe.showBookingConfirmation(bookingMessage);
     }
@@ -104,11 +106,7 @@ public class Controller {
         mainframe.errorMessage(message);
     }
 
-    public String getDepartureDate() {
-
-        String year = mainframe.getYear().getValue().toString();
-        String month = mainframe.getMonth().getValue().toString();
-        String day = mainframe.getDay().getValue().toString();
+    public String formatDates(String year, String month, String day) {
 
         String date = year + "-" + month + "-" + day;
 
@@ -128,32 +126,6 @@ public class Controller {
         }
 
         return date;
-    }
-
-    public String getReturnDate() {
-
-        ///////////////RETURN DATES///////////////////
-
-        String returnYear = mainframe.getReturnYear().getValue().toString();
-        String returnMonth = mainframe.getReturnMonth().getValue().toString();
-        String returnDay = mainframe.getReturnDay().getValue().toString();
-
-        String returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
-
-        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) >= 10) {
-            returnDate = returnYear + "-0" + returnMonth + "-" + returnDay;
-        }
-        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) < 10) {
-            returnDate = returnYear + "-" + returnMonth + "-0" + returnDay;
-        }
-        if (Integer.parseInt(returnMonth) >= 10 && Integer.parseInt(returnDay) >= 10) {
-            returnDate = returnYear + "-" + returnMonth + "-" + returnDay;
-        }
-        if (Integer.parseInt(returnMonth) < 10 && Integer.parseInt(returnDay) < 10) {
-            returnDate = returnYear + "-0" + returnMonth + "-0" + returnDay;
-        }
-
-        return returnDate;
     }
 
 
