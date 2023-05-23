@@ -23,7 +23,7 @@ public class AmadeusAPI {
     private FlightOfferSearch[] flightOffersSearches;
 
 
-    private Amadeus amadeus;
+    private Amadeus amadeusFlightSearch;
 
 
     public AmadeusAPI(String departureAirport, String destinationAirport, String date, String returnDate, int nbrOfPassengers, Controller controller) {
@@ -52,7 +52,7 @@ public class AmadeusAPI {
     }
 
     private void connectToApi() {
-        amadeus = Amadeus
+        amadeusFlightSearch = Amadeus
                 .builder("JZg5Dd12jmmomi3ZDX2lrq1KQNBUPtQx", "GsQLYokKGb6h4cxc")
                 .build();
     }
@@ -75,7 +75,7 @@ public class AmadeusAPI {
 
             //This is where the flight offers are compared - this is where the request happens
             try {
-                flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
+                flightOffersSearches = amadeusFlightSearch.shopping.flightOffersSearch.get(
                         Params.with("originLocationCode", departureCode)
                                 .and("destinationLocationCode", destinationCode)
                                 .and("departureDate", date)
@@ -90,7 +90,7 @@ public class AmadeusAPI {
                 }
 
             } catch (ResponseException e) {
-                String message = "It was not possible to find any trips for these dates";
+                String message = "No trips were found. Please try again.";
                 controller.errorCode(message);
                 return;
                // throw new RuntimeException(e);
@@ -189,7 +189,7 @@ public class AmadeusAPI {
 
             FlightOfferSearch[] flightOffersSearches = new FlightOfferSearch[0];// Sortera efter pris
             try {
-                flightOffersSearches = amadeus.shopping.flightOffersSearch.get(
+                flightOffersSearches = amadeusFlightSearch.shopping.flightOffersSearch.get(
                         Params.with("originLocationCode", departureCode)
                                 .and("destinationLocationCode", destinationCode)
                                 .and("departureDate", date)
@@ -296,25 +296,27 @@ public class AmadeusAPI {
     }
 
     private String getIataCode(String airport) {
-
         String iataCode = null;
-        //This is where searched cities are converted to IATA-codes ex: Malmo -> MMA
-        City[] cities = new City[0];
+        City[] cities = null;
+
         try {
-            cities = amadeus.referenceData.locations
-                    .cities.get(Params.with("keyword", airport));
-
-
+            cities = amadeusFlightSearch.referenceData.locations.cities.get(Params.with("keyword", airport));
         } catch (ResponseException e) {
+            System.out.println("ERROR");
             throw new RuntimeException(e);
+        } catch (Exception e) {
+            controller.errorCode("Error: Location is not valid");
         }
 
-        if (cities.length > 0) {
+        if (cities != null && cities.length > 0) {
             iataCode = cities[0].getIataCode();
             System.out.println("IATA-kod för " + airport + " är " + iataCode);
         }
+
         return iataCode;
     }
+
+
 
     private String formatAirportName(String correctAirport) {
         String str1 = correctAirport;
@@ -332,7 +334,5 @@ public class AmadeusAPI {
         return formatAirportName(destinationAirport);
     }
 
-    public void setDestinationAirport(String destinationAirport) {
-        this.destinationAirport = destinationAirport;
-    }
+
 }

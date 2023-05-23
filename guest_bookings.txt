@@ -251,3 +251,31 @@ Country: Poopistan
 Sincerely, the FlightBuddy team 
 
 
+Your booking number: 909053
+
+Thank you Peter Abrahamsson Peter  for using FlightBuddy for booking your flight tickets. We hope you will have a pleasant stay in Goeteborg!
+
+Here are your booking details for your upcoming trip:
+
+Departure date: 2023-05-23T22:00:00
+From: Stockholm ARN
+To: Goeteborg GOT
+Airline: SK
+<----->
+Departure date: 2023-06-09T13:00:00
+Return from: Goeteborg GOT
+Return to: Stockholm ARN
+Airline: SK
+
+Total price: 185.88€
+
+Full name: Peter Abrahamsson Peter 
+Email address: peter@peter.com
+Address: Förlorargränd 5
+Zip code: 12345
+City: Göteborg
+Country: Sweden
+
+Sincerely, the FlightBuddy team 
+
+

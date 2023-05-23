@@ -1,8 +1,6 @@
 package view;
 
-import com.amadeus.exceptions.ResponseException;
 import controller.Controller;
-import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,11 +8,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
@@ -78,6 +74,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         year.addChangeListener(this);
         month.addChangeListener(this);
         day.addChangeListener(this);
+        flightInfoBorder.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         createFrame();
         SignUp_Page signUpPage = new SignUp_Page(this);
@@ -98,7 +95,7 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
          */
 
 
-        frame.setPreferredSize(new Dimension(920, 600));
+        frame.setPreferredSize(new Dimension(940, 600));
         setBorders();
         frame.setContentPane(mainPanel);
         setTodaysDate();
@@ -413,16 +410,9 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
         if (e.getSource().equals(searchFligthsButton)) {
 
-            try {
-
-                editorPane1.setText("");
-                list1.removeListSelectionListener(this);
-                controller.searchAvailableFlights();
-            } catch (IOException | InterruptedException | ParserConfigurationException | SAXException |
-                     ResponseException ex) {
-                throw new RuntimeException(ex);
-            }
-
+            editorPane1.setText("");
+            list1.removeListSelectionListener(this);
+            controller.searchAvailableFlights();
             list1.addListSelectionListener((ListSelectionListener) this);
 
         }

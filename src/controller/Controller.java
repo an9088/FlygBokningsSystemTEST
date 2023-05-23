@@ -1,16 +1,11 @@
 package controller;
 
-import com.amadeus.exceptions.ResponseException;
-import com.formdev.flatlaf.intellijthemes.*;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import model.AmadeusAPI;
 import model.Booking;
-import org.xml.sax.SAXException;
-import view.BookingHistoryGUI;
 import view.Mainframe;
 
 import javax.swing.*;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -38,7 +33,7 @@ public class Controller {
         mainframe = new Mainframe(this);
     }
 
-    public void searchAvailableFlights() throws IOException, InterruptedException, ParserConfigurationException, SAXException, ResponseException {
+    public void searchAvailableFlights() {
 
 
         String departureAirport = mainframe.getFromAirport().getText();
