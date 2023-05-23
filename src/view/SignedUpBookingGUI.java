@@ -149,16 +149,14 @@ public class SignedUpBookingGUI {
                     errorMessage(message);
                 }
                 else if (!(address.equals("") || city.equals("") || country.equals("")) && zip.length() == 5) {
-
                     PaymentPage paymentPage = new PaymentPage(controller);
-
-                    boolean paymentCompleted = paymentPage.isPaymentCompleted();
-
-                    if(paymentCompleted){
+                    boolean successfull = paymentPage.isPaymentCompleted();
+                    if(successfull) {
                         JOptionPane.showMessageDialog(signUpFrame, "Your booking has been confirmed");
                         controller.createNewBooking(fullName, address, city, zip, country, email, destination, bookingDetails, generateBookingNumber());
-                        signUpFrame.dispose();
+                        signUpFrame.setVisible(false);
                     }
+
 
 
                 }

@@ -62,3 +62,69 @@ Sincerely, the FlightBuddy team
 
 
 === END OF BOOKING ===
+
+>>> [BookingID: 1684853271253-987] - John B - [Booking number: 810667] <<<
+Your booking number: 810667
+
+Thank you John B for using FlightBuddy for booking your flight tickets. We hope you will have a pleasant stay in Tokyo!
+
+Here are your booking details for your upcoming trip:
+
+Departure date: 2023-05-23T22:50:00
+From: Bangkok BKK
+To: Tokyo HND
+Airline: PR
+Number of stops: 1
+<----->
+Departure date: 2023-06-23T09:30:00
+Return from: Tokyo NRT
+Return to: Bangkok BKK
+Airline: PR
+Number of stops: 1
+
+Total price: 745.2€
+
+Full name: John B
+Email address: john@gmail.com
+Address: dsaasd
+Zip code: 12345
+City: dassadads
+Country: dasasd
+
+Sincerely, the FlightBuddy team 
+
+
+=== END OF BOOKING ===
+
+>>> [BookingID: 1684853366197-584] - John B - [Booking number: 716611] <<<
+Your booking number: 716611
+
+Thank you John B for using FlightBuddy for booking your flight tickets. We hope you will have a pleasant stay in Tokyo!
+
+Here are your booking details for your upcoming trip:
+
+Departure date: 2023-05-23T22:50:00
+From: Bangkok BKK
+To: Tokyo HND
+Airline: PR
+Number of stops: 1
+<----->
+Departure date: 2023-06-23T09:30:00
+Return from: Tokyo NRT
+Return to: Bangkok BKK
+Airline: PR
+Number of stops: 1
+
+Total price: 745.2€
+
+Full name: John B
+Email address: john@gmail.com
+Address: daads
+Zip code: 12345
+City: asdasddasads
+Country: dasasd
+
+Sincerely, the FlightBuddy team 
+
+
+=== END OF BOOKING ===
