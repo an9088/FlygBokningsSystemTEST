@@ -45,7 +45,6 @@ public class BookingHistoryGUI {
                 if (selectedIndex != -1) {
                     String selectedBooking = pastBookingsList.getSelectedValue(); // Retrieve the selected booking directly from the JList
                     bookingListModel.remove(selectedIndex);
-                    updateFileContents();
                     bookingDetails.setText("");
                     JOptionPane.showMessageDialog(mainPanel, "Booking deleted successfully.");
                 } else {
@@ -159,19 +158,7 @@ public class BookingHistoryGUI {
         return "";
     }
 
-    private void updateFileContents() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt"))) {
-            for (int i = 1; i < bookingListModel.getSize(); i++) {
-                String booking = bookingListModel.getElementAt(i);
-                writer.write(">>> [BookingID: " + booking + "]\n");
-                String bookingDetails = getBookingDetailsText(booking);
-                writer.write(bookingDetails);
-                writer.write("=== END OF BOOKING ===\n");
-            }
-        } catch (IOException ex) {
-            System.out.println("Failed to update file contents: " + ex.getMessage());
-        }
-    }
+
 
 
     public JButton getDeleteBookingButton() {
