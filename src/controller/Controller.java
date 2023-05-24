@@ -3,6 +3,7 @@ package controller;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import model.AmadeusAPI;
 import model.Booking;
+import view.BookingHistoryGUI;
 import view.Mainframe;
 
 import javax.swing.*;
@@ -22,6 +23,8 @@ public class Controller {
     private ArrayList<String> flightDisplay;
 
     private AmadeusAPI amadeus;
+
+    private BookingHistoryGUI bookingHistoryGUI;
 
 
     public Controller() {
