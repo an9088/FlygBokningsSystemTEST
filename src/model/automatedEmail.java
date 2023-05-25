@@ -6,26 +6,39 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * This class is used to send an email with the booking confirmation after a booking is created.
+ * @author Mattias Malm
+ */
 
 
-public class automatedEmail {
+public class AutomatedEmail {
 
     private String from, to, host, username, password;
     private String bookingInformation;
     private Properties properties;
 
-    public automatedEmail(String to, String bookingInformation) {
+    /**
+     * This constructor is used to store the information passed on from the Booking class which is later passed on to the
+     * sendEmail-method.
+     * @param to - the email address where the booking confirmation is sent.
+     * @param bookingInformation - the booking confirmation itself.
+     */
+    public AutomatedEmail(String to, String bookingInformation) {
         this.to = to;
         this.bookingInformation = bookingInformation;
         sendEmail(to, bookingInformation);
     }
 
+    /**
+     * In this method the email is created and sent to the users specified email account.
+     * @param to - the email address where the booking confirmation is sent.
+     * @param bookingInformation - the booking confirmation itself.
+     */
+
     public void sendEmail(String to, String bookingInformation) {
-        // Recipient's email ID needs to be mentioned.
-        // to = "malmmattias1@outlook.com";
 
         // Sender's email ID needs to be mentioned
         from = "flightbuddyapplication@gmail.com";
@@ -35,11 +48,8 @@ public class automatedEmail {
 
         // Set your Gmail account credentials
         username = "FlightBuddyApplication@gmail.com";
-        System.out.println(username);
 
         password = "jypziyxoicijdzrb";
-
-        System.out.println(password);
 
         // Get system properties
         properties = System.getProperties();
@@ -76,10 +86,6 @@ public class automatedEmail {
             // Now set the actual message
             message.setText(bookingInformation);
 
-
-            // Send message
-
-
             // Create the text part of the message
             MimeBodyPart textPart = new MimeBodyPart();
             textPart.setText(bookingInformation);
@@ -87,6 +93,7 @@ public class automatedEmail {
             // Create the image part of the message
             MimeBodyPart imagePart = new MimeBodyPart();
 
+            // Attaching the FlightBuddy logo to the mail
             imagePart.attachFile("img/icons/FlightBuddy.pdf");
 
             // Add the parts to the multipart message
@@ -97,7 +104,6 @@ public class automatedEmail {
             message.setContent(multipart);
 
             // Send the message
-
             Transport.send(message);
             System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {

@@ -25,7 +25,7 @@ public class Booking {
     private String airport;
     private String fullName;
 
-    private automatedEmail autoEmail;
+    private AutomatedEmail autoEmail;
 
     public Booking(String fullName, String address, String city, String zip, String country, String email,
                    int bookingNumber, String bookingDetails, String airport, Controller controller) {
@@ -173,7 +173,7 @@ public class Booking {
 
         controller.showBookingConfirmation(bookingMessage);
         saveBookingToFileForGuestUser(bookingMessage);
-        autoEmail = new automatedEmail(email, bookingMessage);
+        autoEmail = new AutomatedEmail(email, bookingMessage);
     }
 
     private void bookingConfirmationForSignedInUser(String fullName, String address, String city, String zip,
@@ -193,7 +193,7 @@ public class Booking {
 
         controller.showBookingConfirmation(bookingMessage);
         saveBookingToFileForSignedInUser(email,bookingMessage);
-        autoEmail = new automatedEmail(email, bookingMessage);
+        autoEmail = new AutomatedEmail(email, bookingMessage);
 
     }
 
