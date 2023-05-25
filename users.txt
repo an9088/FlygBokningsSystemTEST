@@ -28,3 +28,13 @@ Lastname: skunka
 Email: skunkad@gmail.com
 Password: skunkad 313
 
+Firstname: Mattias
+Lastname: Biro
+Email: mattias@gmail.com
+Password: matteus!!
+
+Firstname: test
+Lastname: testsson
+Email: testperson1@gmail.com
+Password: testperson!
+
