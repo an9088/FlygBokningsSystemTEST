@@ -9,6 +9,16 @@ import view.Mainframe;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * This class is the main link between the model classes and the view classes. The Controller class is
+ * mainly responsible for handling all the logic in the system and passes on information between the view
+ * and model classes.
+ * @author Dino Patarcec
+ * @author Mattias Malm
+ * @author Mehdi Muhebbi
+ * @author Ellyas Rahimy
+ */
+
 public class Controller {
 
     private boolean paymentSuccessful;
@@ -24,7 +34,13 @@ public class Controller {
 
     private AmadeusAPI amadeus;
 
+
     private BookingHistoryGUI bookingHistoryGUI;
+
+
+    /**
+     * In this constructor the colour theme is set for the GUI. It's also here the mainframe is initialized.
+     */
 
 
     public Controller() {
@@ -35,6 +51,11 @@ public class Controller {
         }
         mainframe = new Mainframe(this);
     }
+
+    /**
+     * In this method, all the necessary information is taken from the mainframe class to be used in the
+     * process of searching for different flights.
+     */
 
     public void searchAvailableFlights() {
 
@@ -83,20 +104,43 @@ public class Controller {
 
     }
 
+    /**
+     * This method is used to pass on the information retrieved from the API to be displayed for the user.
+     * @param message - the information to be shown in the JList containing the available flights.
+     * @param flightDisplay - this parameter is saved in the instance variable of the same name to be used
+     *                      when displaying information about each individual flight.
+     */
+
     public void setDisplayMessage(ArrayList<String> message, ArrayList<String> flightDisplay) {
 
         this.flightDisplay = flightDisplay;
         mainframe.setDisplayMessage(message); // JLIST
     }
 
-
+    /**
+     * this method is called from the PaymentPage class when a booking is about to be finished
+     * @param fullName - name and last name of the user.
+     * @param address - the users address.
+     * @param city - the hometown of the user.
+     * @param zip - the zip code of the user.
+     * @param country - the home country of the user.
+     * @param email - the email address of the user.
+     * @param bookingDetails - the booking details.
+     * @param airport - the destination of the trip.
+     * @param bookingNumber - the specific booking number.
+     */
     public void createNewBooking(String fullName, String address, String city,
                                  String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
 
         Booking booking = new Booking(fullName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
 
     }
-    
+
+    /**
+     * This method passes on the bookingConfirmation sent från the AmadeusAPI class. When a booking has been
+     * confirmed, this message will appear as a pop up screen in the application.
+     * @param bookingMessage the booking confirmation.
+     */
     public void showBookingConfirmation(String bookingMessage) {
         mainframe.showBookingConfirmation(bookingMessage);
     }
@@ -105,10 +149,24 @@ public class Controller {
         return flightDisplay;
     }
 
+    /**
+     * Whenever an error occurs, this message is called. It simply shows whatever error message being passed
+     * in to it.
+     * @param message the error message.
+     */
     public void errorCode(String message) {
         mainframe.errorMessage(message);
     }
 
+    /**
+     * This method is used to create the correct format (YYYY-MM-DD) of the dates needed to search for flights.
+     * The JSpinners, where the dates are retrieved from in the searchAvailableFlights-method,
+     * do not return the correct format by themselves.
+     * @param year - String containing the year.
+     * @param month - String containing the month.
+     * @param day - String containing the day.
+     * @return the combined date in the correct format YYYY-MM-DD.
+     */
     public String formatDates(String year, String month, String day) {
 
         String date = year + "-" + month + "-" + day;
@@ -133,7 +191,7 @@ public class Controller {
 
 
     public String getAirport() {
-        String airport = amadeus.getDestinationAirport();
+        String airport = amadeus.getDestinationCity();
         return airport;
     }
 
@@ -141,6 +199,19 @@ public class Controller {
       return mainframe.getSignedInEmail();
     }
 
+    /**
+     * This is used to create a new booking object for each new booking made by a guest user.
+     * @param name First name.
+     * @param lastName Last name.
+     * @param address Address of the guest user.
+     * @param city City of the guest user.
+     * @param zip Zip code of the guest user.
+     * @param country country code of the guest user.
+     * @param email Email address of the guest user.
+     * @param bookingDetails The booking confirmation.
+     * @param airport the arrival destination of the trip.
+     * @param bookingNumber the specified booking number.
+     */
     public void createNewGuestBooking(String name, String lastName, String address, String city, String zip, String country,
                                       String email, String bookingDetails, String airport, int bookingNumber) {
         booking = new Booking(name, lastName, address, city, zip, country, email, bookingNumber, bookingDetails, airport, this);
