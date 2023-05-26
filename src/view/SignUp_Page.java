@@ -5,7 +5,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-
+/**
+ * Represents the sign-up page of the application.
+ * Allows users to create a new account by providing their personal information.
+ * The sign-up page includes fields for email, surname, forename, and password.
+ * Users can sign up, toggle password visibility, and navigate to the login page.
+ *
+ * @author Dino Patarcec
+ * @author Mehdi Muhebbi
+ */
 public class SignUp_Page {
     private JTextField emailField;
     private JTextField surnameField;
@@ -20,11 +28,18 @@ public class SignUp_Page {
     Mainframe mainframe;
     UserRegistrationService userRegistrationService;
 
+
+
+    /**
+     * Constructs a SignUp_Page object.
+     *
+     * @param mainframe the mainframe of the application
+     */
     public SignUp_Page(Mainframe mainframe) {
         this.mainframe = mainframe;
         this.userRegistrationService = new UserRegistrationService();
         frame = new JFrame();
-        Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
+        Font font = new Font("Arial", Font.BOLD, 16);
         String title = "<html><body><b><font size='5' color='#FFFFFF'>Sign up</font></b></body></html>"; // HTML formatted title with white color
         frame.setTitle(title); // Set the HTML formatted title
         frame.setContentPane(mainPanel);
@@ -49,6 +64,10 @@ public class SignUp_Page {
         });
     }
 
+    /**
+     * Sets up the UI elements of the sign-up page.
+     * Configures the appearance and behavior of the UI components.
+     */
     private void setUpUI() {
         signUpButton.setBackground(new Color(0,123,255));
         signUpButton.setForeground(Color.WHITE);
@@ -60,19 +79,16 @@ public class SignUp_Page {
         passwordHideButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         passwordHideButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                togglePasswordVisibility();
+                guiUtils.togglePasswordVisibility(passwordField1);
             }
         });
     }
 
-    private void togglePasswordVisibility() {
-        if (passwordField1.getEchoChar() == (char) 0) {
-            passwordField1.setEchoChar('*');
-        } else {
-            passwordField1.setEchoChar((char) 0);
-        }
-    }
 
+    /**
+     * Performs the sign-up process.
+     * Collects the user's input, validates it, and saves the user's data if valid.
+     */
     private void signUp() {
         String firstName = forenameField.getText().trim();
         String lastName = surnameField.getText().trim();
@@ -96,6 +112,11 @@ public class SignUp_Page {
         frame.dispose();
     }
 
+    /**
+     * Updates the menu options after a successful sign-up.
+     *
+     * @param email the email address of the newly registered user
+     */
     void updateMenu(String email) {
         mainframe.setMenu1Text(email);
         JMenuItem myBookings = new JMenuItem("My Bookings");

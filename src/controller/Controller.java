@@ -110,7 +110,8 @@ public class Controller {
 
     /**
      * This method is used to pass on the information retrieved from the API to be displayed for the user.
-     * @param message - the information to be shown in the JList containing the available flights.
+     *
+     * @param message       - the information to be shown in the JList containing the available flights.
      * @param flightDisplay - this parameter is saved in the instance variable of the same name to be used
      *                      when displaying information about each individual flight.
      */
@@ -123,15 +124,16 @@ public class Controller {
 
     /**
      * this method is called from the PaymentPage class when a booking is about to be finished
-     * @param fullName - name and last name of the user.
-     * @param address - the users address.
-     * @param city - the hometown of the user.
-     * @param zip - the zip code of the user.
-     * @param country - the home country of the user.
-     * @param email - the email address of the user.
+     *
+     * @param fullName       - name and last name of the user.
+     * @param address        - the users address.
+     * @param city           - the hometown of the user.
+     * @param zip            - the zip code of the user.
+     * @param country        - the home country of the user.
+     * @param email          - the email address of the user.
      * @param bookingDetails - the booking details.
-     * @param airport - the destination of the trip.
-     * @param bookingNumber - the specific booking number.
+     * @param airport        - the destination of the trip.
+     * @param bookingNumber  - the specific booking number.
      */
     public void createNewBooking(String fullName, String address, String city,
                                  String zip, String country, String email, String bookingDetails, String airport, int bookingNumber) {
@@ -143,6 +145,7 @@ public class Controller {
     /**
      * This method passes on the bookingConfirmation sent från the AmadeusAPI class. When a booking has been
      * confirmed, this message will appear as a pop up screen in the application.
+     *
      * @param bookingMessage the booking confirmation.
      */
     public void showBookingConfirmation(String bookingMessage) {
@@ -156,6 +159,7 @@ public class Controller {
     /**
      * Whenever an error occurs, this message is called. It simply shows whatever error message being passed
      * in to it.
+     *
      * @param message the error message.
      */
     public void errorCode(String message) {
@@ -166,9 +170,10 @@ public class Controller {
      * This method is used to create the correct format (YYYY-MM-DD) of the dates needed to search for flights.
      * The JSpinners, where the dates are retrieved from in the searchAvailableFlights-method,
      * do not return the correct format by themselves.
-     * @param year - String containing the year.
+     *
+     * @param year  - String containing the year.
      * @param month - String containing the month.
-     * @param day - String containing the day.
+     * @param day   - String containing the day.
      * @return the combined date in the correct format YYYY-MM-DD.
      */
     public String formatDates(String year, String month, String day) {
@@ -200,21 +205,22 @@ public class Controller {
     }
 
     public String getSignedInEmail() {
-      return mainframe.getSignedInEmail();
+        return mainframe.getSignedInEmail();
     }
 
     /**
      * This is used to create a new booking object for each new booking made by a guest user.
-     * @param name First name.
-     * @param lastName Last name.
-     * @param address Address of the guest user.
-     * @param city City of the guest user.
-     * @param zip Zip code of the guest user.
-     * @param country country code of the guest user.
-     * @param email Email address of the guest user.
+     *
+     * @param name           First name.
+     * @param lastName       Last name.
+     * @param address        Address of the guest user.
+     * @param city           City of the guest user.
+     * @param zip            Zip code of the guest user.
+     * @param country        country code of the guest user.
+     * @param email          Email address of the guest user.
      * @param bookingDetails The booking confirmation.
-     * @param airport the arrival destination of the trip.
-     * @param bookingNumber the specified booking number.
+     * @param airport        the arrival destination of the trip.
+     * @param bookingNumber  the specified booking number.
      */
     public void createNewGuestBooking(String name, String lastName, String address, String city, String zip, String country,
                                       String email, String bookingDetails, String airport, int bookingNumber) {
@@ -222,15 +228,25 @@ public class Controller {
 
     }
 
+    /**
+     * Processes a payment using the provided payment details.
+     *
+     * @param name             the name of the customer
+     * @param email            the email address of the customer
+     * @param cardNumber       the card number for payment
+     * @param nameOnCard       the name on the card
+     * @param expiryDate       the expiry date of the card (in MM/YY format)
+     * @param cvvCode          the CVV code of the card
+     * @param isAmexCard       indicates if the card is American Express
+     * @param isMasterCardVisa indicates if the card is Mastercard/Visa
+     * @return true if the payment is successful, false otherwise
+     */
     public boolean processPayment(String name, String email, String cardNumber, String nameOnCard, String expiryDate, String cvvCode, boolean isAmexCard, boolean isMasterCardVisa) {
         // Check if either Mastercard/Visa or American Express is selected
         if (!isMasterCardVisa && !isAmexCard) {
             JOptionPane.showMessageDialog(null, "Please select either Mastercard/Visa or American Express");
             return false;
         }
-
-        // Perform payment processing logic here
-        // Example: Validate inputs, make API calls, update model, etc.
 
         // Validate email
         if (!isValidEmail(email)) {
@@ -267,16 +283,23 @@ public class Controller {
         return true;
     }
 
-
-
-
-
-
+    /**
+     * Validates an email address.
+     *
+     * @param email the email address to validate
+     * @return true if the email is valid, false otherwise
+     */
     private boolean isValidEmail(String email) {
         // Basic email validation by checking for the presence of '@'
         return email.contains("@");
     }
 
+    /**
+     * Validates an expiry date in the format MM/YY.
+     *
+     * @param expiryDate the expiry date to validate
+     * @return true if the expiry date is valid, false otherwise
+     */
     private boolean isValidExpiryDate(String expiryDate) {
         // Validate expiry date format (MM/YY)
         if (expiryDate.length() != 5 || expiryDate.charAt(2) != '/') {
@@ -297,9 +320,6 @@ public class Controller {
         if (month < 1 || month > 12 || year < 0) {
             return false;
         }
-
-        // Additional validation for expiry date in the future
-        // You can customize this logic based on your requirements
 
         return true;
     }
