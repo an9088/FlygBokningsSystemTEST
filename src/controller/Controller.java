@@ -3,6 +3,7 @@ package controller;
 import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import model.AmadeusAPI;
 import model.Booking;
+import model.DeleteBooking;
 import view.BookingHistoryGUI;
 import view.Mainframe;
 
@@ -26,6 +27,8 @@ public class Controller {
 
     private BookingHistoryGUI bookingHistoryGUI;
 
+    private DeleteBooking deleteBooking;
+
 
     public Controller() {
         try {
@@ -34,6 +37,7 @@ public class Controller {
             ex.printStackTrace();
         }
         mainframe = new Mainframe(this);
+        deleteBooking = new DeleteBooking("users.txt");
     }
 
     public void searchAvailableFlights() {
