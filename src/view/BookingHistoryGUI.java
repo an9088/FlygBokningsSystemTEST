@@ -12,6 +12,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the booking history GUI of the application.
+ * The BookingHistoryGUI class provides functionality for displaying and managing past bookings.
+ * It allows users to view their booking history, select a booking, and see the details of the selected booking.
+ * Users can also delete a booking from the history.
+ * The class interacts with the UserAuthentication class to validate user credentials.
+ * It handles UI elements such as JList, JEditorPane, and JButton to display the booking history and details.
+ * The class is designed to be used in conjunction with the Mainframe class to provide a complete booking history experience.
+ *
+ * @author Dino Patarcec
+ */
 public class BookingHistoryGUI {
     private JPanel mainPanel;
     private JList<String> pastBookingsList;
@@ -55,6 +66,9 @@ public class BookingHistoryGUI {
 
     }
 
+    /**
+     * Initializes the UI components and sets up event listeners.
+     */
     private void initializeUI() {
         bookingListModel = new DefaultListModel<>(); // Initialize the bookingListModel
         pastBookingsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -76,6 +90,10 @@ public class BookingHistoryGUI {
     }
 
 
+
+    /**
+     * Displays the booking history GUI window.
+     */
     public void showWindow() {
         JFrame frame = new JFrame();
         Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
@@ -88,10 +106,20 @@ public class BookingHistoryGUI {
         frame.setLocationRelativeTo(null);
     }
 
+    /**
+     * Sets the user title label with the specified title.
+     *
+     * @param title the title to set
+     */
     public void setUserTitle(String title) {
         userTitle.setText(title);
     }
 
+    /**
+     * Loads the bookings from the specified file and populates the booking list.
+     *
+     * @param fileName the name of the file to load bookings from
+     */
     public void loadBookingsFromFile(String fileName) {
         DefaultListModel<String> bookingListModel = new DefaultListModel<>();
         List<List<String>> bookingDetailsList = new ArrayList<>();
@@ -149,6 +177,12 @@ public class BookingHistoryGUI {
     }
 
 
+    /**
+     * Retrieves the booking details text for the selected booking.
+     *
+     * @param booking the selected booking
+     * @return the booking details text
+     */
     private String getBookingDetailsText(String booking) {
         String[] parts = booking.split(" - ");
         if (parts.length == 2) {
@@ -158,11 +192,5 @@ public class BookingHistoryGUI {
         return "";
     }
 
-
-
-
-    public JButton getDeleteBookingButton() {
-        return deleteBookingButton;
-    }
 }
 

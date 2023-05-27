@@ -11,6 +11,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Represents the payment page of the application.
+ * Allows users to make a payment by providing their payment information.
+ * Users can enter their name, email, card details, and confirm the payment.
+ * The payment page includes fields for name, email, card number, name on card, expiry date, and CVV code.
+ * Users can choose between Mastercard/Visa and American Express card types.
+ * The page also includes a confirm and pay button to process the payment.
+ * Depending on the constructor used, the payment page is used for guest bookings or registered user bookings.
+ *
+ * @author Dino Patarcec
+ */
 public class PaymentPage {
     private JPanel mainPanel;
     private JTextField nameField;
@@ -54,6 +65,20 @@ public class PaymentPage {
 
     private int constructorType;
 
+
+    /**
+     * Constructs a PaymentPage object for registered user bookings.
+     *
+     * @param fullName       the full name of the user
+     * @param address        the address of the user
+     * @param city           the city of the user
+     * @param zip            the zip code of the user
+     * @param country        the country of the user
+     * @param email          the email address of the user
+     * @param destination    the destination of the booking
+     * @param bookingDetails the booking details
+     * @param controller     the controller object for handling the payment processing
+     */
     public PaymentPage(String fullName, String address, String city, String zip, String country, String email, String destination, String bookingDetails, Controller controller) {
         this.constructorType = 1;
         this.fullName = fullName;
@@ -85,6 +110,20 @@ public class PaymentPage {
 
     }
 
+    /**
+     * Constructs a PaymentPage object for guest bookings.
+     *
+     * @param name           the first name of the guest
+     * @param lastName       the last name of the guest
+     * @param address        the address of the guest
+     * @param city           the city of the guest
+     * @param zip            the zip code of the guest
+     * @param country        the country of the guest
+     * @param email          the email address of the guest
+     * @param bookingDetails the booking details
+     * @param airport        the airport of the booking
+     * @param controller     the controller object for handling the payment processing
+     */
     public PaymentPage(String name, String lastName, String address, String city, String zip, String country,
                        String email, String bookingDetails ,String airport, Controller controller){
         this.constructorType = 2;
@@ -117,6 +156,9 @@ public class PaymentPage {
 
     }
 
+    /**
+     * Initializes the UI components and sets up the payment page frame.
+     */
     private void initializeUI() {
         frame = new JFrame("Payment Page");
         frame.setContentPane(mainPanel);
@@ -131,6 +173,10 @@ public class PaymentPage {
         frame.setVisible(true);
     }
 
+    /**
+     * Adds suggestion texts to the text fields as placeholders.
+     * The suggestion texts provide instructions or examples of the expected input format.
+     */
     private void addSuggestionTextFields() {
         guiUtils.addSuggestionText(codeField, "CVV");
         guiUtils.addSuggestionText(expiryDateField, "MM/YY");
@@ -139,6 +185,12 @@ public class PaymentPage {
         guiUtils.addSuggestionText(nameField, "John Doe");
         guiUtils.addSuggestionText(emailField, "johndoe123@gmail.com");
     }
+
+    /**
+     * Sets up the button actions for the confirm & pay button.
+     * When the button is clicked, it retrieves the payment information
+     * and calls the controller's processPayment method to handle the payment processing.
+     */
 
     private void setupButtonActions() {
         confirmPayButton.addActionListener(new ActionListener() {
@@ -171,6 +223,11 @@ public class PaymentPage {
         });
     }
 
+    /**
+     * Retrieves the full name of the signed-in user.
+     *
+     * @return the full name of the signed-in user
+     */
     private String getSignedInUserFullName() {
         String email = controller.getSignedInEmail();
         String firstName = null;
@@ -200,12 +257,11 @@ public class PaymentPage {
         return firstName + " " + lastName;
     }
 
-
-    public boolean isPaymentCompleted() {
-        return paymentCompleted;
-    }
-
-
+    /**
+     * Generates a random booking number.
+     *
+     * @return the randomly generated booking number
+     */
     private int generateBookingNumber() {
         Random random = new Random();
         return random.nextInt(900000) + 100000; // Generate a 6-digit random number
