@@ -13,33 +13,12 @@ Lastname: Rahimy
 Email: ellyasrahimy@gmail.com
 Password: Hejsan123
 
-Firstname: John
-Lastname: B
-Email: john@gmail.com
-Password: john1234^
-
-Firstname: skunked
-Lastname: skunkedd
-Email: Hejsan1@gmail.com
-Password: Skunked 32
-
-Firstname: skunk
-Lastname: skunka
-Email: skunkad@gmail.com
-Password: skunkad 313
 
 Firstname: Mattias
 Lastname: Biro
 Email: mattias@gmail.com
 Password: matteus!!
 
-Firstname: test
-Lastname: testsson
-Email: testperson1@gmail.com
-Password: testperson!
 
-Firstname: troll
-Lastname: test
-Email: troll.test@gmail.com
-Password: troll!16
+
 
