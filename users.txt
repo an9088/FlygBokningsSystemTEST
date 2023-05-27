@@ -38,3 +38,8 @@ Lastname: testsson
 Email: testperson1@gmail.com
 Password: testperson!
 
+Firstname: troll
+Lastname: test
+Email: troll.test@gmail.com
+Password: troll!16
+
