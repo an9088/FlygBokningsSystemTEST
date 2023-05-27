@@ -18,8 +18,8 @@ import java.awt.event.MouseEvent;
  * It also handles UI elements such as text fields, buttons, and labels for the login page.
  * The class is designed to be used in conjunction with the Mainframe class to provide a complete user login experience.
  *
- * @author Dino Patarcec
  * @author Mehdi Muhebbi
+ * @author Dino Patarcec
  */
 public class Login_Page {
     private JPanel mainPanel;

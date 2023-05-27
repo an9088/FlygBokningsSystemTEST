@@ -11,8 +11,8 @@ import java.io.*;
  * The sign-up page includes fields for email, surname, forename, and password.
  * Users can sign up, toggle password visibility, and navigate to the login page.
  *
- * @author Dino Patarcec
  * @author Mehdi Muhebbi
+ * @author Dino Patarcec
  */
 public class SignUp_Page {
     private JTextField emailField;
