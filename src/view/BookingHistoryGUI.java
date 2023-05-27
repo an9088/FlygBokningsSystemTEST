@@ -22,6 +22,7 @@ import java.util.List;
  * The class is designed to be used in conjunction with the Mainframe class to provide a complete booking history experience.
  *
  * @author Dino Patarcec
+ * @author Ellyas Rahimy
  */
 public class BookingHistoryGUI {
     private JPanel mainPanel;
