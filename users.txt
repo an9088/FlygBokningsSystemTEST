@@ -22,3 +22,13 @@ Password: matteus!!
 
 
 
+Firstname: skunk
+Lastname: skunkano
+Email: skunked@gmail.com
+Password: skunksson 32
+
+Firstname: son
+Lastname: sonson
+Email: son@gmail.com
+Password: sonson 123
+
