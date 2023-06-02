@@ -16,6 +16,15 @@ import java.time.Year;
 import java.util.ArrayList;
 
 
+/**
+ * Represents the main frame of the application.
+ * Handles user interactions and displays the user interface.
+ * Implements ActionListener, ChangeListener, and ListSelectionListener interfaces.
+ * @author Dino Patarcec
+ * @author Mattias Malm
+ * @author Ellyas Rahimy
+ * @author Mehdi Muhebbi
+ */
 public class Mainframe extends JFrame implements ActionListener, ChangeListener, ListSelectionListener {
     private JPanel mainPanel;
     private JPanel northPanel;
@@ -61,6 +70,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     private boolean isSignedIn = false;
 
 
+    /**
+     * Creates a new instance of the Mainframe class.
+     *
+     * @param controller The controller object to use for handling actions and data.
+     */
     public Mainframe(Controller controller) {
         this.controller = controller;
         searchFligthsButton.addActionListener(this);
@@ -80,6 +94,12 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         SignUp_Page signUpPage = new SignUp_Page(this);
     }
 
+
+    /**
+     * Creates and configures the main frame of the application.
+     * The frame includes the title, dimensions, content pane, borders, current date setup,
+     * menu setup, default close operation, and visibility settings.
+     */
     private void createFrame() {
         frame = new JFrame();
         Font font = new Font("Arial", Font.BOLD, 16); // Create a new font with desired size and boldness
@@ -87,13 +107,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         frame.setTitle(title); // Set the HTML formatted title
         adults = new SpinnerNumberModel(1, 1, 9, 1);
         spinnerAdult.setModel(adults);
-        /*JDateChooser dateChooser = new JDateChooser();
-        calendarPanel.add(dateChooser);
-        JDateChooser d2 = new JDateChooser();
-        calendarPanel2.add(d2);
-
-         */
-
 
         frame.setPreferredSize(new Dimension(940, 600));
         setBorders();
@@ -107,13 +120,18 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        // Modify the title font
         Font titleFont = new Font("Arial", Font.BOLD, 24);
         JRootPane rootPane = frame.getRootPane();
         rootPane.setFont(titleFont);
     }
 
 
+    /**
+     * Sets up the menu for the main frame of the application.
+     * The menu includes user-related options, help options, and general information options.
+     * It also handles the actions performed when selecting menu items, such as opening login and signup pages,
+     * displaying instructions on how to search for flights and make a booking, and showing information about the developers.
+     */
     public void setupMenu() {
 
         isSignedIn = false;
@@ -153,7 +171,6 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
             }
         });
 
-        //menuBar.add(Box.createHorizontalStrut(10));
         menuBar.add(userButton);
 
 
@@ -299,10 +316,20 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     }
 
+    /**
+     * Returns the user button.
+     *
+     * @return The user button.
+     */
     public JButton getUserButton() {
         return userButton;
     }
 
+    /**
+     * Sets the text for menu1 to display the user's email after signing in.
+     *
+     * @param email The user's email.
+     */
     public void setMenu1Text(String email) {
 
         isSignedIn = true;
@@ -314,6 +341,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         popupMenu.add(emailItem); // Add the email item to menu1
     }
 
+    /**
+     * Returns the email of the signed-in user.
+     *
+     * @return The email of the signed-in user, or null if no user is signed in.
+     */
     public String getSignedInEmail() {
         String email = null;
         if (isSignedIn == true) {
@@ -330,27 +362,23 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
     }
 
 
+    /**
+     * Adds a JMenuItem to menu1 in the popup menu.
+     *
+     * @param item The JMenuItem to add.
+     */
     public void addMenuItemToMenu1(JMenuItem item) {
         // Add the JMenuItem to the popupMenu
         popupMenu.add(item);
     }
 
-    public void removeMenuItemFromMenu1(JMenuItem item) {
-        // Remove the JMenuItem from the popupMenu
-        popupMenu.remove(item);
-    }
-
-    public void removeMenuItemFromMenu1(int index) {
-        // Remove the JMenuItem at the specified index from the popupMenu
-        popupMenu.remove(index);
-    }
-
-    public int getMenu1ItemCount() {
-        // Get the number of items in the popupMenu
-        return popupMenu.getComponentCount();
-    }
-
-
+    /**
+     * Sets the date spinners to today's date.
+     * The year, month, and day spinners are initialized with the current year, month, and day, respectively.
+     * The returnYear, returnMonth, and returnDay spinners are also initialized with the current year, month, and day, respectively.
+     * The range of selectable years is limited to the current year and the next two years.
+     * The range of selectable days is limited to 1 to 31.
+     */
     private void setTodaysDate() {
 
         LocalDate today = LocalDate.now();
@@ -376,21 +404,14 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         returnDayValue = new SpinnerNumberModel(today.getDayOfMonth(), 1, maxDay, 1);
         returnDay.setModel(returnDayValue);
 
-
-
-
-/*
-        year.setValue(today.getYear());
-        month.setValue(today.getMonthValue());
-        day.setValue(today.getDayOfMonth());
-
-        returnYear.setValue(today.getYear());
-        returnMonth.setValue(today.getMonthValue());
-        returnDay.setValue(today.getDayOfMonth());
-
- */
     }
 
+    /**
+     * Sets the borders for various panels and scroll panes.
+     * The method creates titled borders for the search flights panel, available flights panel,
+     * flight information panel, and their respective scroll panes.
+     * The created borders are then set to the corresponding panels and scroll panes.
+     */
     private void setBorders() {
         border = BorderFactory.createTitledBorder("  Search Flights  ");
         border1 = BorderFactory.createTitledBorder("");
@@ -404,6 +425,12 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     }
 
+    /**
+     * Performs actions in response to specific events triggered by the user.
+     * This method is invoked when buttons are clicked or other actions are performed.
+     *
+     * @param e The ActionEvent object that contains information about the event.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -438,11 +465,21 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     }
 
+    /**
+     * Displays an error message dialog box with the specified error message.
+     *
+     * @param message The error message to be displayed.
+     */
     public void errorMessage(String message) {
         JOptionPane errorMessage = new JOptionPane();
         JOptionPane.showMessageDialog(errorMessage, message);
     }
 
+    /**
+     * Displays a booking confirmation message dialog box with the specified booking message.
+     *
+     * @param bookingMessage The booking message to be displayed.
+     */
     public void showBookingConfirmation(String bookingMessage) {
 
         JOptionPane bookingInfo = new JOptionPane();
@@ -450,6 +487,11 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     }
 
+    /**
+     * Sets the display message in the flight list with the provided list of messages.
+     *
+     * @param message The list of messages to be displayed in the flight list.
+     */
     public void setDisplayMessage(ArrayList<String> message) {
 
 
@@ -465,50 +507,111 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
 
     }
 
+    /**
+     * Retrieves the "toAirport" text field.
+     *
+     * @return The "toAirport" text field.
+     */
     public JTextField getToAirport() {
         return toAirport;
     }
 
+
+    /**
+     * Retrieves the "fromAirport" text field.
+     *
+     * @return The "fromAirport" text field.
+     */
     public JTextField getFromAirport() {
         return fromAirport;
     }
 
+    /**
+     * Retrieves the "year" spinner.
+     *
+     * @return The "year" spinner.
+     */
     public JSpinner getYear() {
         return year;
     }
 
+    /**
+     * Retrieves the "month" spinner.
+     *
+     * @return The "month" spinner.
+     */
     public JSpinner getMonth() {
         return month;
     }
 
+    /**
+     * Retrieves the "day" spinner.
+     *
+     * @return The "day" spinner.
+     */
     public JSpinner getDay() {
         return day;
     }
 
+    /**
+     * Retrieves the "editorPane1" editor pane.
+     *
+     * @return The "editorPane1" editor pane.
+     */
     public JEditorPane getEditorPane1() {
         return editorPane1;
     }
 
+    /**
+     * Retrieves the "spinnerAdult" spinner.
+     *
+     * @return The "spinnerAdult" spinner.
+     */
     public JSpinner getSpinnerAdult() {
         return spinnerAdult;
     }
 
+    /**
+     * Retrieves the "returnYear" spinner.
+     *
+     * @return The "returnYear" spinner.
+     */
     public JSpinner getReturnYear() {
         return returnYear;
     }
 
+    /**
+     * Retrieves the "returnMonth" spinner.
+     *
+     * @return The "returnMonth" spinner.
+     */
     public JSpinner getReturnMonth() {
         return returnMonth;
     }
 
+    /**
+     * Retrieves the "returnDay" spinner.
+     *
+     * @return The "returnDay" spinner.
+     */
     public JSpinner getReturnDay() {
         return returnDay;
     }
 
+    /**
+     * Retrieves the "oneWayTicketOnlyCheckBox" check box.
+     *
+     * @return The "oneWayTicketOnlyCheckBox" check box.
+     */
     public JCheckBox getOneWayTicketOnlyCheckBox() {
         return oneWayTicketOnlyCheckBox;
     }
 
+    /**
+     * Invoked when the state of a component, such as the checkbox or spinner, is changed.
+     *
+     * @param e The ChangeEvent representing the state change event.
+     */
     @Override
     public void stateChanged(ChangeEvent e) {
         if (e.getSource() == (oneWayTicketOnlyCheckBox)) {
@@ -576,11 +679,21 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         }
     }
 
+    /**
+     * Sets the information display with the provided flight display text.
+     *
+     * @param flightDisplay The text to be displayed in the information display.
+     */
     public void setInfoDisplay(String flightDisplay) {
         editorPane1.setText("");
         editorPane1.setText(flightDisplay);
     }
 
+    /**
+     * Invoked when the value of the list selection changes.
+     *
+     * @param e The ListSelectionEvent representing the list selection change event.
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getSource().equals(list1)) {
@@ -594,14 +707,5 @@ public class Mainframe extends JFrame implements ActionListener, ChangeListener,
         }
     }
 
-    public JPanel getEastPanel() {
-        return eastPanel;
-    }
 
 }
-
-
-
-
-
-

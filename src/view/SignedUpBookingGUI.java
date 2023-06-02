@@ -11,6 +11,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ *The SignedUpBookingGUI class represents the graphical user interface for creating a booking
+ *for a signed-up user. It provides a form for the user to enter their booking details and handles
+ *the booking creation process.
+ *@author Mattias Malm
+ */
 public class SignedUpBookingGUI {
     private JFrame signUpFrame;
 
@@ -19,6 +25,12 @@ public class SignedUpBookingGUI {
     private String bookingInfo, fullName;
 
 
+    /**
+     * Constructs a SignedUpBookingGUI object.
+     *
+     * @param bookingInfo The booking information.
+     * @param controller  The controller instance.
+     */
 
     public SignedUpBookingGUI(String bookingInfo, Controller controller) {
         this.controller = controller;
@@ -26,10 +38,18 @@ public class SignedUpBookingGUI {
         createSignedInBookingField();
     }
 
+    /**
+     * Retrieves the booking information.
+     *
+     * @return The booking information.
+     */
     public String getBookingInfo() {
         return bookingInfo;
     }
 
+    /**
+     * Creates the signed-in booking field with the form for entering booking details.
+     */
     private void createSignedInBookingField() {
 
         signUpFrame = new JFrame("Make Booking");
@@ -161,6 +181,12 @@ public class SignedUpBookingGUI {
 
     }
 
+    /**
+     * Retrieves the full name of the signed-in user.
+     *
+     * @return The full name of the user.
+     */
+
     private String getSignedInUserFullName() {
         String email = controller.getSignedInEmail();
         String firstName = null;
@@ -190,17 +216,11 @@ public class SignedUpBookingGUI {
         return firstName + " " + lastName;
     }
 
-    private int generateBookingNumber() {
-        Random random = new Random();
-        return random.nextInt(900000) + 100000; // Generate a 6-digit random number
-    }
-
-
-
-
-
-
-
+    /**
+     * Displays an error message dialog.
+     *
+     * @param message The error message to display.
+     */
 
     private void errorMessage(String message) {
         JOptionPane.showMessageDialog(signUpFrame, message);

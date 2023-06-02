@@ -9,8 +9,12 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 /**
+ * The BookingCreatorGUI class represents the graphical user interface for creating a booking.
+ * It provides a form for the user to enter their booking details and handles the booking creation process.
+ * This class is responsible for displaying the booking form, validating user inputs,
+ * and creating a booking based on the entered details.
  * @author Ellyas Rahimy
- * @co-author Mattias Malm
+ * @author  Mattias Malm
  */
 
 public class BookingCreatorGUI {
@@ -24,7 +28,13 @@ public class BookingCreatorGUI {
     private String airport;
 
 
-
+    /**
+     * Constructs a BookingCreatorGUI object.
+     *
+     * @param bookingInfo The booking information.
+     * @param airport     The airport for the booking.
+     * @param controller  The controller instance.
+     */
     public BookingCreatorGUI(String bookingInfo, String airport, Controller controller) {
         this.bookingInfo = bookingInfo;
         this.airport = airport;
@@ -32,10 +42,18 @@ public class BookingCreatorGUI {
         createBookingField();
     }
 
+    /**
+     * Retrieves the booking information.
+     *
+     * @return The booking information.
+     */
     public String getBookingInfo() {
         return bookingInfo;
     }
 
+    /**
+     * Creates the booking field with the form for entering booking details.
+     */
     private void createBookingField() {
 
         signUpFrame = new JFrame("Make Booking");
@@ -169,12 +187,12 @@ public class BookingCreatorGUI {
 
     }
 
-    private int generateBookingNumber() {
-        Random random = new Random();
-        return random.nextInt(900000) + 100000; // Generate a 6-digit random number
-    }
 
-
+    /**
+     * Displays an error message dialog.
+     *
+     * @param message The error message to display.
+     */
     private void errorMessage(String message) {
         JOptionPane.showMessageDialog(signUpFrame, message);
     }
