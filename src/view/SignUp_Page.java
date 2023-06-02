@@ -136,12 +136,7 @@ public class SignUp_Page {
             JOptionPane.showMessageDialog(null, "Sign Out clicked");
             mainframe.setupMenu();
         });
-        if(mainframe.getMenu1ItemCount() > 0) {
-            mainframe.removeMenuItemFromMenu1(0);
-        }
-        if(mainframe.getMenu1ItemCount() > 0) {
-            mainframe.removeMenuItemFromMenu1(0);
-        }
+
         mainframe.addMenuItemToMenu1(myBookings);
         mainframe.addMenuItemToMenu1(chngInfo);
         mainframe.addMenuItemToMenu1(signOut);

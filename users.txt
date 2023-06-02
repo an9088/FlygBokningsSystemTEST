@@ -32,3 +32,13 @@ Lastname: sonson
 Email: son@gmail.com
 Password: sonson 123
 
+Firstname: ss
+Lastname: ss
+Email: poop@gmail.com
+Password: 123456789!
+
+Firstname: ss
+Lastname: ss
+Email: test@gmail.com
+Password: 123456789!
+
