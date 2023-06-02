@@ -4,15 +4,32 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for deleting bookings from a file.
+ * Provides methods to load bookings, retrieve booking details,
+ * remove bookings, and update file contents.
+ *
+ * @author Ellyas Rahimy
+ */
 public class DeleteBooking {
 
     private String fileName;
 
+    /**
+     * Constructs a new DeleteBooking instance with the specified file name.
+     *
+     * @param filename The name of the file to work with.
+     */
     public DeleteBooking(String filename) {
         this.fileName = filename;
     }
 
 
+    /**
+     * Loads the bookings from the file and returns them as a list of formatted strings.
+     *
+     * @return The list of bookings loaded from the file.
+     */
     public List<String> loadBookingsFile() {
         List<String> bookings = new ArrayList<>();
         List<String> currentBookingDetails = new ArrayList<>();
@@ -45,6 +62,12 @@ public class DeleteBooking {
         return bookings;
     }
 
+    /**
+     * Retrieves the booking details text from the formatted booking string.
+     *
+     * @param booking The formatted booking string.
+     * @return The booking details text.
+     */
     public String getBookingDetailsText(String booking) {
         String[] parts = booking.split(" - ");
         if (parts.length == 2) {
@@ -53,6 +76,11 @@ public class DeleteBooking {
         return "";
     }
 
+    /**
+     * Removes the specified booking from the file.
+     *
+     * @param booking The booking to be removed.
+     */
     public void removeBooking(String booking) {
         String[] parts = booking.split(" - ");
         if (parts.length == 2) {
@@ -63,6 +91,12 @@ public class DeleteBooking {
         }
     }
 
+    /**
+     * Formats the list of booking details into a single string.
+     *
+     * @param bookingDetails The list of booking details.
+     * @return The formatted booking details string.
+     */
     private String formatBookingDetails(List<String> bookingDetails) {
         StringBuilder sb = new StringBuilder();
         for (String line : bookingDetails) {
@@ -71,6 +105,12 @@ public class DeleteBooking {
         return sb.toString().trim();
     }
 
+
+    /**
+     * Updates the contents of the file with the provided list of bookings.
+     *
+     * @param bookings The list of bookings to update the file contents with.
+     */
     private void updateFileContents(List<String> bookings) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (String booking : bookings) {
