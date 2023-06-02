@@ -42,3 +42,8 @@ Lastname: ss
 Email: test@gmail.com
 Password: 123456789!
 
+Firstname: poop
+Lastname: poopson
+Email: cumburger@gmail.com
+Password: 123456789!
+
